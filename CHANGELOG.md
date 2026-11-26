@@ -1,3 +1,14 @@
+## [1.1.0](https://github.com/yggdrion/valheim-tracker/compare/v1.0.0...v1.1.0) (2026-11-26)
+
+### ✨ Features
+
+* Tracker Sync shows settings and warriors side by side in wide windows ([e27a44c](https://github.com/yggdrion/valheim-tracker/commit/e27a44c05310d950ca5cbe737616ff6b7f650afa))
+
+### 📝 Documentation
+
+* README screenshots of the hall, map, road, achievements, a warrior page and Tracker Sync ([fed3ac2](https://github.com/yggdrion/valheim-tracker/commit/fed3ac2c7ac0eda8593e6cc04f73215562a47b19))
+* restructure the README; Tracker Sync screenshot with server and token ([96c4c3b](https://github.com/yggdrion/valheim-tracker/commit/96c4c3bacb1b5b60ed0a0c50acf191a7cdbb7b51))
+
 ## 1.0.0 (2026-11-26)
 
 ### ✨ Features
