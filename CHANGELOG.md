@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/yggdrion/valheim-tracker/compare/v1.3.0...v1.3.1) (2026-11-26)
+
+### 🐛 Bug Fixes
+
+* Tracker Sync frameless window with its own title bar, scrolling character list, no checkbox lag ([4414e16](https://github.com/yggdrion/valheim-tracker/commit/4414e16ddfbc0585a33115ed3f2ec74e9337e592))
+
 ## [1.3.0](https://github.com/yggdrion/valheim-tracker/compare/v1.2.1...v1.3.0) (2026-11-26)
 
 ### ✨ Features
