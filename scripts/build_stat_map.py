@@ -10,7 +10,7 @@ stat_map.json: {api_name: {"set": difficulty-set index,
                            "crafts":  [[item token, goal], ...]
                            "others":  [api_name, ...]}}                     other achievements it embodies
 List-style achievements (dynamic lists, bosses as a group, fish, trophies, ...) are not in here: analyze.py
-reads them from achi_hunter's sections.
+reads them from gamedata.json (scripts/extract_game_data.py).
 """
 import argparse, json, os, sys
 

@@ -1,0 +1,52 @@
+{
+  "creature:$enemy_aspect_bonemass": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_dragon": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_eikthyr": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_fader": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_gdking": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_goblinking": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_aspect_seekerqueen": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_charred_melee_Fader": [
+    "creature:$enemy_fader"
+  ],
+  "creature:$enemy_fallenwarrior": "Deep North",
+  "creature:$enemy_frozenking_p3": [
+    "creature:$enemy_frozenking"
+  ],
+  "creature:$enemy_skeleton_summoned": [
+    "item:$item_staffskeleton"
+  ],
+  "creature:$enemy_summonedtroll": [
+    "item:$item_staffredtroll"
+  ],
+  "creature:$piece_trainingdummy": [
+    "piece:$piece_trainingdummy"
+  ],
+  "creature:$spiritcaller_bjorn": [
+    "item:$item_staff_spiritcaller"
+  ],
+  "creature:$spiritcaller_boar": [
+    "item:$item_staff_spiritcaller"
+  ],
+  "creature:$spiritcaller_moose": [
+    "item:$item_staff_spiritcaller"
+  ],
+  "creature:$spiritcaller_wolf": [
+    "item:$item_staff_spiritcaller"
+  ],
+  "item:$item_hatefulblood": "Deep North"
+}

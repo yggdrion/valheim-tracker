@@ -1,37 +1,52 @@
-"""Server side: turn a parsed .fch into achievement progress, via achi_hunter's tables.
+"""Server side: turn a parsed .fch (fch.py) into achievement progress and saga stats, from gamedata.json.
 usage: python analyze.py FILE.fch"""
 import json, os, re, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor"))
-import achi_hunter as ah  # ponytail: no license upstream; fine locally, ask author before redistributing
+
+import fch
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_load = lambda f: json.load(open(os.path.join(_HERE, f), encoding="utf8"))
+# the achievement sections, built from the game's files (scripts/extract_game_data.py)
+GAMEDATA = _load("gamedata.json")
+# the game's PlayerStatType names (scripts/extract_stat_names.py) and English names (scripts/extract_names.py)
+STAT_NAMES = _load("stat_names.json")
+assert len(STAT_NAMES) == fch.STAT_COUNT, "stat_names.json is out of date (run scripts/extract_stat_names.py)"
+_STAT = {n: i for i, n in enumerate(STAT_NAMES)}
+_NAMES = _load("names.json")
+for _s in GAMEDATA["sections"]:
+    for _e in _s["entries"]:
+        _NAMES.setdefault(_e["token"], _e["name"])
+
 
 def analyze_parsed(d, only=None):
-    """d = achi_hunter.parse() result: {"version", "sets": [...]}"""
+    """d = fch.parse() result. One dict per section: id, title, total, done, entries [{token, name, count, biome}]."""
     out = []
-    for sec in ah.build_sections(d):
-        if only and sec["id"] not in only: continue
-        ents = [{"token": t, "name": sec["universe"][t] or ah.strip(t), "count": int(sec["done"].get(t, 0)),
-                 "biome": sec["biomes"].get(t, "")} for t in sec["universe"]]
+    for sec in GAMEDATA["sections"]:
+        if only and sec["id"] not in only:
+            continue
+        s = d["sets"][sec["set"]]
+        if sec["source"] == "stats":
+            count = lambda t: int(s["stats"][_STAT[t]])
+        else:
+            src = s[sec["source"]]
+            count = lambda t: int(src.get(t, 0))
+        ents = [{"token": e["token"], "name": e["name"], "count": count(e["token"]), "biome": e["biome"]}
+                for e in sec["entries"]]
         out.append({"id": sec["id"], "title": sec["title"], "total": len(ents),
                     "done": sum(1 for e in ents if e["count"] > 0), "entries": ents})
     return out
 
-# Steam achievement -> save data. Everything else on Steam's list is not derivable from the character counters.
-SECTION_ACH = {  # api_name -> achi_hunter section id (done/total entries)
-    "AllItemCraft": "crafted", "AllWeaponCraft": "weapons", "AllFoodCooked": "cooked", "AllFoodEaten": "food-eaten",
-    "AllBuildPieces": "built", "DeathByAllTypes": "deaths", "DeathByTreeAll": "tree-deaths",
-    "KillAllCreatures": "enemies", "KillAllCreaturesHard": "enemies-hard", "AllBosses": "bosses-any",
-    "AllBossesNormal": "bosses-normal", "AllBossesHard": "bosses-hard", "AllMiniBosses": "minibosses",
-    "GrindFish": "fishing", "FindAllTrophies": "trophies",
-}
+
 # Everything else comes from the game's own Achievement assets: stat_map.json (scripts/build_stat_map.py).
-STAT_MAP = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "stat_map.json"), encoding="utf8"))
+STAT_MAP = _load("stat_map.json")
 
 
 def achievements(d, sections):
     """{api_name: [done, total]} for every Steam achievement. done == total means unlocked."""
     sets = d["sets"]
     secs = {x["id"]: x for x in sections}
-    out = {api: [secs[sid]["done"], secs[sid]["total"]] for api, sid in SECTION_ACH.items()}
+    out = {s["achievement"]: [secs[s["id"]]["done"], secs[s["id"]]["total"]]
+           for s in GAMEDATA["sections"] if s["id"] in secs}
     for api, e in STAT_MAP.items():
         if "others" in e:
             continue
@@ -49,29 +64,22 @@ def achievements(d, sections):
     return out
 
 
-
-# Not-achievement stats for the dashboard's saga: the game's own counter names (scripts/extract_stat_names.py).
-STAT_NAMES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "stat_names.json"), encoding="utf8"))
-assert len(STAT_NAMES) == ah.STAT_COUNT, "stat_names.json is out of date (run scripts/extract_stat_names.py)"
-_HERE = os.path.dirname(os.path.abspath(__file__))
-# game's English names (scripts/extract_names.py), then achi_hunter's own tables on top
-_NAMES = {**json.load(open(os.path.join(_HERE, "names.json"), encoding="utf8")), **ah.CRAFTABLE, **ah.BUILDABLE, **ah.TROPHIES, **ah.FOOD_EATEN, **ah.ENEMIES, **ah.BOSSES, **ah.MINIBOSSES, **ah.FISH}
-
-
 def _nm(tok):
     n = _NAMES.get(tok)
-    return n if isinstance(n, str) and n else ah.strip(tok).replace("_", " ").capitalize()
+    return n if isinstance(n, str) and n else fch.strip(tok).replace("_", " ").capitalize()
 
 
 def meta(d):
-    """Plain counters from the any-difficulty set: {stats: {StatName: v}, kills, harvested, picked_up, eaten, built, worlds}."""
-    s = d["sets"][0]
+    """Plain counters from the raw set: {stats: {StatName: v}, kills, harvested, picked_up, eaten, built, worlds}."""
+    s = d["sets"][fch.SET_RAW]
     cnt = lambda m: {_nm(k): int(v) for k, v in sorted(m.items(), key=lambda kv: -kv[1]) if v > 0}
     return {"stats": {n: round(v, 1) for n, v in zip(STAT_NAMES, s["stats"]) if v},
             "kills": cnt(s["kills"]), "picked_up": cnt(s["picked_up"]), "eaten": cnt(s["foods_eaten"]),
             "built": cnt(s["pieces_built"]),
-            "harvested": {re.sub(r"(?<=[a-z])(?=[A-Z])", " ", k): int(v) for k, v in sorted(s["pickables"].items(), key=lambda kv: -kv[1]) if v > 0},
+            "harvested": {re.sub(r"(?<=[a-z])(?=[A-Z])", " ", k): int(v)
+                          for k, v in sorted(s["pickables"].items(), key=lambda kv: -kv[1]) if v > 0},
             "worlds": {k: round(v) for k, v in s["worlds"].items()}}
 
+
 if __name__ == "__main__":
-    print(json.dumps(analyze_parsed(ah.parse(sys.argv[1])), indent=1))
+    print(json.dumps(analyze_parsed(fch.parse(open(sys.argv[1], "rb").read())), indent=1))

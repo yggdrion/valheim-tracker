@@ -1,31 +1,13 @@
-"""Map data from a .fch (what achi_hunter does not read): per world the explored area, pins and spawn/bed/death points.
+"""Map data from a .fch: per world the explored area, pins and spawn/bed/death points (fch.worlds finds them).
 
-Layout after the stat sets (Valheim 1.0, profile version 46):
-    byte ?, int32 world count, per world:
-        int64 world uid | bool+vec3 custom spawn | bool+vec3 logout | bool+vec3 death | vec3 home
-        bool has map | byte[] map: int32 version, byte[] gzip( int32 size, bool[size*size] explored,
-                                   bool[size*size] explored by others (shared map), int32 pins, pins... )
-    pin: string name, vec3 pos, int32 type, bool checked, int64 owner, string author
+The map blob: int32 version, byte[] gzip( int32 size, bool[size*size] explored, bool[size*size] explored by others
+(shared map), int32 pin count, pins ); pin: string name, vec3 pos, int32 type, bool checked, int64 owner, string author.
 Map pixels are 12 m; pixel (size/2, size/2) is the world centre, x east, row = z north.
 """
 import base64, gzip, struct, zlib
-import achi_hunter as ah
+import fch
 
 PIN_DEATH, PIN_BOSS = 4, 9
-
-
-def _after_sets(raw):
-    data = raw[4:4 + struct.unpack_from("<i", raw, 0)[0]]
-    r = ah.Reader(data)
-    r.i32(); n_stats = r.i32(); n_sets = r.i32()
-    for _ in range(n_sets):
-        r.p += 4 * n_stats
-        r.sdict(); r.sdict(); r.sdict()
-        for _ in range(r.i32()):
-            r.sdict()
-        for _ in range(5):
-            r.sdict()
-    return data, r
 
 
 def _map(blob):
@@ -37,7 +19,7 @@ def _map(blob):
     bits = bytearray(cells // 8)
     for i in (i for i, v in enumerate(explored) if v):
         bits[i >> 3] |= 1 << (i & 7)
-    r = ah.Reader(z, 4 + 2 * cells)
+    r = fch.Reader(z, 4 + 2 * cells)
     pins = []
     for _ in range(r.i32()):
         name = r.string()
@@ -47,27 +29,17 @@ def _map(blob):
     return {"size": size, "explored": base64.b64encode(zlib.compress(bytes(bits), 9)).decode(), "pins": pins}
 
 
-def worlds(raw):
+def worlds(raw, parsed=None):
     """{world uid (str): {spawn, logout, death, home: [x, z] or None, size, explored (b64 zlib bitmask), pins}}"""
-    data, r = _after_sets(raw)
-    p = r.p + 1
-    n, = struct.unpack_from("<i", data, p); p += 4
     out = {}
-    for _ in range(n):
-        uid, = struct.unpack_from("<q", data, p); p += 8
-        w = {}
-        for k in ("spawn", "logout", "death"):
-            has = data[p]; x, _y, z = struct.unpack_from("<3f", data, p + 1); p += 13
-            w[k] = [round(x), round(z)] if has else None
-        x, _y, z = struct.unpack_from("<3f", data, p); p += 12
-        w["home"] = [round(x), round(z)] if (x, z) != (0, 0) else None
-        has = data[p]; p += 1
-        if has:
-            ln, = struct.unpack_from("<i", data, p); p += 4
-            w.update(_map(data[p:p + ln])); p += ln
-        out[str(uid)] = w
+    for uid, w in fch.worlds(raw, parsed):
+        xz = lambda v: [round(v[0]), round(v[2])] if v else None
+        m = {k: xz(w[k]) for k in ("spawn", "logout", "death")}
+        m["home"] = xz(w["home"]) if (w["home"][0], w["home"][2]) != (0, 0) else None
+        if w["map"]:
+            m.update(_map(w["map"]))
+        out[str(uid)] = m
     return out
-
 
 if __name__ == "__main__":
     import sys

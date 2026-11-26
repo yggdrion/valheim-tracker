@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write names.json: the game's English names for $item_/$piece_/$enemy_ tokens, from its localization table.
+"""Write names.json: the game's English names for $item_/$piece_/$enemy_/$animal_ tokens, from its localization table.
 Read-only on the game install. Needs UnityPy (pip install UnityPy, e.g. in .cache/venv). Run after a game patch.
 
   python scripts/extract_names.py [--game "<steamapps/common/Valheim>"]
@@ -8,7 +8,7 @@ import argparse, csv, io, json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT = os.path.expanduser("~/.local/share/Steam/steamapps/common/Valheim")
-KEEP = ("item_", "piece_", "enemy_")
+KEEP = ("item_", "piece_", "enemy_", "animal_", "ship_", "tool_")
 
 
 def main():
@@ -25,7 +25,9 @@ def main():
         raise SystemExit("no localization TextAsset in resources.assets")
     rows = csv.reader(io.StringIO(text))
     col = next(rows).index("English")
-    out = {"$" + r[0]: r[col].strip() for r in rows
+    import re
+    clean = lambda t: re.sub(r"</?color[^>]*>", "", t).strip()      # some names carry rich-text colour tags
+    out = {"$" + r[0]: clean(r[col]) for r in rows
            if len(r) > col and r[0].startswith(KEEP) and r[col].strip() and not r[0].endswith("_description")}
     with open(a.out, "w", encoding="utf8") as f:
         json.dump(dict(sorted(out.items())), f, indent=0, ensure_ascii=False); f.write("\n")

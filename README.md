@@ -41,11 +41,11 @@ Enter the server address and token once; it finds the characters folder, uploads
 ```
 player PC                                     server (docker compose)
   Valheim writes <name>.fch                     valheim-server ──── world save (read-only) ───┐
-  Tracker Sync / fchsync.sh ── raw .fch ─────▶  tracker (server.py): parses and analyses      ├──▶ dashboard :8088
+  Tracker Sync ──────── raw .fch ─────▶  tracker (server.py): parses and analyses      ├──▶ dashboard :8088
                                + shared token    every upload, reads the world folder ─────────┘
 ```
 
-- The clients upload the **raw** character file when it changes, plus a heartbeat. They never parse a save and never write to the game folder.
+- Tracker Sync uploads the **raw** character file when it changes, plus a heartbeat. It never parses a save and never writes to the game folder.
 - `server.py` (Python, standard library only) does all the parsing: achievements, stats, the explored map. It reads the world folder read-only for the seed, bosses and locations.
 - A character that stops reporting is shown as "resting"; its progress stays.
 
@@ -63,16 +63,7 @@ player PC                                     server (docker compose)
 
 **Tracker Sync**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open).
 
-**Headless** (Linux, macOS, Steam Deck, servers): `fchsync.sh` needs bash and curl.
-
-    TRACKER_TOKEN=<token> ./fchsync.sh -s http://host:8088                       # watch and sync
-    ./fchsync.sh -d "<characters folder>" -s http://host:8088 -t <token> -1      # one folder, sync once
-
-Without `-d` it looks in the usual places (local saves, Steam Cloud `userdata/*/892970/remote/characters`, the Proton prefix). Env alternatives: `TRACKER_SERVER`, `TRACKER_TOKEN`, `FCH_DIR`.
-
-**Windows script** (until Tracker Sync has been tried there): copy `fchsync.env.example` to `fchsync.env`, set server and token, double-click `fchsync.bat` (or `.\fchsync.ps1 -Server http://host:8088 -Token <token>`).
-
-Character files live on each player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud); the server only sees what the clients upload.
+Character files live on each player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud); the server only sees what Tracker Sync uploads.
 
 ## Releases
 
@@ -86,6 +77,8 @@ Automatic on every push to `main` (`.github/workflows/build.yml`): the server im
 
 Game data, regenerate after a Valheim patch (read-only on the game install):
 
-- Achievement tables: `vendor/achi_hunter.py` from [Melichor/ValheimSaveParser](https://github.com/Melichor/ValheimSaveParser); update with `python scripts/update_melichor.py` (see `.claude/skills/update-melichor/SKILL.md`) and `python scripts/update_achievements.py` for the Steam list.
+- `scripts/extract_game_data.py <world folder>` → `gamedata.json`: the achievement sections (what each lists, which save counter and difficulty set it reads) and the earliest biome of every entry for The Road, built from the game's own files by the game's own rules (needs UnityPy and bun or node). Biome links the game hides in attack scripts are in `curated/biome_links.json`; reviewed exceptions in `curated/biome_overrides.json`. It prints any entry left without a biome.
+- `scripts/extract_achievements.py` + `scripts/build_stat_map.py` → `stat_map.json` (the counter achievements), `scripts/update_achievements.py` → `achievements.json` (the Steam list).
+- The save parser (`fch.py`) follows the game's `PlayerProfile.SavePlayerToDisk`; a layout change shows up as a clear upload error.
 - `scripts/extract_stat_names.py` → `stat_names.json` (needs dnfile), `scripts/extract_names.py` → `names.json` (needs UnityPy), `scripts/extract_location_names.py <world folder>` → `location_names.json`.
 - The biome generator in `worldgen.js` ports the game's `WorldGenerator`; it was checked against a real world's 12,176 placed locations (every boss altar, trader and dungeon in its own biome).

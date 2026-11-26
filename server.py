@@ -8,7 +8,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
 import analyze, mapdata, worlds
-import achi_hunter as ah
+import fch
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOKEN = os.environ.get("TRACKER_TOKEN", "")
@@ -18,7 +18,7 @@ STATE = "state"
 STALE = float(os.environ.get("STALE_MINUTES", "10")) * 60   # a character is 'resting' (offline) after this long without contact
 # version of the analysis code+tables: a stored character from an older version is re-uploaded by the client
 AV = hashlib.sha1(b"".join(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), "rb").read()
-                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "names.json", "mapdata.py", "vendor/achi_hunter.py"))).hexdigest()[:12]
+                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "names.json", "mapdata.py", "fch.py", "gamedata.json"))).hexdigest()[:12]
 SEEN = {}   # name -> last contact (upload or heartbeat), in memory
 WORLD = os.environ.get("WORLD_DIR", "")   # folder of ONE world, e.g. /config/worlds_local/roota (mounted read-only)
 _wcache = (None, None)
@@ -85,15 +85,15 @@ class H(BaseHTTPRequestHandler):
             return self.send(400, {"error": "bad name or size"})
         raw = self.rfile.read(n)
         try:
-            d = ah.parse(raw)
+            d = fch.parse(raw)
             secs = analyze.analyze_parsed(d)
             ach = analyze.achievements(d, secs)
-        except ah.SaveError as e:
+        except fch.SaveError as e:
             return self.send(400, {"error": str(e)})
         except (struct.error, IndexError, KeyError, UnicodeDecodeError, AssertionError, ValueError, MemoryError, OverflowError):
             return self.send(400, {"error": "not a readable Valheim .fch file"})
         try:
-            maps = mapdata.worlds(raw)   # the map is a bonus: a layout it cannot read must not block the upload
+            maps = mapdata.worlds(raw, d)   # the map is a bonus: a layout it cannot read must not block the upload
         except Exception:
             maps = {}
         worlds = sorted(d["sets"][0]["worlds"])

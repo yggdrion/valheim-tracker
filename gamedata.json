@@ -1,0 +1,7560 @@
+{
+ "generated_from": "Valheim game files (scripts/extract_game_data.py)",
+ "sections": [
+  {
+   "id": "crafted",
+   "achievement": "AllItemCraft",
+   "title": "Items crafted (any difficulty)",
+   "set": 1,
+   "source": "crafted",
+   "entries": [
+    {
+     "token": "$item_arrow_bloodgold",
+     "name": "Bloodgold Arrow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_arrow_bronze",
+     "name": "Bronzehead Arrow",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_arrow_carapace",
+     "name": "Carapace Arrow",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_arrow_charred",
+     "name": "Charred Arrow",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_arrow_fire",
+     "name": "Fire Arrow",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_arrow_flint",
+     "name": "Flinthead Arrow",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_arrow_frost",
+     "name": "Frost Arrow",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_arrow_iron",
+     "name": "Ironhead Arrow",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_arrow_needle",
+     "name": "Needle Arrow",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_arrow_obsidian",
+     "name": "Obsidian Arrow",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_arrow_poison",
+     "name": "Poison Arrow",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_arrow_silver",
+     "name": "Silver Arrow",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_arrow_wood",
+     "name": "Wood Arrow",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_atgeir_blackmetal",
+     "name": "Black Metal Atgeir",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_atgeir_bronze",
+     "name": "Bronze Atgeir",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_atgeir_gold",
+     "name": "Nord Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_gold_bloodlightning",
+     "name": "Thunderblood Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_gold_frostfire",
+     "name": "Frostfire Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_gold_uncooked",
+     "name": "Cast: Nord Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_himminafl",
+     "name": "Himminafl",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_atgeir_iron",
+     "name": "Iron Atgeir",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_axe2h_gold",
+     "name": "Nord Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe2h_gold_bloodlightning",
+     "name": "Thunderblood Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe2h_gold_frostfire",
+     "name": "Frostfire Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_berzerkr",
+     "name": "Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_blood",
+     "name": "Bleeding Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_lightning",
+     "name": "Thundering Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_nature",
+     "name": "Primal Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_blackmetal",
+     "name": "Black Metal Axe",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_axe_bronze",
+     "name": "Bronze Axe",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_axe_early",
+     "name": "Early Axes",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_axe_flint",
+     "name": "Flint Axe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_axe_gold",
+     "name": "Nord Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_gold_bloodlightning",
+     "name": "Thunderblood Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_gold_frostfire",
+     "name": "Frostfire Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_gold_uncooked",
+     "name": "Cast: Nord Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_iron",
+     "name": "Iron Axe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_axe_jotunbane",
+     "name": "Jotun Bane",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bakedpoteitr_uncooked",
+     "name": "Unbaked Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_barleywinebase",
+     "name": "Barley Wine Base: Fire Resistance",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_battleaxe",
+     "name": "Battleaxe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_battleaxe_blackmetal",
+     "name": "Black Metal Battleaxe",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_battleaxe_crystal",
+     "name": "Crystal Battleaxe",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_battleaxe_gold_uncooked",
+     "name": "Cast: Nord Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_battleaxe_skullsplittur",
+     "name": "Skull Splittur",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bell",
+     "name": "Bell",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bilebomb",
+     "name": "Bile Bomb",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_blacksoup",
+     "name": "Black Soup",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bloodpudding",
+     "name": "Blood Pudding",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_boarjerky",
+     "name": "Boar Jerky",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bolt_blackmetal",
+     "name": "Black Metal Bolt",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bolt_bloodgold",
+     "name": "Bloodgold Bolt",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bolt_bone",
+     "name": "Bone Bolt",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bolt_carapace",
+     "name": "Carapace Bolt",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bolt_charred",
+     "name": "Charred Bolt",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bolt_iron",
+     "name": "Iron Bolt",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bomb_dynamite",
+     "name": "Ember Charge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bombblob_frost",
+     "name": "Blob Bomb: Frost",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_bombblob_lava",
+     "name": "Blob Bomb: Lava",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bombblob_morkhalla",
+     "name": "Blob Bomb: Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bombblob_poison",
+     "name": "Blob Bomb: Poison",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bombblob_poisonelite",
+     "name": "Blob Bomb: Elite Poison",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bombblob_tar",
+     "name": "Blob Bomb: Tar",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_bow",
+     "name": "Crude Bow",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_bow_ashlands",
+     "name": "Ash Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsblood",
+     "name": "Blood Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsroot",
+     "name": "Root Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsstorm",
+     "name": "Storm Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_draugrfang",
+     "name": "Draugr Fang",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_bow_finewood",
+     "name": "Finewood Bow",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bow_gold",
+     "name": "Nord Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_gold_bloodlightning",
+     "name": "Thunderblood Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_gold_frostfire",
+     "name": "Frostfire Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_gold_uncooked",
+     "name": "Cast: Nord Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_huntsman",
+     "name": "Huntsman Bow",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bow_snipesnap",
+     "name": "Spinesnap",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_breaddough",
+     "name": "Bread Dough",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_bronze",
+     "name": "Bronze",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bronzenails",
+     "name": "Bronze Nails",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_cape_ash",
+     "name": "Ashen Cape",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_cape_asksvin",
+     "name": "Asksvin Cloak",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_cape_deepnorth",
+     "name": "Moose Hide Cape",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_cape_deepnorth_mage",
+     "name": "Cape of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_cape_deerhide",
+     "name": "Deer Hide Cape",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_cape_feather",
+     "name": "Feather Cape",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_cape_linen",
+     "name": "Linen Cape",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_cape_lox",
+     "name": "Lox Cape",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_cape_trollhide",
+     "name": "Troll Hide Cape",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_cape_wolf",
+     "name": "Wolf Fur Cape",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_carrotsoup",
+     "name": "Carrot Soup",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_catapult_ammo",
+     "name": "Explosive Payload",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_catapult_bloodgold_ammo",
+     "name": "Bloodgold Payload",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_catapult_training_ammo",
+     "name": "Grausten Payload",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_ceramicplate",
+     "name": "Ceramic Plate",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_chest_berserker",
+     "name": "Patterns of the Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_chest_berserker_undead",
+     "name": "Vilebone Cage",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_chest_bronze",
+     "name": "Bronze Plate Tunic",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_chest_carapace",
+     "name": "Carapace Breastplate",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_chest_fenris",
+     "name": "Fenris Coat",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_chest_flametal",
+     "name": "Flametal Breastplate",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_chest_heavy_deepnorth",
+     "name": "Breastplate of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_heavy_gold_uncooked",
+     "name": "Cast: Breastplate of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_iron",
+     "name": "Iron Scale Mail",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_chest_leather",
+     "name": "Leather Tunic",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_chest_lox",
+     "name": "Lox Fur Jacket",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_chest_mage",
+     "name": "Eitr-weave Robe",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_chest_mage_ashlands",
+     "name": "Robes of Embla",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_chest_mage_deepnorth",
+     "name": "Robes of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_mage_gold_uncooked",
+     "name": "Cast: Robes of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_medium_ashlands",
+     "name": "Breastplate of Ask",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_chest_medium_deepnorth",
+     "name": "Chestpiece of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_medium_gold_uncooked",
+     "name": "Cast: Chestpiece of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_chest_pcuirass",
+     "name": "Padded Cuirass",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_chest_rags",
+     "name": "Rag Tunic",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_chest_root",
+     "name": "Root Harnesk",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_chest_trollleather",
+     "name": "Troll Leather Tunic",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_chest_wolf",
+     "name": "Wolf Hide Chestpiece",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_crossbow_arbalest",
+     "name": "Arbalest",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_crossbow_bloodlightning_gold",
+     "name": "Thunderblood Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_frostfire_gold",
+     "name": "Frostfire Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_gold",
+     "name": "Nord Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_gold_uncooked",
+     "name": "Cast: Nord Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_ripper",
+     "name": "Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_blood",
+     "name": "Wound Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_lightning",
+     "name": "Storm Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_nature",
+     "name": "Root Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_cultivator",
+     "name": "Cultivator",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_deerstew",
+     "name": "Deer Stew",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_demister",
+     "name": "Wisplight",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_dvergrkey",
+     "name": "Sealbreaker",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_egg_cooked",
+     "name": "Cooked Egg",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_eyescream",
+     "name": "Eyescream",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_feastashlands",
+     "name": "Ashlands Gourmet Bowl",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_feastblackforest",
+     "name": "Black Forest Buffet Platter",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastdeepnorth",
+     "name": "Northern Morning Fare",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_feastmeadows",
+     "name": "Whole Roasted Meadow Boar",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastmistlands",
+     "name": "Mushrooms Galore á la Mistlands",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_feastmountains",
+     "name": "Hearty Mountain Logger's Stew",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_feastoceans",
+     "name": "Sailor's Bounty",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastplains",
+     "name": "Plains Pie Picnic",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_feastswamps",
+     "name": "Swamp Dweller's Delight",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fierysvinstew",
+     "name": "Fiery Svinstew",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fireworkrocket_blue",
+     "name": "Blue Fireworks",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fireworkrocket_cyan",
+     "name": "Cyan Fireworks",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_fireworkrocket_green",
+     "name": "Green Fireworks",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fireworkrocket_purple",
+     "name": "Purple Fireworks",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fireworkrocket_red",
+     "name": "Red Fireworks",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_fireworkrocket_yellow",
+     "name": "Yellow Fireworks",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_fish_raw",
+     "name": "Raw Fish",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fishandbreaduncooked",
+     "name": "Uncooked Fish 'n' Bread",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_fishingbait_ashlands",
+     "name": "Hot Fishing Bait",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fishingbait_cave",
+     "name": "Cold Fishing Bait",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_fishingbait_deepnorth",
+     "name": "Frosty Fishing Bait",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_fishingbait_forest",
+     "name": "Mossy Fishing Bait",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fishingbait_mistlands",
+     "name": "Misty Fishing Bait",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_fishingbait_ocean",
+     "name": "Heavy Fishing Bait",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fishingbait_plains",
+     "name": "Stingy Fishing Bait",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_fishingbait_swamp",
+     "name": "Sticky Fishing Bait",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fishsoup",
+     "name": "Fish Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fishwraps",
+     "name": "Fish Wraps",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_fistweapon_bjorn",
+     "name": "Paws of the Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fistweapon_bjorn_undead",
+     "name": "Vilebone Maulclaws",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_fistweapon_fenris",
+     "name": "Flesh Rippers",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_fistweapon_frostfire_gold",
+     "name": "Frostfire Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fistweapon_gold",
+     "name": "Nord Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fistweapon_gold_bloodlightning",
+     "name": "Thunderblood Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fistweapon_gold_uncooked",
+     "name": "Cast: Nord Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_frostorbs_uncooked",
+     "name": "Cast: Northern Vengeance",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_graplinghook",
+     "name": "Grappling Hook",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_helmet_berserker",
+     "name": "Headdress of the Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_helmet_berserker_undead",
+     "name": "Vilebone Visage",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_helmet_bronze",
+     "name": "Bronze Helmet",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_helmet_carapace",
+     "name": "Carapace Helmet",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_helmet_celebration",
+     "name": "Celebratory Cap",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_helmet_crown_of_valheim",
+     "name": "Crown of Valheim",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_drake",
+     "name": "Drake Helmet",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_helmet_fenris",
+     "name": "Fenris Hood",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_helmet_fishinghat",
+     "name": "Fishing Hat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_flametal",
+     "name": "Flametal Helmet",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_helmet_heavy_deepnorth",
+     "name": "Helmet of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_heavy_gold_uncooked",
+     "name": "Cast: Helmet of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_iron",
+     "name": "Iron Helmet",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_helmet_leather",
+     "name": "Leather Helmet",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_helmet_lox",
+     "name": "Lox Fur Hood",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_helmet_mage",
+     "name": "Eitr-weave Hood",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_helmet_mage_ashlands",
+     "name": "Hood of Embla",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_helmet_mage_deepnorth",
+     "name": "Headdress of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_mage_gold_uncooked",
+     "name": "Cast: Headdress of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_medium_ashlands",
+     "name": "Hood of Ask",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_helmet_medium_deepnorth",
+     "name": "Hood of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_medium_gold_uncooked",
+     "name": "Cast: Hood of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_helmet_padded",
+     "name": "Padded Helmet",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_helmet_root",
+     "name": "Root Mask",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_helmet_rootcrown",
+     "name": "Crown of Roots",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_helmet_trollleather",
+     "name": "Troll Leather Hood",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_hoe",
+     "name": "Hoe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_honeyglazedchickenuncooked",
+     "name": "Uncooked Honey Glazed Chicken",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_ironnails",
+     "name": "Iron Nails",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_kalechips_uncooked",
+     "name": "Raw Kale Chips",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_keys_gold_uncooked",
+     "name": "Cast: Intricate Key",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_blackmetal",
+     "name": "Black Metal Knife",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_knife_butcher",
+     "name": "Butcher Knife",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_knife_chitin",
+     "name": "Abyssal Razor",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_knife_copper",
+     "name": "Copper Knife",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_knife_flint",
+     "name": "Flint Knife",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_knife_gold",
+     "name": "Nord Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_gold_bloodlightning",
+     "name": "Thunderblood Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_gold_frostfire",
+     "name": "Frostfire Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_gold_uncooked",
+     "name": "Cast: Nord Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_silver",
+     "name": "Silver Knife",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_knife_skollandhati",
+     "name": "Skoll and Hati",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_legs_berserker",
+     "name": "Loincloth of the Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_legs_berserker_undead",
+     "name": "Vilebone Drapes",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_legs_bronze",
+     "name": "Bronze Plate Leggings",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_legs_carapace",
+     "name": "Carapace Greaves",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_legs_fenris",
+     "name": "Fenris Leggings",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_legs_flametal",
+     "name": "Flametal Greaves",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_legs_heavy_deepnorth",
+     "name": "Trousers of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_heavy_gold_uncooked",
+     "name": "Cast: Trousers of the Protector",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_iron",
+     "name": "Iron Greaves",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_legs_leather",
+     "name": "Leather Trousers",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_legs_lox",
+     "name": "Lox Fur Trousers",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_legs_mage",
+     "name": "Eitr-weave Trousers",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_legs_mage_ashlands",
+     "name": "Trousers of Embla",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_legs_mage_deepnorth",
+     "name": "Trousers of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_mage_gold_uncooked",
+     "name": "Cast: Trousers of the Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_medium_ashlands",
+     "name": "Trousers of Ask",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_legs_medium_deepnorth",
+     "name": "Trousers of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_medium_gold_uncooked",
+     "name": "Cast: Trousers of the Vanguard",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_legs_pgreaves",
+     "name": "Padded Greaves",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_legs_rags",
+     "name": "Rag Trousers",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_legs_root",
+     "name": "Root Leggings",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_legs_trollleather",
+     "name": "Troll Leather Trousers",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_legs_wolf",
+     "name": "Wolf Hide Trousers",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_lingondricka",
+     "name": "Lingonberry Juice",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_loxpie_uncooked",
+     "name": "Unbaked Lox Pie",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_mace2h_gold_bloodlightning",
+     "name": "Thunderblood Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace2h_gold_frostfire",
+     "name": "Frostfire Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_bronze",
+     "name": "Bronze Mace",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_mace_eldner",
+     "name": "Flametal Mace",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_blood",
+     "name": "Bloodgeon",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_lightning",
+     "name": "Storm Star",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_nature",
+     "name": "Klossen",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_gold",
+     "name": "Nord Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_gold_bloodlightning",
+     "name": "Thunderblood Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_gold_frostfire",
+     "name": "Frostfire Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_gold_uncooked",
+     "name": "Cast: Nord Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_iron",
+     "name": "Iron Mace",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_mace_needle",
+     "name": "Porcupine",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_mace_silver",
+     "name": "Frostner",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_magicallystuffedmushroomuncooked",
+     "name": "Uncooked Stuffed Mushroom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_marinatedgreens",
+     "name": "Marinated Greens",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mashedmeat",
+     "name": "Mashed Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_meadbasebugrepellent",
+     "name": "Mead Base: Anti-Sting",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_meadbasebzerker",
+     "name": "Mead base: Berserkir",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbaseeitr",
+     "name": "Mead Base: Minor Eitr",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meadbaseeitr_lingering",
+     "name": "Mead Base: Lingering Eitr",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meadbasefrostresist",
+     "name": "Mead Base: Frost Resistance",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbasehasty",
+     "name": "Mead base: Ratatosk",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbasehealth",
+     "name": "Mead Base: Minor Healing",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_meadbasehealth_lingering",
+     "name": "Mead Base: Lingering Health",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_meadbasehealth_major",
+     "name": "Mead Base: Major Healing",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meadbasehealth_medium",
+     "name": "Mead Base: Medium Healing",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbaselightfoot",
+     "name": "Mead Base: Lightfoot",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meadbasepoisonresist",
+     "name": "Mead Base: Poison Resistance",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_meadbasestamina",
+     "name": "Mead Base: Minor Stamina",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_meadbasestamina_lingering",
+     "name": "Mead Base: Lingering Stamina",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meadbasestamina_medium",
+     "name": "Mead Base: Medium Stamina",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_meadbasestrength",
+     "name": "Mead Base: Troll Endurance",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbaseswimmer",
+     "name": "Mead Base: Vananidir",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_meadbasetamer",
+     "name": "Mead Base: Animal Whispers",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_meadbasetasty",
+     "name": "Mead Base: Tasty",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_meatballsmashedpoteitr",
+     "name": "Meatballs and Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_meatplatteruncooked",
+     "name": "Uncooked Meat Platter",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mechanicalspring",
+     "name": "Mechanical Spring",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mincemeatsauce",
+     "name": "Minced Meat Sauce",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_mistharesupremeuncooked",
+     "name": "Uncooked Misthare Supreme",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_moosekebab",
+     "name": "Meat In Bread",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mushroomomelette",
+     "name": "Mushroom Omelette",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_oatmeallingonberryjam",
+     "name": "Oatmeal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_oatmilk",
+     "name": "Oat Milk",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_onionsoup",
+     "name": "Onion Soup",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_oozebomb",
+     "name": "Ooze Bomb",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_ovenpancake_uncooked",
+     "name": "Oven Pancake Batter",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_pancakes",
+     "name": "Pancakes",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_pickaxe_antler",
+     "name": "Antler Pickaxe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_pickaxe_blackmetal",
+     "name": "Black Metal Pickaxe",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_pickaxe_bronze",
+     "name": "Bronze Pickaxe",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_pickaxe_iron",
+     "name": "Iron Pickaxe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_piquantpie_uncooked",
+     "name": "Uncooked Piquant Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_pulledbear",
+     "name": "Pulled Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_queensjam",
+     "name": "Queen's Jam",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_roastedcrustpie_uncooked",
+     "name": "Uncooked Roasted Crust Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_saddleasksvin",
+     "name": "Asksvin Saddle",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_saddlelox",
+     "name": "Lox Saddle",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_saddlemoose",
+     "name": "Moose Saddle",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_salad",
+     "name": "Salad",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sausages",
+     "name": "Sausages",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_scorchingmedley",
+     "name": "Scorching Medley",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_scythe",
+     "name": "Scythe",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_sealsoup",
+     "name": "Seal Meat Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_seekeraspic",
+     "name": "Seeker Aspic",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_serpentstew",
+     "name": "Serpent Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sharpeningstone",
+     "name": "Sharpening Stone",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shield_banded",
+     "name": "Banded Shield",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shield_blackmetal",
+     "name": "Black Metal Shield",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_shield_blackmetal_tower",
+     "name": "Black Metal Tower Shield",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_shield_bonetower",
+     "name": "Bone Tower Shield",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_shield_bronzebuckler",
+     "name": "Bronze Buckler",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_shield_buckler_gold_uncooked",
+     "name": "Cast: Nord Buckler",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_carapace",
+     "name": "Carapace Shield",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_shield_carapacebuckler",
+     "name": "Carapace Buckler",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_shield_flametal",
+     "name": "Flametal Shield",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_shield_flametal_tower",
+     "name": "Flametal Tower Shield",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_shield_gold",
+     "name": "Nord Shield",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_gold_tower",
+     "name": "Nord Greatshield",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_goldbuckler",
+     "name": "Nord Buckler",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_iron_tower",
+     "name": "Iron Tower Shield",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shield_ironbuckler",
+     "name": "Iron Buckler",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shield_roots",
+     "name": "Shield of Roots",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shield_round_gold_uncooked",
+     "name": "Cast: Nord Shield",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_serpentscale",
+     "name": "Serpent Scale Shield",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_shield_silver",
+     "name": "Silver Shield",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_shield_tower_gold_uncooked",
+     "name": "Cast: Nord Greatshield",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_shield_wood",
+     "name": "Wood Shield",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_shield_woodtower",
+     "name": "Wood Tower Shield",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_shieldcore",
+     "name": "Shield Core",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_shocklatesmoothie",
+     "name": "Muckshake",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sizzlingberrybroth",
+     "name": "Sizzling Berry Broth",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sledge_demolisher",
+     "name": "Demolisher",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sledge_gold",
+     "name": "Nord Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sledge_gold_uncooked",
+     "name": "Cast: Nord Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sledge_iron",
+     "name": "Iron Sledge",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_smokedfish",
+     "name": "Smoked Fish",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_smokedmoosemeat",
+     "name": "Smoked Moose Meat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sparklingshroomshake",
+     "name": "Sparkling Shroomshake",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_ancientbark",
+     "name": "Ancient Bark Spear",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_spear_bronze",
+     "name": "Bronze Spear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_spear_carapace",
+     "name": "Carapace Spear",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_spear_chitin",
+     "name": "Abyssal Harpoon",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$item_spear_flint",
+     "name": "Flint Spear",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_spear_gold",
+     "name": "Nord Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_gold_bloodlightning",
+     "name": "Thunderblood Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_gold_frostfire",
+     "name": "Frostfire Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_gold_uncooked",
+     "name": "Cast: Nord Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_splitner",
+     "name": "Splitnir",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_blood",
+     "name": "Splitnir the Bleeding",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_lightning",
+     "name": "Splitnir the Storming",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_nature",
+     "name": "Splitnir the Primal",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_wolffang",
+     "name": "Fang Spear",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_spicymarmalade",
+     "name": "Spicy Marmalade",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_staff_frostorbs",
+     "name": "Northern Vengeance",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_lightning",
+     "name": "Dundr",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_staff_orbofahri",
+     "name": "Echo Spike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_orbofahri_uncooked",
+     "name": "Cast: Echo Spike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_spiritcaller",
+     "name": "Spirit Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_spiritcaller_uncooked",
+     "name": "Cast: Spirit Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_thunderblood",
+     "name": "Lightning Strike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_thunderblood_uncooked",
+     "name": "Cast: Lightning Strike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staffclusterbomb",
+     "name": "Staff of Fracturing",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_stafffireball",
+     "name": "Staff of Embers",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffgreenroots",
+     "name": "Staff of the Wild",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_stafficeshards",
+     "name": "Staff of Frost",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffredtroll",
+     "name": "Trollstav",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_staffshield",
+     "name": "Staff of Protection",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffskeleton",
+     "name": "Dead Raiser",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_stagbreaker",
+     "name": "Stagbreaker",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_sword2h_gold",
+     "name": "Nord Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword2h_gold_bloodlightning",
+     "name": "Thunderblood Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword2h_gold_frostfire",
+     "name": "Frostfire Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword2h_gold_uncooked",
+     "name": "Cast: Nord Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_blackmetal",
+     "name": "Black Metal Sword",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_sword_bronze",
+     "name": "Bronze Sword",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_sword_dyrnwyn",
+     "name": "Dyrnwyn",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_gold",
+     "name": "Nord Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_gold_bloodlightning",
+     "name": "Thunderblood Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_gold_frostfire",
+     "name": "Frostfire Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_gold_uncooked",
+     "name": "Cast: Nord Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_iron",
+     "name": "Iron Sword",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sword_krom",
+     "name": "Krom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sword_mistwalker",
+     "name": "Mistwalker",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sword_niedhogg",
+     "name": "Nidhögg",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_blood",
+     "name": "Nidhögg the Bleeding",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_lightning",
+     "name": "Nidhögg the Thundering",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_nature",
+     "name": "Nidhögg the Primal",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_silver",
+     "name": "Silver Sword",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_sword_slayer",
+     "name": "Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_blood",
+     "name": "Brutal Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_lightning",
+     "name": "Scourging Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_nature",
+     "name": "Primal Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_wood",
+     "name": "Wooden Sword",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trinketblackdamagedealth",
+     "name": "Bracelets of the Brave",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trinketblackdtamina",
+     "name": "Evasion Mantle",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trinketbloodgoldhealth",
+     "name": "Neckstabber",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trinketbloodgoldstamina",
+     "name": "Witch Crown",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trinketbronzehealth",
+     "name": "Heart of the Forest",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trinketbronzestamina",
+     "name": "Bronze Pendant",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trinketcarapaceeitr",
+     "name": "Pulsating Earrings",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trinketchitinswim",
+     "name": "Fins of Destiny",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$item_trinketflametaleitr",
+     "name": "Jörmundling",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trinketflametalstaminahealth",
+     "name": "Brimstone",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trinketironhealth",
+     "name": "Iron Brooch",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trinketironstamina",
+     "name": "Nimble Anklet",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trinketscalestaminadamage",
+     "name": "Resounding Shackle",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trinketsilverdamage",
+     "name": "Wolf Sight",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trinketsilverresist",
+     "name": "Crystal Heart",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_turnipstew",
+     "name": "Turnip Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_turretbolt",
+     "name": "Black Metal Missile",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_turretbolt_bloodgold",
+     "name": "Bloodgold Missile",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_turretbolt_flametal",
+     "name": "Flametal Missile",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_turretboltwood",
+     "name": "Wooden Missile",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_vikingcupcake_uncooked",
+     "name": "Unbaked Sweetbread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_wolf_skewer",
+     "name": "Wolf Skewer",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_wolfjerky",
+     "name": "Wolf Jerky",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_yggdrasilporridge",
+     "name": "Yggdrasil Porridge",
+     "biome": "Mistlands"
+    }
+   ]
+  },
+  {
+   "id": "weapons",
+   "achievement": "AllWeaponCraft",
+   "title": "Weapons crafted (any difficulty)",
+   "set": 1,
+   "source": "crafted",
+   "entries": [
+    {
+     "token": "$item_atgeir_blackmetal",
+     "name": "Black Metal Atgeir",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_atgeir_bronze",
+     "name": "Bronze Atgeir",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_atgeir_gold",
+     "name": "Nord Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_gold_bloodlightning",
+     "name": "Thunderblood Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_gold_frostfire",
+     "name": "Frostfire Atgeir",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_atgeir_himminafl",
+     "name": "Himminafl",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_atgeir_iron",
+     "name": "Iron Atgeir",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_axe2h_gold",
+     "name": "Nord Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe2h_gold_bloodlightning",
+     "name": "Thunderblood Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe2h_gold_frostfire",
+     "name": "Frostfire Greataxe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_berzerkr",
+     "name": "Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_blood",
+     "name": "Bleeding Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_lightning",
+     "name": "Thundering Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_berzerkr_nature",
+     "name": "Primal Berserkir Axes",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_axe_blackmetal",
+     "name": "Black Metal Axe",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_axe_bronze",
+     "name": "Bronze Axe",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_axe_early",
+     "name": "Early Axes",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_axe_flint",
+     "name": "Flint Axe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_axe_gold",
+     "name": "Nord Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_gold_bloodlightning",
+     "name": "Thunderblood Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_gold_frostfire",
+     "name": "Frostfire Axe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_axe_iron",
+     "name": "Iron Axe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_axe_jotunbane",
+     "name": "Jotun Bane",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_axe_stone",
+     "name": "Stone Axe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_battleaxe",
+     "name": "Battleaxe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_battleaxe_blackmetal",
+     "name": "Black Metal Battleaxe",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_battleaxe_crystal",
+     "name": "Crystal Battleaxe",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_battleaxe_skullsplittur",
+     "name": "Skull Splittur",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bilebomb",
+     "name": "Bile Bomb",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_bomb_dynamite",
+     "name": "Ember Charge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bombblob_frost",
+     "name": "Blob Bomb: Frost",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_bombblob_lava",
+     "name": "Blob Bomb: Lava",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bombblob_morkhalla",
+     "name": "Blob Bomb: Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bombblob_poison",
+     "name": "Blob Bomb: Poison",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bombblob_poisonelite",
+     "name": "Blob Bomb: Elite Poison",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bombblob_tar",
+     "name": "Blob Bomb: Tar",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_bow",
+     "name": "Crude Bow",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_bow_ashlands",
+     "name": "Ash Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsblood",
+     "name": "Blood Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsroot",
+     "name": "Root Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_ashlandsstorm",
+     "name": "Storm Fang",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bow_draugrfang",
+     "name": "Draugr Fang",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_bow_finewood",
+     "name": "Finewood Bow",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bow_gold",
+     "name": "Nord Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_gold_bloodlightning",
+     "name": "Thunderblood Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_gold_frostfire",
+     "name": "Frostfire Bow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bow_huntsman",
+     "name": "Huntsman Bow",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bow_snipesnap",
+     "name": "Spinesnap",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_club",
+     "name": "Club",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_crossbow_arbalest",
+     "name": "Arbalest",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_crossbow_bloodlightning_gold",
+     "name": "Thunderblood Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_frostfire_gold",
+     "name": "Frostfire Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_gold",
+     "name": "Nord Crossbow",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_crossbow_ripper",
+     "name": "Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_blood",
+     "name": "Wound Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_lightning",
+     "name": "Storm Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_crossbow_ripper_nature",
+     "name": "Root Ripper",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fistweapon_bjorn",
+     "name": "Paws of the Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fistweapon_bjorn_undead",
+     "name": "Vilebone Maulclaws",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_fistweapon_fenris",
+     "name": "Flesh Rippers",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_fistweapon_frostfire_gold",
+     "name": "Frostfire Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fistweapon_gold",
+     "name": "Nord Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fistweapon_gold_bloodlightning",
+     "name": "Thunderblood Knucklechains",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_graplinghook",
+     "name": "Grappling Hook",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_knife_blackmetal",
+     "name": "Black Metal Knife",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_knife_butcher",
+     "name": "Butcher Knife",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_knife_chitin",
+     "name": "Abyssal Razor",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_knife_copper",
+     "name": "Copper Knife",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_knife_flint",
+     "name": "Flint Knife",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_knife_gold",
+     "name": "Nord Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_gold_bloodlightning",
+     "name": "Thunderblood Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_gold_frostfire",
+     "name": "Frostfire Dagger",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_knife_silver",
+     "name": "Silver Knife",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_knife_skollandhati",
+     "name": "Skoll and Hati",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mace2h_gold_bloodlightning",
+     "name": "Thunderblood Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace2h_gold_frostfire",
+     "name": "Frostfire Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_bronze",
+     "name": "Bronze Mace",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_mace_eldner",
+     "name": "Flametal Mace",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_blood",
+     "name": "Bloodgeon",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_lightning",
+     "name": "Storm Star",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_eldner_nature",
+     "name": "Klossen",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mace_gold",
+     "name": "Nord Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_gold_bloodlightning",
+     "name": "Thunderblood Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_gold_frostfire",
+     "name": "Frostfire Mace",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mace_iron",
+     "name": "Iron Mace",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_mace_needle",
+     "name": "Porcupine",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_mace_silver",
+     "name": "Frostner",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_oozebomb",
+     "name": "Ooze Bomb",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_pickaxe_antler",
+     "name": "Antler Pickaxe",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_pickaxe_blackmetal",
+     "name": "Black Metal Pickaxe",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_pickaxe_bronze",
+     "name": "Bronze Pickaxe",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_pickaxe_iron",
+     "name": "Iron Pickaxe",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_scythe",
+     "name": "Scythe",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_sledge_demolisher",
+     "name": "Demolisher",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sledge_gold",
+     "name": "Nord Sledge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sledge_iron",
+     "name": "Iron Sledge",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_spear_ancientbark",
+     "name": "Ancient Bark Spear",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_spear_bronze",
+     "name": "Bronze Spear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_spear_carapace",
+     "name": "Carapace Spear",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_spear_chitin",
+     "name": "Abyssal Harpoon",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$item_spear_flint",
+     "name": "Flint Spear",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_spear_gold",
+     "name": "Nord Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_gold_bloodlightning",
+     "name": "Thunderblood Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_gold_frostfire",
+     "name": "Frostfire Spear",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_spear_splitner",
+     "name": "Splitnir",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_blood",
+     "name": "Splitnir the Bleeding",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_lightning",
+     "name": "Splitnir the Storming",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_splitner_nature",
+     "name": "Splitnir the Primal",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spear_wolffang",
+     "name": "Fang Spear",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_staff_frostorbs",
+     "name": "Northern Vengeance",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_lightning",
+     "name": "Dundr",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_staff_orbofahri",
+     "name": "Echo Spike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_spiritcaller",
+     "name": "Spirit Caller",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staff_thunderblood",
+     "name": "Lightning Strike",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_staffclusterbomb",
+     "name": "Staff of Fracturing",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_stafffireball",
+     "name": "Staff of Embers",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffgreenroots",
+     "name": "Staff of the Wild",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_stafficeshards",
+     "name": "Staff of Frost",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffredtroll",
+     "name": "Trollstav",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_staffshield",
+     "name": "Staff of Protection",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_staffskeleton",
+     "name": "Dead Raiser",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_stagbreaker",
+     "name": "Stagbreaker",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_sword2h_gold",
+     "name": "Nord Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword2h_gold_bloodlightning",
+     "name": "Thunderblood Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword2h_gold_frostfire",
+     "name": "Frostfire Greatsword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_blackmetal",
+     "name": "Black Metal Sword",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_sword_bronze",
+     "name": "Bronze Sword",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_sword_dyrnwyn",
+     "name": "Dyrnwyn",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_gold",
+     "name": "Nord Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_gold_bloodlightning",
+     "name": "Thunderblood Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_gold_frostfire",
+     "name": "Frostfire Sword",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sword_iron",
+     "name": "Iron Sword",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sword_krom",
+     "name": "Krom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sword_mistwalker",
+     "name": "Mistwalker",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sword_niedhogg",
+     "name": "Nidhögg",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_blood",
+     "name": "Nidhögg the Bleeding",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_lightning",
+     "name": "Nidhögg the Thundering",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_niedhogg_nature",
+     "name": "Nidhögg the Primal",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_silver",
+     "name": "Silver Sword",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_sword_slayer",
+     "name": "Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_blood",
+     "name": "Brutal Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_lightning",
+     "name": "Scourging Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_slayer_nature",
+     "name": "Primal Slayer",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sword_wood",
+     "name": "Wooden Sword",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_torch",
+     "name": "Torch",
+     "biome": "Meadows"
+    }
+   ]
+  },
+  {
+   "id": "cooked",
+   "achievement": "AllFoodCooked",
+   "title": "Food cooked (any difficulty)",
+   "set": 1,
+   "source": "crafted",
+   "entries": [
+    {
+     "token": "$item_asksvin_meat_cooked",
+     "name": "Cooked Asksvin Tail",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bakedpoteitr",
+     "name": "Baked Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bakedpoteitr_uncooked",
+     "name": "Unbaked Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bjorn_meat_cooked",
+     "name": "Cooked Bear Meat",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_blacksoup",
+     "name": "Black Soup",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bloodpudding",
+     "name": "Blood Pudding",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_blubber_cooked",
+     "name": "Cooked Seal Blubber",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_boar_meat_cooked",
+     "name": "Cooked Boar Meat",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_boarjerky",
+     "name": "Boar Jerky",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bonemawmeat_cooked",
+     "name": "Cooked Bonemaw Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bread",
+     "name": "Bread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_breaddough",
+     "name": "Bread Dough",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_bug_meat_cooked",
+     "name": "Cooked Seeker Meat",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_carrotsoup",
+     "name": "Carrot Soup",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_chicken_meat_cooked",
+     "name": "Cooked Chicken Meat",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_deer_meat_cooked",
+     "name": "Cooked Deer Meat",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_deerstew",
+     "name": "Deer Stew",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_egg_cooked",
+     "name": "Cooked Egg",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_eyescream",
+     "name": "Eyescream",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_fierysvinstew",
+     "name": "Fiery Svinstew",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fish_cooked",
+     "name": "Cooked Fish",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fish_raw",
+     "name": "Raw Fish",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fishandbread",
+     "name": "Fish 'n' Bread",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_fishandbreaduncooked",
+     "name": "Uncooked Fish 'n' Bread",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_fishsoup",
+     "name": "Fish Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fishwraps",
+     "name": "Fish Wraps",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_hare_meat_cooked",
+     "name": "Cooked Hare Meat",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_honeyglazedchicken",
+     "name": "Honey Glazed Chicken",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_honeyglazedchickenuncooked",
+     "name": "Uncooked Honey Glazed Chicken",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_kalechips",
+     "name": "Kale Chips",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_kalechips_uncooked",
+     "name": "Raw Kale Chips",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_lingondricka",
+     "name": "Lingonberry Juice",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_loxmeat_cooked",
+     "name": "Cooked Lox Meat",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_loxpie",
+     "name": "Lox Meat Pie",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_loxpie_uncooked",
+     "name": "Unbaked Lox Pie",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_magicallystuffedmushroom",
+     "name": "Stuffed Mushroom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_magicallystuffedmushroomuncooked",
+     "name": "Uncooked Stuffed Mushroom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_marinatedgreens",
+     "name": "Marinated Greens",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mashedmeat",
+     "name": "Mashed Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_meatballsmashedpoteitr",
+     "name": "Meatballs and Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_meatplatter",
+     "name": "Meat Platter",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_meatplatteruncooked",
+     "name": "Uncooked Meat Platter",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mincemeatsauce",
+     "name": "Minced Meat Sauce",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_mistharesupreme",
+     "name": "Misthare Supreme",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mistharesupremeuncooked",
+     "name": "Uncooked Misthare Supreme",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_moose_meat_cooked",
+     "name": "Cooked Moose Meat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_moosekebab",
+     "name": "Meat In Bread",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mushroomomelette",
+     "name": "Mushroom Omelette",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_necktailgrilled",
+     "name": "Grilled Neck Tail",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_oatmeallingonberryjam",
+     "name": "Oatmeal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_oatmilk",
+     "name": "Oat Milk",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_onionsoup",
+     "name": "Onion Soup",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_ovenpancake",
+     "name": "Oven Pancake",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_ovenpancake_uncooked",
+     "name": "Oven Pancake Batter",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_pancakes",
+     "name": "Pancakes",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_piquantpie",
+     "name": "Piquant Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_piquantpie_uncooked",
+     "name": "Uncooked Piquant Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_pulledbear",
+     "name": "Pulled Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_queensjam",
+     "name": "Queen's Jam",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_roastedcrustpie",
+     "name": "Roasted Crust Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_roastedcrustpie_uncooked",
+     "name": "Uncooked Roasted Crust Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_salad",
+     "name": "Salad",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sausages",
+     "name": "Sausages",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_scorchingmedley",
+     "name": "Scorching Medley",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sealsoup",
+     "name": "Seal Meat Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_seekeraspic",
+     "name": "Seeker Aspic",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_serpentmeatcooked",
+     "name": "Cooked Serpent Meat",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_serpentstew",
+     "name": "Serpent Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shocklatesmoothie",
+     "name": "Muckshake",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sizzlingberrybroth",
+     "name": "Sizzling Berry Broth",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_smokedfish",
+     "name": "Smoked Fish",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_smokedmoosemeat",
+     "name": "Smoked Moose Meat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_sparklingshroomshake",
+     "name": "Sparkling Shroomshake",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spicymarmalade",
+     "name": "Spicy Marmalade",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_turnipstew",
+     "name": "Turnip Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_vikingcupcake",
+     "name": "Frosted Sweetbread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_vikingcupcake_uncooked",
+     "name": "Unbaked Sweetbread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_volture_meat_cooked",
+     "name": "Cooked Volture Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_wolf_meat_cooked",
+     "name": "Cooked Wolf Meat",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_wolf_skewer",
+     "name": "Wolf Skewer",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_wolfjerky",
+     "name": "Wolf Jerky",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_yggdrasilporridge",
+     "name": "Yggdrasil Porridge",
+     "biome": "Mistlands"
+    }
+   ]
+  },
+  {
+   "id": "food-eaten",
+   "achievement": "AllFoodEaten",
+   "title": "Food eaten (The Gourmet)",
+   "set": 1,
+   "source": "foods_eaten",
+   "entries": [
+    {
+     "token": "$item_asksvin_meat_cooked",
+     "name": "Cooked Asksvin Tail",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bakedpoteitr",
+     "name": "Baked Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_bjorn_meat_cooked",
+     "name": "Cooked Bear Meat",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_blacksoup",
+     "name": "Black Soup",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_bloodpudding",
+     "name": "Blood Pudding",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_blubber_cooked",
+     "name": "Cooked Seal Blubber",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_blueberries",
+     "name": "Blueberries",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_boar_meat_cooked",
+     "name": "Cooked Boar Meat",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_boarjerky",
+     "name": "Boar Jerky",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_bonemawmeat_cooked",
+     "name": "Cooked Bonemaw Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_bread",
+     "name": "Bread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_bug_meat_cooked",
+     "name": "Cooked Seeker Meat",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_carrot",
+     "name": "Carrot",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_carrotsoup",
+     "name": "Carrot Soup",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_chicken_meat_cooked",
+     "name": "Cooked Chicken Meat",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_cloudberries",
+     "name": "Cloudberries",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_deer_meat_cooked",
+     "name": "Cooked Deer Meat",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_deerstew",
+     "name": "Deer Stew",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_egg_cooked",
+     "name": "Cooked Egg",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_eyescream",
+     "name": "Eyescream",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_feastashlands",
+     "name": "Ashlands Gourmet Bowl",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_feastblackforest",
+     "name": "Black Forest Buffet Platter",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastdeepnorth",
+     "name": "Northern Morning Fare",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_feastmeadows",
+     "name": "Whole Roasted Meadow Boar",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastmistlands",
+     "name": "Mushrooms Galore á la Mistlands",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_feastmountains",
+     "name": "Hearty Mountain Logger's Stew",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_feastoceans",
+     "name": "Sailor's Bounty",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_feastplains",
+     "name": "Plains Pie Picnic",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_feastswamps",
+     "name": "Swamp Dweller's Delight",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_fiddleheadfern",
+     "name": "Fiddlehead",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fierysvinstew",
+     "name": "Fiery Svinstew",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_fish_cooked",
+     "name": "Cooked Fish",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_fishandbread",
+     "name": "Fish 'n' Bread",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_fishsoup",
+     "name": "Fish Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_fishwraps",
+     "name": "Fish Wraps",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_glowworm",
+     "name": "Luminous Larva",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_hare_meat_cooked",
+     "name": "Cooked Hare Meat",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_honey",
+     "name": "Honey",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_honeyglazedchicken",
+     "name": "Honey Glazed Chicken",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_jotunpuffs",
+     "name": "Jotun Puffs",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_kale",
+     "name": "Kale",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_kalechips",
+     "name": "Kale Chips",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_lingonberries",
+     "name": "Lingonberries",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_lingondricka",
+     "name": "Lingonberry Juice",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_loxmeat_cooked",
+     "name": "Cooked Lox Meat",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_loxpie",
+     "name": "Lox Meat Pie",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_magecap",
+     "name": "Magecap",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_magicallystuffedmushroom",
+     "name": "Stuffed Mushroom",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_marinatedgreens",
+     "name": "Marinated Greens",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_mashedmeat",
+     "name": "Mashed Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_meatballsmashedpoteitr",
+     "name": "Meatballs and Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_meatplatter",
+     "name": "Meat Platter",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mincemeatsauce",
+     "name": "Minced Meat Sauce",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_mistharesupreme",
+     "name": "Misthare Supreme",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_moose_meat_cooked",
+     "name": "Cooked Moose Meat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_moosekebab",
+     "name": "Meat In Bread",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_mushroomcommon",
+     "name": "Mushroom",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_mushroomomelette",
+     "name": "Mushroom Omelette",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_mushroomyellow",
+     "name": "Yellow Mushroom",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_necktailgrilled",
+     "name": "Grilled Neck Tail",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_oat",
+     "name": "Oats",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_oatmeallingonberryjam",
+     "name": "Oatmeal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_oatmilk",
+     "name": "Oat Milk",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_onion",
+     "name": "Onion",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_onionsoup",
+     "name": "Onion Soup",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_ovenpancake",
+     "name": "Oven Pancake",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_pancakes",
+     "name": "Pancakes",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_piquantpie",
+     "name": "Piquant Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_poteitr",
+     "name": "Poteitr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_pulledbear",
+     "name": "Pulled Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_queensjam",
+     "name": "Queen's Jam",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_raspberries",
+     "name": "Raspberries",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_roastedcrustpie",
+     "name": "Roasted Crust Pie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_royaljelly",
+     "name": "Royal Jelly",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_salad",
+     "name": "Salad",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_sausages",
+     "name": "Sausages",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_scorchingmedley",
+     "name": "Scorching Medley",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sealsoup",
+     "name": "Seal Meat Soup",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_seekeraspic",
+     "name": "Seeker Aspic",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_serpentmeatcooked",
+     "name": "Cooked Serpent Meat",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_serpentstew",
+     "name": "Serpent Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_shocklatesmoothie",
+     "name": "Muckshake",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_sizzlingberrybroth",
+     "name": "Sizzling Berry Broth",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_smokedfish",
+     "name": "Smoked Fish",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_smokedmoosemeat",
+     "name": "Smoked Moose Meat",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_smokepuff",
+     "name": "Smoke Puff",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_sparklingshroomshake",
+     "name": "Sparkling Shroomshake",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_spicymarmalade",
+     "name": "Spicy Marmalade",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_turnipstew",
+     "name": "Turnip Stew",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_vikingcupcake",
+     "name": "Frosted Sweetbread",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_vineberry",
+     "name": "Vineberry Cluster",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_volture_meat_cooked",
+     "name": "Cooked Volture Meat",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_wolf_meat_cooked",
+     "name": "Cooked Wolf Meat",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_wolf_skewer",
+     "name": "Wolf Skewer",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_wolfjerky",
+     "name": "Wolf Jerky",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_yggdrasilporridge",
+     "name": "Yggdrasil Porridge",
+     "biome": "Mistlands"
+    }
+   ]
+  },
+  {
+   "id": "built",
+   "achievement": "AllBuildPieces",
+   "title": "Pieces built (any difficulty)",
+   "set": 1,
+   "source": "pieces_built",
+   "entries": [
+    {
+     "token": "$item_hardrock",
+     "name": "Mysterious Rock",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_BlackwoodStakewall",
+     "name": "Ashwood Stakewall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_archerytarget",
+     "name": "Archery Target",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_armorstand",
+     "name": "Armour Stand",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_artisan_ext1",
+     "name": "Artisan Press",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_artisanstation",
+     "name": "Artisan Table",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_ashwood_archedwall",
+     "name": "Ashwood Arched Wall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_beam_1m",
+     "name": "Ashwood Beam 1 m",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_beam_2m",
+     "name": "Ashwood Beam 2 m",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_bed",
+     "name": "Ashwood Bed",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_decowall",
+     "name": "Ashwood Decorative Wall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_decowall_divider",
+     "name": "Ashwood Divider",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_decowall_tree",
+     "name": "Ashwood Decorative Window",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_door",
+     "name": "Ashwood Door",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_floor_1x1",
+     "name": "Ashwood Floor 1x1",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_floor_2x2",
+     "name": "Ashwood Floor 2x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_floor_deco",
+     "name": "Ashwood Decorative Floor",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_halfwall",
+     "name": "Ashwood Half Wall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_pole_1m",
+     "name": "Ashwood Pole 1 m",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_pole_2m",
+     "name": "Ashwood Pole 2 m",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_quarterwall",
+     "name": "Ashwood Quarter Wall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwood_wall",
+     "name": "Ashwood Wall",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodarch_big",
+     "name": "Ashwood Arch",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodbeam26",
+     "name": "Ashwood Beam 26°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodbeam45",
+     "name": "Ashwood Beam 45°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodbeam67",
+     "name": "Ashwood Beam 67°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodcross26",
+     "name": "Ashwood Roof Cross 26°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodcross45",
+     "name": "Ashwood Roof Cross 45°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodstair",
+     "name": "Ashwood Stair",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof67",
+     "name": "Ashwood Wall 67°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof67upsidedown",
+     "name": "Ashwood Wall 67° (Inverted)",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof_26",
+     "name": "Ashwood Wall 26°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof_26_upsidedown",
+     "name": "Ashwood Wall 26° (Inverted)",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof_45",
+     "name": "Ashwood Wall 45°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallroof_45_upsidedown",
+     "name": "Ashwood Wall 45° (Inverted)",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_ashwoodwallrooftop67",
+     "name": "Ashwood Roof Cross 67°",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_asksvinskeleton",
+     "name": "Asksvin Skeleton",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_banner01",
+     "name": "Black Banner",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_banner02",
+     "name": "Blue Banner",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_banner03",
+     "name": "White and Red Striped Banner",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_banner04",
+     "name": "Red Banner",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_banner05",
+     "name": "Green Banner",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_banner06",
+     "name": "Blue, Red and White Banner",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_banner07",
+     "name": "White and Blue Striped Banner",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_banner08",
+     "name": "Yellow Banner",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_banner09",
+     "name": "Purple Banner",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_banner10",
+     "name": "Orange Banner",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_banner11",
+     "name": "White Banner",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_barber",
+     "name": "Barber Station",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_bathtub",
+     "name": "Hot Tub",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_bed",
+     "name": "Bed",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_bed02",
+     "name": "Dragon Bed",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_beehive",
+     "name": "Beehive",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_bench01",
+     "name": "Wood Bench",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_bench_runed",
+     "name": "Carved Bench",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_benchlog",
+     "name": "Sitting Log",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_birdnest",
+     "name": "Birds' Nest",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_blackforge",
+     "name": "Black Forge",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackforge_ext1",
+     "name": "Black Forge Cooler",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackforge_ext2",
+     "name": "Vice",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackforge_ext3",
+     "name": "Metal Cutter",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_blackforge_ext4",
+     "name": "Gem Cutter",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_blackforge_ext5",
+     "name": "Smith's Aprons",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_blackmarble1x1",
+     "name": "Black Marble 1x1x1",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble2x1x1",
+     "name": "Black Marble 2x1x1",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble2x2x2",
+     "name": "Black Marble 2x2x2",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_arch",
+     "name": "Black Marble Arch",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_base1",
+     "name": "Black Marble Plinth",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_basecorner",
+     "name": "Black Marble Plinth Corner",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_bench",
+     "name": "Black Marble Bench",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_column_1",
+     "name": "Black Marble Column Small",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_column_2",
+     "name": "Black Marble Column Wide",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_floor",
+     "name": "Black Marble Floor",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_floor_triangle",
+     "name": "Black Marble Floor Triangle",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_out1",
+     "name": "Black Marble Cornice",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_outcorner",
+     "name": "Black Marble Cornice Corner",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_stair",
+     "name": "Black Marble Stair",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_table",
+     "name": "Black Marble Table",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_throne",
+     "name": "Black Marble Throne",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmarble_tip",
+     "name": "Black Marble Quarter Spire",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_blackmetalbarstack",
+     "name": "Black Metal Stack",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_blackwoodbench01",
+     "name": "Ashwood Bench",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_blackwoodstack",
+     "name": "Ashwood Stack",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_blastfurnace",
+     "name": "Blast Furnace",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_bloodgoldbarstack",
+     "name": "Bloodgold Stack",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_bone_throne",
+     "name": "Bone Throne",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_bonestack",
+     "name": "Bone Stack",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_bonfire",
+     "name": "Bonfire",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_brazierceiling01",
+     "name": "Hanging Brazier",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_brazierfloor01",
+     "name": "Standing Brazier",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_brazierfloor02",
+     "name": "Blue Standing Brazier",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_bronzebarstack",
+     "name": "Bronze Stack",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_candle",
+     "name": "Resin Candle",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_cartographytable",
+     "name": "Cartography Table",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_cauldron",
+     "name": "Cauldron",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_cauldron_ext1_spice",
+     "name": "Spice Rack",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_cauldron_ext3_butchertable",
+     "name": "Butcher's Table",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_cauldron_ext4_pans",
+     "name": "Pots and Pans",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_cauldron_ext5_mortarandpestle",
+     "name": "Mortar and Pestle",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_cauldron_ext6_rollingpins",
+     "name": "Rolling Pins and Cutting Boards",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_cauldron_ext7_smoker",
+     "name": "Smoker",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_celebrationgarland",
+     "name": "Flower Garland",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_chair",
+     "name": "Wood Chair",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_chair_runed",
+     "name": "Carved Chair",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_charcoalkiln",
+     "name": "Charcoal Kiln",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_chest",
+     "name": "Reinforced Chest",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_chestbarrel",
+     "name": "Barrel",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_chestblackmetal",
+     "name": "Black Metal Chest",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_chestgrausten",
+     "name": "Grausten Chest",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_chestprivate",
+     "name": "Personal Chest",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_chesttreasure",
+     "name": "Treasure Chest",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_chestwarderobe",
+     "name": "Wardrobe",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_chestwood",
+     "name": "Chest",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_clothdoor",
+     "name": "Red Jute Curtain",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_coalpile",
+     "name": "Coal Pile",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_cookingstation",
+     "name": "Cooking Station",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_cookingstation_iron",
+     "name": "Iron Cooking Station",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_copperbarstack",
+     "name": "Copper Stack",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_crystalwall1x1",
+     "name": "Crystal Wall 1x1",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_darkwoodarch",
+     "name": "Darkwood Arch",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodbeam",
+     "name": "Darkwood Beam 2 m",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodbeam4",
+     "name": "Darkwood Beam 4 m",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodbeam_26",
+     "name": "Darkwood Beam 26°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodbeam_45",
+     "name": "Darkwood Beam 45°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodbeam_67",
+     "name": "Darkwood Beam 67°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodchair",
+     "name": "Darkwood Chair",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwooddecowall",
+     "name": "Carved Darkwood Divider",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodgate",
+     "name": "Darkwood Gate",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodpole",
+     "name": "Darkwood Pole 2m",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodpole4",
+     "name": "Darkwood Pole 4m",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodraven",
+     "name": "Raven Adornment",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroof26",
+     "name": "Shingle Roof 26°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroof45",
+     "name": "Shingle Roof 45°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroof67",
+     "name": "Shingle Roof 67°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooficorner",
+     "name": "Shingle Roof Inner Corner 26°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooficorner45",
+     "name": "Shingle Roof Inner Corner 45°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooficorner67",
+     "name": "Shingle Roof Inner Corner 67°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroofocorner",
+     "name": "Shingle Roof Outer Corner 26°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroofocorner45",
+     "name": "Shingle Roof Outer Corner 45°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodroofocorner67",
+     "name": "Shingle Roof Outer Corner 67°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooftop",
+     "name": "Shingle Roof Ridge 26°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooftop45",
+     "name": "Shingle Roof Ridge 45°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodrooftop67",
+     "name": "Shingle Roof Ridge 67°",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_darkwoodwolf",
+     "name": "Wolf Adornment",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_deco_stave_wall",
+     "name": "Lathed Timber Wall",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_drawbridge_dn",
+     "name": "Timberwood Drawbridge",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_drawbridge_log",
+     "name": "Rustic Drawbridge",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_dvergr_lantern",
+     "name": "Dvergr Wall Lantern",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_lantern_pole",
+     "name": "Dvergr Pole Lantern",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_metal_wall",
+     "name": "Dvergr Metal Wall",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_sharpstakes",
+     "name": "Dvergr Sharp Stakes",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_spiralstair",
+     "name": "Dvergr Spiral Staircase Left",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_spiralstair_right",
+     "name": "Dvergr Spiral Staircase Right",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_dvergr_stake_wall",
+     "name": "Dvergr Stakewall",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_eitrrefinery",
+     "name": "Eitr Refinery",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_faderember",
+     "name": "Eternal Pyre",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_fairylightgarland",
+     "name": "Fey Lights",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_fermenter",
+     "name": "Fermenter",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_firepit",
+     "name": "Campfire",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_firepit_iron",
+     "name": "Iron Fire Pit",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_flametal_beam",
+     "name": "Flametal Beam",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_flametal_pillar",
+     "name": "Flametal Pillar",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_flametalbarstack",
+     "name": "Flametal Stack",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_flametalgate",
+     "name": "Flametal Gate",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_flintpile",
+     "name": "Flint Pile",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_forge",
+     "name": "Forge",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_forge_ext1",
+     "name": "Forge Bellows",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_forge_ext2",
+     "name": "Anvils",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_forge_ext3",
+     "name": "Grinding Wheel",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_forge_ext4",
+     "name": "Smith's Anvil",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_forge_ext5",
+     "name": "Forge Cooler",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_forge_ext6",
+     "name": "Forge Tool Rack",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_frostfoundry",
+     "name": "Frost Foundry",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_frostkiln",
+     "name": "Frigid Kiln",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_grausten_archmedium",
+     "name": "Grausten Medium Arch",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_archsmall",
+     "name": "Grausten Small Arch",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_beammedium",
+     "name": "Grausten Medium Beam",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_beamsmall",
+     "name": "Grausten Small Beam",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_floor1x1",
+     "name": "Grausten Floor 1x1",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_floor2x2",
+     "name": "Grausten Floor 2x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_floor4x4",
+     "name": "Grausten Floor 4x4",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_pillarmedium",
+     "name": "Grausten Medium Pillar",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_pillarsmall",
+     "name": "Grausten Small Pillar",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_pillartapered",
+     "name": "Grausten Tapered Pillar",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_pillartaperedinverted",
+     "name": "Grausten Tapered Pillar (Inverted)",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45",
+     "name": "Grausten Roof",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45_arch",
+     "name": "Grausten Arched Roof",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45_archcorner",
+     "name": "Grausten Arched Roof Corner",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45_archcorner2",
+     "name": "Grausten Arched Roof Corner",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45_corner",
+     "name": "Grausten Roof Corner",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_roof45_corner2",
+     "name": "Grausten Roof Corner",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_stair",
+     "name": "Grausten Stairs",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_stoneladder",
+     "name": "Grausten Steep Stairs",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_wall1x2",
+     "name": "Grausten Wall 1x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_wall2x2",
+     "name": "Grausten Wall 2x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_wall4x2",
+     "name": "Grausten Wall 4x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_wallarch",
+     "name": "Grausten Wall Arch",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_wallarchinv",
+     "name": "Grausten Wall Arch (Inverted)",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_window2x2",
+     "name": "Grausten Window 2x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_grausten_window4x2",
+     "name": "Grausten Window 4x2",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_graustenpile",
+     "name": "Grausten Pile",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_groundtorch",
+     "name": "Standing Iron Torch",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_groundtorchblue",
+     "name": "Standing Blue-burning Iron Torch",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_groundtorchdemister",
+     "name": "Wisp Torch",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_groundtorchgreen",
+     "name": "Standing Green-burning Iron Torch",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_groundtorchwood",
+     "name": "Standing Wood Torch",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_guardstone",
+     "name": "Ward",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_hanging_cloth_blue1",
+     "name": "Blue Jute Drapes",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_hanging_cloth_blue2",
+     "name": "Blue Jute Curtain",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_hearth",
+     "name": "Hearth",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_hexagonalgate",
+     "name": "Hexagonal Gate",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_hoodedlantern",
+     "name": "Hooded Lantern",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_icecube",
+     "name": "Ice Block",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_incinerator",
+     "name": "Obliterator",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironbarstack",
+     "name": "Iron Stack",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironfloor",
+     "name": "Cage Floor 2x2",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironfloorSmall",
+     "name": "Cage Floor 1x1",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_irongate",
+     "name": "Iron Gate",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironwall",
+     "name": "Cage Wall 2x2",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironwallSmall",
+     "name": "Cage Wall 1x1",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_ironwoodbeam67",
+     "name": "Wood Iron Beam 67°",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_itemstand",
+     "name": "Item Stand",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_jackoturnip",
+     "name": "Jack-o-turnip",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_jute_carpet",
+     "name": "Red Jute Carpet",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_juteblue_carpet",
+     "name": "Blue Jute Carpet",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_lavalantern",
+     "name": "Lava Lantern",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_logbeam2",
+     "name": "Log Beam 2 m",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_logbeam4",
+     "name": "Log Beam 4 m",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_logpole2",
+     "name": "Log Pole 2 m",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_logpole4",
+     "name": "Log Pole 4 m",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_magetable",
+     "name": "Galdr Table",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_magetable_ext",
+     "name": "Rune Table",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_magetable_ext2",
+     "name": "Unfading Candles",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_magetable_ext3",
+     "name": "Feathery Wreath",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_magetable_ext4",
+     "name": "Standing Loom",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_marblepile",
+     "name": "Black Marble Pile",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_maypole",
+     "name": "Maypole",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_meadcauldron",
+     "name": "Mead Ketill",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_mistletoe",
+     "name": "Mistletoe",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_moose_throne",
+     "name": "Antler Throne",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_oven",
+     "name": "Stone Oven",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_portal",
+     "name": "Portal",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_portal_stone",
+     "name": "Portal – Stone",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_pot_large_green",
+     "name": "Large Green Pot",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_pot_medium_green",
+     "name": "Medium Green Pot",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_pot_small_green",
+     "name": "Small Green Pot",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_preptable",
+     "name": "Food Preparation Table",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_rug_asksvin",
+     "name": "Asksvin Rug",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_rug_bjorn",
+     "name": "Bearskin Rug",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_rug_deer",
+     "name": "Deer Rug",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_rug_hare",
+     "name": "Hare Rug",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_rug_lox",
+     "name": "Lox Rug",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_rug_moose",
+     "name": "Moose Hide Carpet",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_rug_seal",
+     "name": "Sealskin Rug",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_rug_straw",
+     "name": "Straw",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_rug_wolf",
+     "name": "Wolf Rug",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_sapcollector",
+     "name": "Sap Extractor",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_scale_26",
+     "name": "Scalewood Wall 26° Left",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_26_flipped",
+     "name": "Scalewood Wall 26° Right",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_26_upsidedown",
+     "name": "Scalewood Wall 26° Right (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_26_upsidedown_flipped",
+     "name": "Scalewood Wall 26° Left (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_45",
+     "name": "Scalewood Wall 45° Left",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_45_flipped",
+     "name": "Scalewood Wall 45° Right",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_45_upsidedown",
+     "name": "Scalewood Wall 45° Right (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_45_upsidedown_flipped",
+     "name": "Scalewood Wall 45° Left (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_67",
+     "name": "Scalewood Wall 67° Left",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_67_flipped",
+     "name": "Scalewood Wall 67° Right",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_67_upsidedown",
+     "name": "Scalewood Wall 67° Right (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_67_upsidedown_flipped",
+     "name": "Scalewood Wall 67° Left (Inverted)",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_halfwall",
+     "name": "Scalewood Half Wall",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_quarterwall",
+     "name": "Scalewood Quarter Wall",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_scale_wall",
+     "name": "Scalewood Wall",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_sconce",
+     "name": "Sconce",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_sharpstakes",
+     "name": "Sharp Stakes",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_shieldgenerator",
+     "name": "Shield Generator",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_sign",
+     "name": "Sign",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_silverbarstack",
+     "name": "Silver Stack",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_skullpile",
+     "name": "Pile of Skulls",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$piece_smelter",
+     "name": "Smelter",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_snowlantern",
+     "name": "Snow Lantern",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_spinningwheel",
+     "name": "Spinning Wheel",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_stakewall",
+     "name": "Stakewall",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_stave_deco_beam_2m",
+     "name": "Decorated Timber Beam 2m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stave_deco_pole_2m",
+     "name": "Decorated Timber Pole 2m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stave_pole_2m",
+     "name": "Timber Pole 2m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stave_pole_4m",
+     "name": "Timber Pole 4m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stave_wall",
+     "name": "Timber Wall",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavebeam2",
+     "name": "Timber Beam 2m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavebeam26",
+     "name": "Timber Beam 26°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavebeam4",
+     "name": "Timber Beam 4m",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavebeam45",
+     "name": "Timber Beam 45°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavebeam67",
+     "name": "Timber Beam 67°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavecross26",
+     "name": "Timber Roof Cross 26°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavecross45",
+     "name": "Timber Roof Cross 45°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavedecobeam26",
+     "name": "Decorated Timber Beam 26°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavedecobeam45",
+     "name": "Decorated Timber Beam 45°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavedecobeam67",
+     "name": "Decorated Timber Beam 67°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavegate",
+     "name": "Timberwood Gate",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stavewallrooftop67",
+     "name": "Timber Roof Cross 67°",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_stonearch",
+     "name": "Stone Arch",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonecutter",
+     "name": "Stonecutter",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonefence",
+     "name": "Stone Fence",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_stonefloor2x2",
+     "name": "Stone Floor 2x2",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonepile",
+     "name": "Stone Pile",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_stonepillar",
+     "name": "Stone Pillar",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonestair",
+     "name": "Stone Stair",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonethrone",
+     "name": "Stone Throne",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_stonewall1x1",
+     "name": "Stone Wall 1x1",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonewall2x1",
+     "name": "Stone Wall 2x1",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stonewall4x2",
+     "name": "Stone Wall 4x2",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_stool",
+     "name": "Stool",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_table",
+     "name": "Table",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_table_oak",
+     "name": "Long Heavy Table",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_table_round",
+     "name": "Round Table",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_table_runed",
+     "name": "Long Carved Table",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_table_runed_small",
+     "name": "Square Carved Table",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_throne01",
+     "name": "Raven Throne",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_tinbarstack",
+     "name": "Tin Stack",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_trainingdummy",
+     "name": "T.W.I.G.",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_trap",
+     "name": "Trap",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_treasure_pile",
+     "name": "Coin Pile",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_treasure_stack",
+     "name": "Coin Stack",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_turret",
+     "name": "Ballista",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_windmill",
+     "name": "Windmill",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_wisplure",
+     "name": "Wisp Fountain",
+     "biome": "Plains"
+    },
+    {
+     "token": "$piece_woodbeam1",
+     "name": "Wood Beam 1 m",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodbeam2",
+     "name": "Wood Beam 2 m",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodbeam26",
+     "name": "Wood Beam 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodbeam45",
+     "name": "Wood Beam 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodbeam67",
+     "name": "Wood Beam 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodcorestack",
+     "name": "Corewood Stack",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_wooddoor",
+     "name": "Wood Door",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_wooddragon",
+     "name": "Wood Dragon Adornment",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfence",
+     "name": "Roundpole Fence",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfencegate",
+     "name": "Roundpole Gate",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfinestack",
+     "name": "Finewood Stack",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfloor1x1",
+     "name": "Wood Floor 1x1",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfloor2x2",
+     "name": "Wood Floor 2x2",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodfroststack",
+     "name": "Timberwood Stack",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$piece_woodgate",
+     "name": "Wood Gate",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodironbeam",
+     "name": "Wood Iron Beam",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_woodironbeam_26",
+     "name": "Wood Iron Beam 26°",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_woodironbeam_45",
+     "name": "Wood Iron Beam 45°",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_woodironpole",
+     "name": "Wood Iron Pole",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_woodlog26",
+     "name": "Log Beam 26°",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_woodlog45",
+     "name": "Log Beam 45°",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_woodlog67",
+     "name": "Log Beam 67°",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_woodpole",
+     "name": "Wood Pole 1 m",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodpole2",
+     "name": "Wood Pole 2 m",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroof26",
+     "name": "Thatch Roof 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroof45",
+     "name": "Thatch Roof 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroof67",
+     "name": "Thatch Roof 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooficorner",
+     "name": "Thatch Roof Inner Corner 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooficorner45",
+     "name": "Thatch Roof Inner Corner 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooficorner67",
+     "name": "Thatch Roof Inner Corner 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroofocorner",
+     "name": "Thatch Roof Outer Corner 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroofocorner45",
+     "name": "Thatch Roof Outer Corner 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodroofocorner67",
+     "name": "Thatch Roof Outer Corner 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooftop",
+     "name": "Thatch Roof Ridge 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooftop45",
+     "name": "Thatch Roof Ridge 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodrooftop67",
+     "name": "Thatch Roof Ridge 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodstack",
+     "name": "Wood Stack",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodstair",
+     "name": "Wood Stairs",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodstepladder",
+     "name": "Wood Ladder",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwall",
+     "name": "Wood Wall",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallhalf",
+     "name": "Wood Wall Half",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallquarter",
+     "name": "Wood Wall 1x1",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof",
+     "name": "Wood Wall 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof45",
+     "name": "Wood Wall 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof45_upsidedown",
+     "name": "Wood Wall 45° (Inverted)",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof67",
+     "name": "Wood Wall 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof67upsidedown",
+     "name": "Wood Wall 67° (Inverted)",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallroof_upsidedown",
+     "name": "Wood Wall 26° (Inverted)",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallrooftop",
+     "name": "Wood Roof Cross 26°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallrooftop45",
+     "name": "Wood Roof Cross 45°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwallrooftop67",
+     "name": "Wood Roof Cross 67°",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_woodwindowshutter",
+     "name": "Wood Shutter",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_workbench",
+     "name": "Workbench",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_workbench_ext1",
+     "name": "Chopping Block",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_workbench_ext2",
+     "name": "Tanning Rack",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_workbench_ext3",
+     "name": "Adze",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_workbench_ext4",
+     "name": "Tool Shelf",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_yggdrasilstack",
+     "name": "Yggdrasil Wood Stack",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$piece_yulecrown",
+     "name": "Yule Wreath",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$piece_yulegarland",
+     "name": "Yule Garland",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$piece_yuleklapp",
+     "name": "Yuleklapp",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$piece_yuletree",
+     "name": "Yule Tree",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$ship_karve",
+     "name": "Karve",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$ship_longship",
+     "name": "Longship",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$ship_longship_ashlands",
+     "name": "Drakkar",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$ship_raft",
+     "name": "Raft",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$tool_batteringram",
+     "name": "Battering Ram",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$tool_cart",
+     "name": "Cart",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$tool_catapult",
+     "name": "Catapult",
+     "biome": "Ashlands"
+    }
+   ]
+  },
+  {
+   "id": "deaths",
+   "achievement": "DeathByAllTypes",
+   "title": "Ways to die",
+   "set": 1,
+   "source": "stats",
+   "entries": [
+    {
+     "token": "DeathByEnemyHit",
+     "name": "Enemy hit",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByFall",
+     "name": "Fall",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByDrowning",
+     "name": "Drowning",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByBurning",
+     "name": "Burning",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByFreezing",
+     "name": "Freezing",
+     "biome": "Mountain"
+    },
+    {
+     "token": "DeathByPoisoned",
+     "name": "Poisoned",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "DeathBySmoke",
+     "name": "Smoke",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByEdgeOfWorld",
+     "name": "Edge of world",
+     "biome": "Ocean"
+    },
+    {
+     "token": "DeathByTree",
+     "name": "Tree",
+     "biome": "Meadows"
+    },
+    {
+     "token": "DeathByTurret",
+     "name": "Turret",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "DeathByStalagtite",
+     "name": "Stalagtite",
+     "biome": "Mountain"
+    },
+    {
+     "token": "DeathByCatapult",
+     "name": "Catapult",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "DeathByAshlandsOcean",
+     "name": "Ashlands ocean",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "DeathByIncinerator",
+     "name": "Incinerator",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "DeathByDrawBridge",
+     "name": "Draw bridge",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "DeathByAshlandsLava",
+     "name": "Ashlands lava",
+     "biome": "Ashlands"
+    }
+   ]
+  },
+  {
+   "id": "tree-deaths",
+   "achievement": "DeathByTreeAll",
+   "title": "Killed by each kind of tree",
+   "set": 1,
+   "source": "stats",
+   "entries": [
+    {
+     "token": "TreeBeech",
+     "name": "Beech",
+     "biome": "Meadows"
+    },
+    {
+     "token": "TreeBirch",
+     "name": "Birch",
+     "biome": "Meadows"
+    },
+    {
+     "token": "TreeSnowFir",
+     "name": "Snow fir",
+     "biome": "Mountain"
+    },
+    {
+     "token": "TreeSnowPine",
+     "name": "Snow pine",
+     "biome": "Deep North"
+    },
+    {
+     "token": "TreeFir",
+     "name": "Fir",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "TreeOak",
+     "name": "Oak",
+     "biome": "Meadows"
+    },
+    {
+     "token": "TreePine",
+     "name": "Pine",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "TreeAshlands",
+     "name": "Ashlands",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "TreeYggdrasilShoot",
+     "name": "Yggdrasil shoot",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "TreeSwamp",
+     "name": "Swamp",
+     "biome": "Swamp"
+    }
+   ]
+  },
+  {
+   "id": "enemies",
+   "achievement": "KillAllCreatures",
+   "title": "Creatures killed (any difficulty)",
+   "set": 1,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_abomination",
+     "name": "Abomination",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_asksvin",
+     "name": "Asksvin",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_asksvin_hatchling",
+     "name": "Asksvin Hatchling",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_aspect_bonemass",
+     "name": "Aspect of the Writhing Dead",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_dragon",
+     "name": "Aspect of the Dragon Mother",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_eikthyr",
+     "name": "Aspect of the Lightning Stag",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_fader",
+     "name": "Aspect of the Emerald Flame",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_gdking",
+     "name": "Aspect of the Living Forest",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_goblinking",
+     "name": "Aspect of the Twisted Soul",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_seekerqueen",
+     "name": "Aspect of the Crawling Matriarch",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_babyseeker",
+     "name": "Seeker Brood",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_barka",
+     "name": "Barka",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_bat",
+     "name": "Bat",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_bjorn",
+     "name": "Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_blob",
+     "name": "Blob",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_blobelite",
+     "name": "Oozer",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_blobfrost",
+     "name": "Frost Blob",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_bloblava",
+     "name": "Lava Blob",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_blobmork",
+     "name": "Shapeless Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_blobmorkmini",
+     "name": "Tiny Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_blobtar",
+     "name": "Growth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_boar",
+     "name": "Boar",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_boarpiggy",
+     "name": "Piggy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_bonemass",
+     "name": "Bonemass",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_bonemawserpent",
+     "name": "Bonemaw",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_archer",
+     "name": "Charred Marksman",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_mage",
+     "name": "Charred Warlock",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee",
+     "name": "Charred Warrior",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee_Dyrnwyn",
+     "name": "Lord Reto",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee_Fader",
+     "name": "Summoned Charred Warrior",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_twitcher",
+     "name": "Charred Twitcher",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_twitcher_summoned",
+     "name": "Summoned Twitcher",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_chicken",
+     "name": "Chicken",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_deathsquito",
+     "name": "Deathsquito",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_deer",
+     "name": "Deer",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_dragon",
+     "name": "Moder",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_drake",
+     "name": "Drake",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_draugr",
+     "name": "Draugr",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_draugrelite",
+     "name": "Draugr Elite",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_dvergr",
+     "name": "Dvergr Rogue",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_dvergr_deepnorth",
+     "name": "Imprisoned Dvergr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_dvergr_mage",
+     "name": "Dvergr Mage",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_eikthyr",
+     "name": "Eikthyr",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_elaking",
+     "name": "Elaking",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_elakingmole",
+     "name": "Eyeless One",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_fader",
+     "name": "Fader",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_fallenvalkyrie",
+     "name": "Fallen Valkyrie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_fallenwarrior",
+     "name": "Fallen Warrior",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_fenring",
+     "name": "Fenring",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_fenringcultist",
+     "name": "Cultist",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_fenringcultist_hildir",
+     "name": "Geirrhafa",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_frozenking",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_frozenking_p3",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_gdking",
+     "name": "The Elder",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_ghost",
+     "name": "Ghost",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_gjall",
+     "name": "Gjall",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_goblin",
+     "name": "Fuling",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblin_deepnorth",
+     "name": "Captive Fuling",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_goblin_hildir",
+     "name": "Zil",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinbrute",
+     "name": "Fuling Berserker",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinbrute_hildircombined",
+     "name": "Zil & Thungr",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinking",
+     "name": "Yagluth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinshaman",
+     "name": "Fuling Shaman",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_greydwarf",
+     "name": "Greydwarf",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_greydwarfbrute",
+     "name": "Greydwarf Brute",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_greydwarfshaman",
+     "name": "Greydwarf Shaman",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_greyling",
+     "name": "Greyling",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_hare",
+     "name": "Hare",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_hen",
+     "name": "Hen",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_jotun_warrior",
+     "name": "Krigen",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_jotun_witch",
+     "name": "Hexen",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_kvastur",
+     "name": "Kvastur",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_leech",
+     "name": "Leech",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_lox",
+     "name": "Lox",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_loxcalf",
+     "name": "Lox Calf",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_moose",
+     "name": "Moose",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_moosecalf",
+     "name": "Moose Calf",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_morgen",
+     "name": "Morgen",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_neck",
+     "name": "Neck",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_root",
+     "name": "Root",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_seal",
+     "name": "Seal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_seal_baby",
+     "name": "Baby Seal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_seeker",
+     "name": "Seeker",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_seekerbrute",
+     "name": "Seeker Soldier",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_seekerqueen",
+     "name": "The Queen",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_serpent",
+     "name": "Serpent",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$enemy_skeleton",
+     "name": "Skeleton",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_skeleton_summoned",
+     "name": "Skelett",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_skeletonfire",
+     "name": "Brenna",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_skeletonpoison",
+     "name": "Rancid Remains",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_stonegolem",
+     "name": "Stone Golem",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_summonedtroll",
+     "name": "Summoned Troll",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_surtling",
+     "name": "Surtling",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_tick",
+     "name": "Tick",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_troll",
+     "name": "Troll",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_trollfrost",
+     "name": "Gammeltroll",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_ulv",
+     "name": "Ulv",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_unbjorn",
+     "name": "Vile",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_volture",
+     "name": "Volture",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_wolf",
+     "name": "Wolf",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_wolfcub",
+     "name": "Wolf Cub",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_wraith",
+     "name": "Wraith",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_writhan",
+     "name": "Writhan",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_trainingdummy",
+     "name": "T.W.I.G.",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$spiritcaller_bjorn",
+     "name": "bjorn",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_boar",
+     "name": "boar",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_moose",
+     "name": "moose",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_wolf",
+     "name": "wolf",
+     "biome": "Deep North"
+    }
+   ]
+  },
+  {
+   "id": "enemies-hard",
+   "achievement": "KillAllCreaturesHard",
+   "title": "Creatures killed (Hard)",
+   "set": 7,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_abomination",
+     "name": "Abomination",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_asksvin",
+     "name": "Asksvin",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_asksvin_hatchling",
+     "name": "Asksvin Hatchling",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_aspect_bonemass",
+     "name": "Aspect of the Writhing Dead",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_dragon",
+     "name": "Aspect of the Dragon Mother",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_eikthyr",
+     "name": "Aspect of the Lightning Stag",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_fader",
+     "name": "Aspect of the Emerald Flame",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_gdking",
+     "name": "Aspect of the Living Forest",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_goblinking",
+     "name": "Aspect of the Twisted Soul",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_aspect_seekerqueen",
+     "name": "Aspect of the Crawling Matriarch",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_babyseeker",
+     "name": "Seeker Brood",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_barka",
+     "name": "Barka",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_bat",
+     "name": "Bat",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_bjorn",
+     "name": "Bear",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_blob",
+     "name": "Blob",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_blobelite",
+     "name": "Oozer",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_blobfrost",
+     "name": "Frost Blob",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_bloblava",
+     "name": "Lava Blob",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_blobmork",
+     "name": "Shapeless Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_blobmorkmini",
+     "name": "Tiny Pulp",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_blobtar",
+     "name": "Growth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_boar",
+     "name": "Boar",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_boarpiggy",
+     "name": "Piggy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_bonemass",
+     "name": "Bonemass",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_bonemawserpent",
+     "name": "Bonemaw",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_archer",
+     "name": "Charred Marksman",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_mage",
+     "name": "Charred Warlock",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee",
+     "name": "Charred Warrior",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee_Dyrnwyn",
+     "name": "Lord Reto",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_melee_Fader",
+     "name": "Summoned Charred Warrior",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_twitcher",
+     "name": "Charred Twitcher",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_charred_twitcher_summoned",
+     "name": "Summoned Twitcher",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_chicken",
+     "name": "Chicken",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_deathsquito",
+     "name": "Deathsquito",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_deer",
+     "name": "Deer",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_dragon",
+     "name": "Moder",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_drake",
+     "name": "Drake",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_draugr",
+     "name": "Draugr",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_draugrelite",
+     "name": "Draugr Elite",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_dvergr",
+     "name": "Dvergr Rogue",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_dvergr_deepnorth",
+     "name": "Imprisoned Dvergr",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_dvergr_mage",
+     "name": "Dvergr Mage",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_eikthyr",
+     "name": "Eikthyr",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_elaking",
+     "name": "Elaking",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_elakingmole",
+     "name": "Eyeless One",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_fader",
+     "name": "Fader",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_fallenvalkyrie",
+     "name": "Fallen Valkyrie",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_fallenwarrior",
+     "name": "Fallen Warrior",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_fenring",
+     "name": "Fenring",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_fenringcultist",
+     "name": "Cultist",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_fenringcultist_hildir",
+     "name": "Geirrhafa",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_frozenking",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_frozenking_p3",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_gdking",
+     "name": "The Elder",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_ghost",
+     "name": "Ghost",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_gjall",
+     "name": "Gjall",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_goblin",
+     "name": "Fuling",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblin_deepnorth",
+     "name": "Captive Fuling",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_goblin_hildir",
+     "name": "Zil",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinbrute",
+     "name": "Fuling Berserker",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinbrute_hildircombined",
+     "name": "Zil & Thungr",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinking",
+     "name": "Yagluth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblinshaman",
+     "name": "Fuling Shaman",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_greydwarf",
+     "name": "Greydwarf",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_greydwarfbrute",
+     "name": "Greydwarf Brute",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_greydwarfshaman",
+     "name": "Greydwarf Shaman",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_greyling",
+     "name": "Greyling",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_hare",
+     "name": "Hare",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_hen",
+     "name": "Hen",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_jotun_warrior",
+     "name": "Krigen",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_jotun_witch",
+     "name": "Hexen",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_kvastur",
+     "name": "Kvastur",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_leech",
+     "name": "Leech",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_lox",
+     "name": "Lox",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_loxcalf",
+     "name": "Lox Calf",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_moose",
+     "name": "Moose",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_moosecalf",
+     "name": "Moose Calf",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_morgen",
+     "name": "Morgen",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_neck",
+     "name": "Neck",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_root",
+     "name": "Root",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_seal",
+     "name": "Seal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_seal_baby",
+     "name": "Baby Seal",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_seeker",
+     "name": "Seeker",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_seekerbrute",
+     "name": "Seeker Soldier",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_seekerqueen",
+     "name": "The Queen",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_serpent",
+     "name": "Serpent",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$enemy_skeleton",
+     "name": "Skeleton",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_skeleton_summoned",
+     "name": "Skelett",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_skeletonfire",
+     "name": "Brenna",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_skeletonpoison",
+     "name": "Rancid Remains",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_stonegolem",
+     "name": "Stone Golem",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_summonedtroll",
+     "name": "Summoned Troll",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_surtling",
+     "name": "Surtling",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_tick",
+     "name": "Tick",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_troll",
+     "name": "Troll",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_trollfrost",
+     "name": "Gammeltroll",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$enemy_ulv",
+     "name": "Ulv",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_unbjorn",
+     "name": "Vile",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_volture",
+     "name": "Volture",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_wolf",
+     "name": "Wolf",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_wolfcub",
+     "name": "Wolf Cub",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_wraith",
+     "name": "Wraith",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_writhan",
+     "name": "Writhan",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$piece_trainingdummy",
+     "name": "T.W.I.G.",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$spiritcaller_bjorn",
+     "name": "bjorn",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_boar",
+     "name": "boar",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_moose",
+     "name": "moose",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$spiritcaller_wolf",
+     "name": "wolf",
+     "biome": "Deep North"
+    }
+   ]
+  },
+  {
+   "id": "bosses-any",
+   "achievement": "AllBosses",
+   "title": "Bosses killed (any difficulty)",
+   "set": 1,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_eikthyr",
+     "name": "Eikthyr",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_gdking",
+     "name": "The Elder",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_bonemass",
+     "name": "Bonemass",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_dragon",
+     "name": "Moder",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_goblinking",
+     "name": "Yagluth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_seekerqueen",
+     "name": "The Queen",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_fader",
+     "name": "Fader",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_frozenking_p3",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    }
+   ]
+  },
+  {
+   "id": "bosses-normal",
+   "achievement": "AllBossesNormal",
+   "title": "Bosses killed (Normal or higher)",
+   "set": 6,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_eikthyr",
+     "name": "Eikthyr",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_gdking",
+     "name": "The Elder",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_bonemass",
+     "name": "Bonemass",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_dragon",
+     "name": "Moder",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_goblinking",
+     "name": "Yagluth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_seekerqueen",
+     "name": "The Queen",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_fader",
+     "name": "Fader",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_frozenking_p3",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    }
+   ]
+  },
+  {
+   "id": "bosses-hard",
+   "achievement": "AllBossesHard",
+   "title": "Bosses killed (Hard)",
+   "set": 7,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_eikthyr",
+     "name": "Eikthyr",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$enemy_gdking",
+     "name": "The Elder",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_bonemass",
+     "name": "Bonemass",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$enemy_dragon",
+     "name": "Moder",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_goblinking",
+     "name": "Yagluth",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_seekerqueen",
+     "name": "The Queen",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$enemy_fader",
+     "name": "Fader",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_frozenking_p3",
+     "name": "Kall Fimbulbringer",
+     "biome": "Deep North"
+    }
+   ]
+  },
+  {
+   "id": "minibosses",
+   "achievement": "AllMiniBosses",
+   "title": "Mini-bosses killed (any difficulty)",
+   "set": 1,
+   "source": "kills",
+   "entries": [
+    {
+     "token": "$enemy_fenringcultist_hildir",
+     "name": "Geirrhafa",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$enemy_skeletonfire",
+     "name": "Brenna",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$enemy_charred_melee_Dyrnwyn",
+     "name": "Lord Reto",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$enemy_goblinbrute_hildircombined",
+     "name": "Zil & Thungr",
+     "biome": "Plains"
+    },
+    {
+     "token": "$enemy_goblin_hildir",
+     "name": "Zil",
+     "biome": "Plains"
+    }
+   ]
+  },
+  {
+   "id": "fishing",
+   "achievement": "GrindFish",
+   "title": "Fish caught",
+   "set": 1,
+   "source": "pickables",
+   "entries": [
+    {
+     "token": "$animal_fish1",
+     "name": "Perch",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$animal_fish2",
+     "name": "Pike",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$animal_fish3",
+     "name": "Tuna",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$animal_fish4",
+     "name": "Tetra",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$animal_fish5",
+     "name": "Trollfish",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$animal_fish6",
+     "name": "Giant Herring",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$animal_fish7",
+     "name": "Grouper",
+     "biome": "Plains"
+    },
+    {
+     "token": "$animal_fish8",
+     "name": "Coral Cod",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$animal_fish9",
+     "name": "Anglerfish",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$animal_fish10",
+     "name": "Northern Salmon",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$animal_fish11",
+     "name": "Magmafish",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$animal_fish12",
+     "name": "Pufferfish",
+     "biome": "Ocean"
+    }
+   ]
+  },
+  {
+   "id": "trophies",
+   "achievement": "FindAllTrophies",
+   "title": "Trophies collected",
+   "set": 1,
+   "source": "picked_up",
+   "entries": [
+    {
+     "token": "$enemy_kvastur",
+     "name": "Kvastur",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_abomination",
+     "name": "Abomination Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_asksvin",
+     "name": "Asksvin Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_barka",
+     "name": "Barka Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_bjorn",
+     "name": "Bear Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_bjorn_undead",
+     "name": "Vile Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_blob",
+     "name": "Blob Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_blob_frost",
+     "name": "Frost Blob Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_blob_lava",
+     "name": "Lava Blob Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_blob_morkhalla",
+     "name": "Pulp Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_boar",
+     "name": "Boar Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_bonemass",
+     "name": "Bonemass Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_bonemaw",
+     "name": "Bonemaw Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_brutebro",
+     "name": "Thungr Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_charredarcher",
+     "name": "Marksman Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_charredmage",
+     "name": "Warlock Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_charredmelee",
+     "name": "Warrior Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_cultist",
+     "name": "Cultist Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_cultist_hildir",
+     "name": "Geirrhafa Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_deathsquito",
+     "name": "Deathsquito Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_deer",
+     "name": "Deer Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_dragonqueen",
+     "name": "Moder Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_draugr",
+     "name": "Draugr Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_draugrelite",
+     "name": "Draugr Elite Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_dvergr",
+     "name": "Dvergr Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_eikthyr",
+     "name": "Eikthyr Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_elaking",
+     "name": "Elaking Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_elder",
+     "name": "The Elder Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_fader",
+     "name": "Fader Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_fallenvalkyrie",
+     "name": "Fallen Valkyrie Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_fenring",
+     "name": "Fenring Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_ghost",
+     "name": "Ghost Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_gjall",
+     "name": "Gjall Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_goblin",
+     "name": "Fuling Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_goblinbrute",
+     "name": "Fuling Berserker Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_goblinking",
+     "name": "Yagluth Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_goblinshaman",
+     "name": "Fuling Shaman Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_greydwarf",
+     "name": "Greydwarf Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_greydwarfbrute",
+     "name": "Greydwarf Brute Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_greydwarfshaman",
+     "name": "Greydwarf Shaman Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_growth",
+     "name": "Growth Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_hare",
+     "name": "Hare Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_hatchling",
+     "name": "Drake Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_jotunwarrior",
+     "name": "Krigen Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_jotunwitch",
+     "name": "Hexen Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_leech",
+     "name": "Leech Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_lox",
+     "name": "Lox Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_mole",
+     "name": "Eyeless One Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_moose",
+     "name": "Moose Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_morgen",
+     "name": "Morgen Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_neck",
+     "name": "Neck Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_seal",
+     "name": "Seal Trophy",
+     "biome": "Deep North"
+    },
+    {
+     "token": "$item_trophy_seeker",
+     "name": "Seeker Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_seeker_brute",
+     "name": "Seeker Soldier Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_seekerqueen",
+     "name": "The Queen Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_serpent",
+     "name": "Serpent Trophy",
+     "biome": "Ocean"
+    },
+    {
+     "token": "$item_trophy_sgolem",
+     "name": "Stone Golem Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_shamanbro",
+     "name": "Zil Trophy",
+     "biome": "Plains"
+    },
+    {
+     "token": "$item_trophy_skeleton",
+     "name": "Skeleton Trophy",
+     "biome": "Meadows"
+    },
+    {
+     "token": "$item_trophy_skeleton_hildir",
+     "name": "Brenna Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_skeletonpoison",
+     "name": "Rancid Remains Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_surtling",
+     "name": "Surtling Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_tick",
+     "name": "Tick Trophy",
+     "biome": "Mistlands"
+    },
+    {
+     "token": "$item_trophy_troll",
+     "name": "Troll Trophy",
+     "biome": "Black Forest"
+    },
+    {
+     "token": "$item_trophy_ulv",
+     "name": "Ulv Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_volture",
+     "name": "Volture Trophy",
+     "biome": "Ashlands"
+    },
+    {
+     "token": "$item_trophy_wolf",
+     "name": "Wolf Trophy",
+     "biome": "Mountain"
+    },
+    {
+     "token": "$item_trophy_wraith",
+     "name": "Wraith Trophy",
+     "biome": "Swamp"
+    },
+    {
+     "token": "$item_trophy_writhan",
+     "name": "Writhan Trophy",
+     "biome": "Swamp"
+    }
+   ]
+  }
+ ]
+}
