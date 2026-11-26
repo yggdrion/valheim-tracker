@@ -7,7 +7,7 @@
 
 ## Raw upload (done)
 Server takes raw `.fch` (`POST /upload?name=X`, parsed with upstream `parse()`), Go parser removed, `fchsync.sh` is the Linux/macOS client (tested on Linux with six real characters: numbers identical to the old Go path; garbage/empty/old-version uploads give 400).
-- [ ] **Windows `fchsync.ps1`**: same loop as `fchsync.sh` (poll `LastWriteTimeUtc`+`Length`, wait 0.7 s, read with `FileShare.ReadWrite`, `Invoke-RestMethod -Method Post`, `/heartbeat` every 30 s, re-upload on 404; default dir `characters_local`, fallback Steam `userdata\*\892970\remote\characters`) + `fchsync.bat` wrapper.
+- [ ] Test `fchsync.ps1` / `.bat` on a Windows box (written on Linux, never run; no pwsh here).
 - [ ] Optional: keep the last raw file per character in `state/` to recompute after a table update; per-name rate limit.
 - [ ] Autostart how-to (systemd user unit / Task Scheduler); macOS paths in `fchsync.sh` are untested.
 

@@ -11,3 +11,4 @@ ref/
 srv/
 tracker/
 .cache/
+fchsync.env

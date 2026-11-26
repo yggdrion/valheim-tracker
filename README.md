@@ -2,7 +2,7 @@
 
 Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mods.
 
-- `fchsync.sh` (bash + curl, per player PC; a Windows `fchsync.ps1` is still to do): uploads changed `.fch` character files raw. Never writes to the game folder.
+- `fchsync.sh` (bash + curl) / `fchsync.ps1` + `fchsync.bat` (Windows), per player PC: uploads changed `.fch` character files raw. Never writes to the game folder.
 - `server.py` (Python, stdlib): receives raw uploads, parses and analyses them, reads the world folder read-only, serves the dashboard.
 - `docker-compose.yaml`: dedicated server ([community-valheim-tools/valheim-server-docker](https://github.com/community-valheim-tools/valheim-server-docker)) + tracker.
 
@@ -16,6 +16,8 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
 
     TRACKER_TOKEN=<token> ./fchsync.sh -s http://host:8088          # Linux / macOS / Steam Deck
     ./fchsync.sh -d "<characters folder>" -s http://host:8088 -t <token> -1   # explicit folder, sync once
+
+Windows: copy `fchsync.env.example` to `fchsync.env`, set server URL and token, double-click `fchsync.bat` (or `.\fchsync.ps1 -Server http://host:8088 -Token <token>`).
 
 Without `-d` it looks in `~/.config/unity3d/IronGate/Valheim/characters_local`, the Steam Cloud `userdata/*/892970/remote/characters`
 and the Proton prefix. Env alternatives: `TRACKER_SERVER`, `TRACKER_TOKEN`, `FCH_DIR`.
