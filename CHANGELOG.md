@@ -1,3 +1,13 @@
+## [1.2.1](https://github.com/yggdrion/valheim-tracker/compare/v1.2.0...v1.2.1) (2026-11-26)
+
+### 🐛 Bug Fixes
+
+* Tracker Sync opens wide (1000x760) in the two-column layout ([185fa0d](https://github.com/yggdrion/valheim-tracker/commit/185fa0ddeb72438c159f77f07358d27f44d3831c))
+
+### 📝 Documentation
+
+* todo: drop map extras and the optional server items ([56e5165](https://github.com/yggdrion/valheim-tracker/commit/56e516592a4e3d46e5915bd526c8ba6d1e791a38))
+
 ## [1.2.0](https://github.com/yggdrion/valheim-tracker/compare/v1.1.0...v1.2.0) (2026-11-26)
 
 ### ✨ Features
