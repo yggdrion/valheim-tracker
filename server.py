@@ -18,7 +18,7 @@ STATE = "state"
 STALE = float(os.environ.get("STALE_MINUTES", "10")) * 60   # hide characters whose client has not reported for this long
 # version of the analysis code+tables: a stored character from an older version is re-uploaded by the client
 AV = hashlib.sha1(b"".join(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), "rb").read()
-                           for f in ("analyze.py", "stat_map.json", "vendor/achi_hunter.py"))).hexdigest()[:12]
+                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "vendor/achi_hunter.py"))).hexdigest()[:12]
 SEEN = {}   # name -> last contact (upload or heartbeat), in memory
 WORLD = os.environ.get("WORLD_DIR", "")   # folder of ONE world, e.g. /config/worlds_local/roota (mounted read-only)
 _wcache = (None, None)
@@ -67,7 +67,7 @@ class H(BaseHTTPRequestHandler):
         tmp = os.path.join(STATE, name + ".tmp")
         with open(tmp, "w", encoding="utf8") as f:
             json.dump({"name": name, "updated": time.time(), "av": AV, "version": d["version"], "worlds": worlds, "sections": secs,
-                       "achievements": ach}, f)
+                       "achievements": ach, "meta": analyze.meta(d)}, f)
         SEEN[name] = time.time()
         os.replace(tmp, os.path.join(STATE, name + ".json"))
         self.send(200, {"ok": True})

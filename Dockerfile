@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 WORKDIR /app
-COPY *.py dashboard.html achievements.json stat_map.json ./
+COPY *.py dashboard.html achievements.json stat_map.json stat_names.json ./
 COPY vendor vendor
 COPY fonts fonts
 ENV PYTHONUNBUFFERED=1

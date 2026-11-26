@@ -67,6 +67,43 @@ button{font:inherit;color:var(--parch);cursor:pointer}
 .fl button.on{border-color:var(--sc);background:rgba(255,255,255,.08)}.fl button b{color:var(--mut);font-weight:normal}
 input[type=search]{font:inherit;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:8px;color:var(--parch);padding:5px 10px;min-width:170px}
 
+/* road: what's left per biome */
+.road .bar2{margin-bottom:10px}
+.seg.bios{flex-wrap:wrap}.seg.bios button small{opacity:.7;margin-left:5px;font-size:11px}
+.rsec{margin:12px 0 4px;display:flex;align-items:baseline;gap:10px;font-family:var(--head);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.rsec small{font-family:var(--body);letter-spacing:0;text-transform:none;color:var(--mut);font-size:12px}
+.rt{display:inline-flex;gap:7px;align-items:center;font-size:13px;padding:3px 9px;border-radius:7px;border:1px solid var(--line);background:rgba(0,0,0,.22)}
+.rt .pd{display:inline-flex;gap:3px}.rt .pdot{width:9px;height:9px}
+.rt.all{border-color:var(--gold);color:var(--gold2);background:rgba(212,168,79,.08)}
+.rt.none{border-style:dashed;color:#9b927c}
+.chk{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mut);cursor:pointer}
+.who button .wd{font-size:11px;color:var(--mut);font-style:italic}
+.who button.away{opacity:.55}
+
+.cath{display:flex;align-items:baseline;gap:10px;margin:18px 0 5px;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}
+.cath:first-child{margin-top:4px}.cath small{font-family:var(--body);font-weight:normal;letter-spacing:0;text-transform:none;color:var(--mut);font-size:12.5px}
+.catb{margin-top:10px}
+a.nm{text-decoration:none}a.nm:hover{text-decoration:underline}
+.back{color:var(--gold);text-decoration:none;font-size:14px}.back:hover{text-decoration:underline}
+.ph{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:end;margin:6px 0 12px}
+.pname{font-family:var(--head);font-weight:700;font-size:30px;color:var(--c);text-transform:uppercase;letter-spacing:.06em}
+.ph .wmeta{grid-column:1}.pbig{grid-column:2;grid-row:1/3;color:var(--mut);font-size:14px;text-align:right}.pbig b{display:block;font-size:34px;color:var(--parch);line-height:1}
+.pcats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px 22px}
+.pcat{display:grid;grid-template-columns:130px 1fr 44px;gap:10px;align-items:center;font-size:13px}.pcat small{color:var(--mut);text-align:right;font-variant-numeric:tabular-nums}
+
+.fel .ft{margin-bottom:6px;color:var(--mut);font-size:13px}.fel .ft b{color:var(--parch);font-size:20px;margin-right:2px}
+.fel .bar i{background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.pages{margin-top:8px;font-size:13px;color:var(--mut)}.pages a{color:var(--c);text-decoration:none;font-family:var(--head);font-weight:700}.pages a:hover{text-decoration:underline}.pages small{font-style:italic}
+.saga .sub2{color:var(--mut);font-size:13px;font-style:italic;margin:-4px 0 12px}
+.themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.theme{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.theme h3{margin:0 0 8px;font-family:var(--head);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.kv{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mut);padding:1px 0}
+.kv b{color:var(--parch);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kv.big b{font-size:22px;color:var(--gold2);line-height:1.1}.kv.big{align-items:baseline;margin-bottom:4px}
+.top{margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:6px}
+.top .kv{font-size:12.5px}.top .kv span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top .lab{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
 /* achievement states */
 .st-unlocked{--sc:var(--s-unlocked)}.st-byplayers{--sc:var(--s-byplayers)}.st-partial{--sc:var(--s-partial)}.st-locked{--sc:var(--s-locked)}.st-unknown{--sc:var(--s-unknown)}
 .ic{width:100%;aspect-ratio:1;border-radius:8px;display:block;background:#0a0b0d;object-fit:cover}
@@ -131,8 +168,14 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 <header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Achievement Hall</h1><div class="sub">the fellowship's road to all 53</div></header>
 <div class="divider"></div>
 
+<section class="panel saga" id="sagap" hidden><h2 id="sagah">Saga of the Fellowship</h2><div class="sub2" id="sagas"></div><div class="themes" id="saga"></div></section>
 <section class="panel" id="worldp" hidden><div class="world" id="world"></div></section>
-<section class="panel"><h2>Warriors</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
+<section class="panel"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
+
+<section class="panel road"><h2>The Road</h2>
+  <div class="bar2"><div class="seg bios" id="bios"></div><label class="chk"><input type="checkbox" id="hideall"> hide what's done</label></div>
+  <div id="road"></div>
+</section>
 
 <section class="panel">
   <h2>Achievements</h2>
@@ -151,12 +194,23 @@ const ICON='https://shared.akamai.steamstatic.com/community_assets/images/apps/8
 const COL=['--c0','--c1','--c2','--c3','--c4','--c5'];
 const RUNES=['ᛏ','ᚦ','ᛒ','ᛞ','ᛃ','ᛉ','ᚨ','ᛟ'];
 const BIO=['Meadows','Black Forest','Ocean','Swamp','Mountain','Plains','Mistlands','Ashlands','Deep North'];
-const STATES=[['unlocked','Unlocked'],['byplayers','Partly by players'],['partial','Partly unlocked'],['locked','Locked'],['unknown','Not trackable']];
+const STATES=[['unlocked','Unlocked'],['byplayers','Some have it'],['partial','In progress'],['locked','Locked'],['unknown','Not trackable']];
 const SECTION_OF={AllItemCraft:'crafted',AllWeaponCraft:'weapons',AllFoodCooked:'cooked',AllFoodEaten:'food-eaten',AllBuildPieces:'built',
  DeathByAllTypes:'deaths',DeathByTreeAll:'tree-deaths',KillAllCreatures:'enemies',KillAllCreaturesHard:'enemies-hard',AllBosses:'bosses-any',
  AllBossesNormal:'bosses-normal',AllBossesHard:'bosses-hard',AllMiniBosses:'minibosses',GrindFish:'fishing',FindAllTrophies:'trophies'};
 
-let ACH=[],chars=[],sel=new Set(),first=true,full={},hidden=0,stale=10;
+const CATS=[
+ ['Bosses',['Boss1Eikthyr','Boss2Elder','Boss3Bonemass','Boss4Moder','Boss5Yagluth','Boss6Queen','Boss7Fader','Boss8FrozenKing','AllBosses','AllBossesNormal','AllBossesHard','AllMiniBosses','MultiplayerBoss','SoloBoss']],
+ ['Hunting',['KillAllCreatures','KillAllCreaturesHard','FindAllTrophies','GrindLeviathan']],
+ ['Crafting',['AllItemCraft','AllWeaponCraft','BuildDyrnwyn']],
+ ['Building',['AllBuildPieces','GrindBuild','BuildHouse','BuildVillage','BuildHigh','BuildHighWorld','GrindComfort']],
+ ['Food & gathering',['AllFoodCooked','AllFoodEaten','GrindCook','GrindEat','GrindHarvest','GrindForager','GrindHoney','GrindTrees']],
+ ['Exploration & sea',['Arrived','ExploreNSEW','ExploreNSEWNoMap','SailEdge','GrindSail','GrindSailHelm','GrindTreasure','GrindFish','BigFish']],
+ ['Deaths',['FirstDeath','DeathByAllTypes','DeathByTree','DeathByTreeAll','DeathByObliterator']],
+ ['Legacy',['GrindDays','KingsQueens','ChildOfOdin']]];
+const catOf=api=>(CATS.find(c=>c[1].includes(api))||['Other'])[0];
+let route=null;
+let WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},hidden=0,stale=10;
 let view=ls('view')||'cards',flt=new Set(JSON.parse(ls('flt')||'[]')),q='',open=null;
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('vh_'+k);localStorage.setItem('vh_'+k,v)}catch(e){}}
 const $=id=>document.getElementById(id);
@@ -165,7 +219,7 @@ const idx=n=>chars.findIndex(c=>c.name===n);
 const colv=n=>`var(${COL[idx(n)%COL.length]})`;
 const tint=(e,n)=>{e.style.setProperty('--c',colv(n));return e};
 const ago=t=>{const s=Date.now()/1000-t;return s<90?'just now':s<5400?Math.round(s/60)+' min ago':s<172800?Math.round(s/3600)+' h ago':Math.round(s/86400)+' d ago'};
-const shown=()=>chars.filter(c=>sel.has(c.name)&&full[c.name]);
+const shown=()=>route?chars.filter(c=>c.name===route&&full[c.name]):chars.filter(c=>sel.has(c.name)&&full[c.name]);
 const icon=(a,got)=>{const i=el('img','ic');i.loading='lazy';i.alt=a.name;i.src=ICON+(got?a.icon_achieved:a.icon_unachieved);i.onerror=()=>{i.style.visibility='hidden'};return i};
 
 function prog(n,a){const p=full[n].achievements[a.api_name];return p?{d:p[0],t:p[1],f:p[1]?p[0]/p[1]:0,done:p[0]>=p[1]&&p[1]>0}:null}
@@ -176,25 +230,34 @@ function stateOf(a,P){
   const s=nDone===P.length?'unlocked':nDone>0?'byplayers':best>0?'partial':'locked';
   return{s,ps,best,nDone};
 }
-function label(S,P){return S.s==='byplayers'?`${S.nDone}/${P.length} warriors`:S.s==='partial'?Math.max(1,Math.round(S.best*100))+'% best':STATES.find(x=>x[0]===S.s)[1]}
+function label(S,P){return S.s==='byplayers'?`${S.nDone} of ${P.length} have it`:S.s==='partial'?bestTxt(S):STATES.find(x=>x[0]===S.s)[1]}
 
+function bestTxt(S){const tr=S.ps.filter(Boolean);
+  if(tr.length===1)return tr[0].t>1?`${tr[0].d.toLocaleString()} / ${tr[0].t.toLocaleString()}`:'in progress';
+  return Math.max(1,Math.floor(100*tr.reduce((n,p)=>n+Math.min(p.f,1),0)/tr.length))+'% together'}
 async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(u+' '+r.status);return r.json()}
 async function load(){
   try{
     if(!ACH.length)ACH=await j('/api/achievements');
     const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));hidden=r.offline_hidden;stale=r.stale_minutes;
+    const w=await j('/api/world');WNAME=(w&&!w.error&&w.name||'').toLowerCase();renderWorld(w);
     const known=new Set(chars.map(c=>c.name));
-    if(first){chars.forEach(c=>sel.add(c.name));first=false}
-    else for(const c of chars)if(!(c.name in full)&&!sel.has(c.name)&&!seenBefore.has(c.name))sel.add(c.name);
+    if(first){const here=chars.filter(inWorld);(here.length?here:chars).forEach(c=>sel.add(c.name));first=false}
+    else for(const c of chars)if(!(c.name in full)&&!sel.has(c.name)&&!seenBefore.has(c.name)&&inWorld(c))sel.add(c.name);
     chars.forEach(c=>seenBefore.add(c.name));
     for(const n of [...sel])if(!known.has(n))sel.delete(n);
-    await Promise.all(chars.filter(c=>sel.has(c.name)).map(async c=>{full[c.name]=await j('/api/character/'+encodeURIComponent(c.name))}));
-    renderWorld(await j('/api/world'));
+    await Promise.all(chars.filter(c=>sel.has(c.name)||c.name===route).map(async c=>{full[c.name]=await j('/api/character/'+encodeURIComponent(c.name))}));
+
     $('foot').textContent='';
   }catch(e){$('foot').textContent='server unreachable: '+e.message}
   render();
 }
 const seenBefore=new Set();
+async function onRoute(){const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null;
+  if(route&&!full[route]&&chars.some(c=>c.name===route))full[route]=await j('/api/character/'+encodeURIComponent(route));
+  document.title=route?route+' · Achievement Hall':'Valheim Achievement Hall';render();scrollTo(0,0)}
+addEventListener('hashchange',onRoute);
+const inWorld=c=>!WNAME||(c.worlds||[]).some(x=>x.toLowerCase()===WNAME);
 
 function renderWorld(w){
   const p=$('worldp');if(!w||w.error){p.hidden=!w;if(w&&w.error)$('world').replaceChildren(el('div','wmeta','World not readable: '+w.error));return}
@@ -208,20 +271,107 @@ function renderWorld(w){
   r.append(a,b);
 }
 
+function renderPlayer(){
+  const who=$('who'),pr=$('prog');who.replaceChildren();pr.replaceChildren();
+  $('wh').textContent='Warrior';
+  const c=chars.find(x=>x.name===route);
+  const back=el('a','back','← the fellowship');back.href='#';who.append(back);
+  if(!c){pr.append(el('div','empty',`${route} is not online. Characters disappear after ${stale} min without contact.`));return}
+  if(!full[c.name])return;
+  const h=tint(el('div','ph'),c.name),got=ACH.filter(a=>{const p=prog(c.name,a);return p&&p.done}).length;
+  h.append(el('div','pname',c.name),el('div','wmeta',[(c.worlds||[]).length?'worlds: '+c.worlds.join(', '):'has not joined a world',
+    `save v${c.version}`,`updated ${ago(c.updated)}`,`seen ${ago(c.seen)}`].join(' · ')));
+  const big=el('div','pbig');big.append(el('b','',got),` / ${ACH.length} unlocked`);h.append(big);pr.append(h);
+  const g=el('div','pcats');
+  for(const [cat,apis] of CATS){const n=apis.filter(a=>{const p=full[c.name].achievements[a];return p&&p[0]>=p[1]&&p[1]>0}).length;
+    const r=tint(el('div','pcat'),c.name);r.append(el('span','',cat));const b=el('div','bar thin'),f=el('i');f.style.width=(100*n/apis.length)+'%';b.append(f);
+    r.append(b,el('small','',`${n} / ${apis.length}`));g.append(r)}
+  pr.append(g);
+}
 function render(){
+  if(route){renderPlayer();const P=shown();renderSaga(P);renderRoad(P);renderMain(P);return}
+  $('wh').textContent='The Fellowship';
   const who=$('who');who.replaceChildren();
   if(!chars.length)who.append(el('div','empty',`No warrior online. Characters disappear after ${stale} min without contact; start fchsync on a player PC.`));
   for(const c of chars){
     const b=tint(el('button',sel.has(c.name)?'on':''),c.name);b.append(el('i'),el('span','',c.name));
+    if(WNAME&&!inWorld(c)){b.classList.add('away');b.append(el('span','wd',(c.worlds||[]).length?'in '+c.worlds.join(', '):'no world yet'))}
+    b.title=(c.worlds||[]).length?'worlds: '+c.worlds.join(', '):'has not joined a world';
     b.onclick=async()=>{if(sel.has(c.name))sel.delete(c.name);else{sel.add(c.name);if(!full[c.name])full[c.name]=await j('/api/character/'+encodeURIComponent(c.name))}render()};who.append(b)}
   if(chars.length)who.append(el('small','',`${sel.size} of ${chars.length} shown`+(hidden?` · ${hidden} offline hidden`:'')));
   const P=shown(),pr=$('prog');pr.replaceChildren();
-  for(const c of P){
-    const got=ACH.filter(a=>{const p=prog(c.name,a);return p&&p.done}).length,tr=ACH.filter(a=>prog(c.name,a)).length;
-    const row=tint(el('div','prow'),c.name);row.append(el('div','nm',c.name));
-    const bar=el('div','bar'),i=el('i');i.style.width=(100*got/ACH.length)+'%';bar.append(i);
-    const n=el('div','n');const b=el('b','',got);n.append(b,` / ${ACH.length} unlocked · ${tr} tracked · seen ${ago(c.seen)}`);row.append(bar,n);pr.append(row)}
-  renderMain(P);
+  if(P.length){
+    const all=ACH.filter(a=>P.every(c=>{const p=prog(c.name,a);return p&&p.done})).length,
+          sum=P.reduce((n,c)=>n+ACH.filter(a=>{const p=prog(c.name,a);return p&&p.done}).length,0);
+    const f=el('div','fel'),t=el('div','ft');t.append(el('b','',all),` / ${ACH.length} achievements unlocked by ${P.length>1?'the whole fellowship':P[0].name}`);
+    if(P.length>1)t.append(el('small','',` · ${sum} of ${ACH.length*P.length} unlocks gathered together`));
+    const bar=el('div','bar'),i1=el('i');i1.style.width=(100*sum/(ACH.length*P.length))+'%';bar.append(i1);f.append(t,bar);
+    const pg=el('div','pages');pg.append('warrior pages: ');
+    P.forEach((c,k)=>{const a=tint(el('a','',c.name),c.name);a.href='#player/'+encodeURIComponent(c.name);if(k)pg.append(' · ');pg.append(a,el('small','',` seen ${ago(c.seen)}`))});
+    f.append(pg);pr.append(f)}
+  renderSaga(P);renderRoad(P);renderMain(P);
+}
+
+const RSEC=[['bosses-any','Slay'],['bosses-normal','Slay (normal+)'],['bosses-hard','Slay (hard)'],['minibosses','Mini-boss'],
+ ['enemies','Kill'],['enemies-hard','Kill (hard)'],['trophies','Trophy'],['crafted','Craft'],['weapons','Craft weapon'],['built','Build'],
+ ['cooked','Cook'],['food-eaten','Eat'],['fishing','Catch'],['deaths','Die by'],['tree-deaths','Crushed by tree']];
+let bio=ls('bio')||'Meadows',hideAll=ls('hideall')!=='0';
+const bioOf=e=>e.biome||'Other';
+function renderRoad(P){
+  const bs=$('bios'),r=$('road');bs.replaceChildren();r.replaceChildren();$('hideall').checked=hideAll;
+  if(!P.length){r.append(el('div','empty','Pick at least one warrior.'));return}
+  // per biome: entries of every section, done-flags per player
+  const secs=P.map(c=>Object.fromEntries(full[c.name].sections.map(x=>[x.id,x])));
+  const stat={};
+  for(const [sid] of RSEC)(secs[0][sid]?.entries||[]).forEach((e,k)=>{const b=bioOf(e),st=stat[b]??={d:0,t:0};
+    for(const S of secs){st.t++;if(S[sid].entries[k].count>0)st.d++}});
+  const order=[...BIO,'Other'].filter(b=>stat[b]);if(!order.includes(bio))bio=order[0];
+  for(const b of order){const x=el('button',b===bio?'on':'');x.append(b,el('small','',Math.floor(100*stat[b].d/stat[b].t)+'%'));
+    x.onclick=()=>{bio=b;ls('bio',b);renderRoad(P)};bs.append(x)}
+  let any=false;
+  for(const [sid,lab] of RSEC){
+    const es=(secs[0][sid]?.entries||[]).map((e,k)=>({e,k})).filter(x=>bioOf(x.e)===bio);if(!es.length)continue;
+    const rows=es.map(({e,k})=>({e,got:secs.map(S=>S[sid].entries[k].count>0)})),
+          nAll=rows.filter(x=>x.got.every(Boolean)).length,show=rows.filter(x=>!hideAll||!x.got.every(Boolean));
+    const h=el('div','rsec');h.append(lab,el('small','',`${nAll} / ${rows.length} done${P.length>1?' by everyone':''}`));
+    if(!show.length){if(!hideAll)r.append(h);continue}
+    any=true;r.append(h);const m=el('div','tiles');
+    show.sort((x,y)=>y.got.filter(Boolean).length-x.got.filter(Boolean).length||x.e.name.localeCompare(y.e.name));
+    for(const {e,got} of show){const n=got.filter(Boolean).length,t=el('span','rt'+(n===P.length?' all':n?'':' none'));t.append(e.name);
+      if(P.length>1){const d=el('span','pd');P.forEach((c,i)=>{const o=tint(el('i','pdot'+(got[i]?' y':'')),c.name);o.title=c.name+(got[i]?': done':': missing');d.append(o)});t.append(d)}
+      t.title=P.filter((c,i)=>!got[i]).map(c=>c.name).join(', ')+(n<P.length?' still missing':'');m.append(t)}
+    r.append(m)}
+  if(!any)r.append(el('div','empty',`Nothing left in ${bio}: everyone has it all.`));
+}
+$('hideall').onchange=e=>{hideAll=e.target.checked;ls('hideall',hideAll?'1':'0');renderRoad(shown())};
+
+const fmtN=n=>Math.round(n).toLocaleString();
+const km=m=>(m/1000).toLocaleString(undefined,{maximumFractionDigits:1})+' km';
+const hrs=s=>{const m=Math.round(s/60);return m<60?m+' min':Math.floor(m/60)+' h '+String(m%60).padStart(2,'0')+' min'};
+const THEMES=[
+ ['Travel',[['DistanceTraveled','travelled',km,1],['DistanceWalk','on foot (walking)',km],['DistanceRun','running',km],['DistanceSail','sailing',km],['DistanceAir','in the air',km],['PortalsUsed','portals taken']],null],
+ ['Slaying',[['EnemyKills','creatures slain',fmtN,1],['BossKills','bosses felled'],['ArrowsShot','arrows loosed'],['EnemyHits','blows landed'],['HitsTakenEnemies','blows taken']],['kills','most slain']],
+ ['Gathering',[['Tree','trees felled',fmtN,1],['TreeChops','axe swings at trees'],['Mines','rocks and ore mined'],['HarvestBerry','berries picked'],['HarvestMushroom','mushrooms picked'],['HarvestCrop','crops harvested'],['BeesHarvested','honey harvests'],['SapHarvested','sap harvests']],['harvested','most gathered']],
+ ['Building & crafting',[['Builds','pieces built',fmtN,1],['BuildPiecesRemoved','pieces torn down'],['Crafts','items crafted'],['Upgrades','items upgraded'],['CraftFood','meals cooked']],['built','most built']],
+ ['Life in Valheim',[['Deaths','deaths',fmtN,1],['Jumps','jumps'],['FoodEaten','meals eaten'],['Sleep','nights slept'],['RavenTalk','talks with the ravens'],['CreatureTamed','creatures tamed'],['TamedPetting','pets given'],['TombstonesOpenedOwn','graves recovered'],
+   ['ConsecutiveDaysSurvivedMax','longest streak (days)',fmtN,0,'max'],['MaxComfort','highest comfort',fmtN,0,'max'],['DeepestDungeon','deepest dungeon',v=>Math.round(v)+' m',0,'max']],['eaten','favourite food']]];
+function renderSaga(P){
+  const p=$('sagap'),box=$('saga');box.replaceChildren();
+  const M=P.map(c=>full[c.name].meta).filter(Boolean);
+  if(!M.length){p.hidden=true;return}p.hidden=false;
+  $('sagah').textContent=route?'Chronicle of '+route:P.length>1?'Saga of the Fellowship':'Saga of '+P[0].name;
+  const st=(k,mode)=>{const v=M.map(m=>m.stats[k]||0);return mode==='max'?Math.max(...v):v.reduce((a,b)=>a+b,0)};
+  const merge=k=>{const o={};for(const m of M)for(const [n,v] of Object.entries(m[k]||{}))o[n]=(o[n]||0)+v;return Object.entries(o).sort((a,b)=>b[1]-a[1])};
+  const play=M.reduce((n,m)=>n+Object.values(m.worlds||{}).reduce((a,b)=>a+b,0),0);
+  const wl=route&&M[0].worlds?Object.entries(M[0].worlds).map(([w,s])=>`${w} ${hrs(s)}`).join(' · '):'';
+  $('sagas').textContent=(P.length>1?`${P.length} warriors · `:'')+`${hrs(play)} in Valheim`+(P.length>1?' together':'')+(wl?` (${wl})`:'');
+  for(const [title,rows,top] of THEMES){
+    const t=el('div','theme');t.append(el('h3','',title));let n=0;
+    for(const [k,lab,f=fmtN,big,mode] of rows){const v=st(k,mode);if(!v&&!big)continue;n++;
+      const r=el('div','kv'+(big?' big':''));r.append(el('span','',lab),el('b','',f(v)));t.append(r)}
+    if(top){const es=merge(top[0]).slice(0,5);if(es.length){const tp=el('div','top');tp.append(el('div','lab',top[1]));
+      for(const [nm,v] of es){const r=el('div','kv');r.append(el('span','',nm),el('b','',fmtN(v)));tp.append(r)}t.append(tp)}}
+    box.append(t)}
 }
 
 function renderMain(P){
@@ -235,7 +385,13 @@ function renderMain(P){
   if(!P.length){v.append(el('div','empty','Pick at least one warrior.'));return}
   const items=all.filter(x=>(!flt.size||flt.has(x.S.s))&&(!q||(x.a.name+' '+x.a.description).toLowerCase().includes(q)));
   if(!items.length){v.append(el('div','empty','No achievement matches.'));return}
-  if(view==='cards')cards(v,items,P);else if(view==='list')list(v,items,P);else matrix(v,items,P);
+  for(const [cat] of [...CATS,['Other']]){
+    const its=items.filter(x=>catOf(x.a.api_name)===cat);if(!its.length)continue;
+    const inCat=all.filter(x=>catOf(x.a.api_name)===cat),nu=inCat.filter(x=>x.S.s==='unlocked').length;
+    const h=el('div','cath');h.append(el('span','',cat),el('small','',`${nu} / ${inCat.length} unlocked${P.length>1?' by everyone':''}`));
+    const b=el('div','bar thin'),f=el('i');f.style.width=(100*nu/inCat.length)+'%';b.append(f);v.append(h,b);
+    const box=el('div','catb');v.append(box);
+    if(view==='cards')cards(box,its,P);else if(view==='list')list(box,its,P);else matrix(box,its,P)}
   if(open)fillDialog(P);
 }
 
@@ -305,5 +461,6 @@ $('dlg').addEventListener('click',e=>{if(e.target.id==='dlg'){open=null;e.target
 $('dlg').addEventListener('close',()=>{open=null});
 $('views').onclick=e=>{const v=e.target.dataset&&e.target.dataset.v;if(v){view=v;ls('view',v);render()}};
 $('q').oninput=e=>{q=e.target.value.toLowerCase();render()};
+{const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null}
 load();setInterval(load,15000);
 </script></body></html>

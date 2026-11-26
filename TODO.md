@@ -2,8 +2,11 @@
 
 ## Wanted next
 - [ ] **Map**: the explored map lives in each character's `.fch` (compressed block after the stat sets, per character). Decode it, merge all players, render it (biome/height colours, player spawns, boss altars) on the dashboard. World-side: locations and structures from the chunk files.
-- [ ] **Dashboard rework**: layout and flow are still a first pass (see the last screenshots). Ideas: group achievements by category, per-player detail page, nicer progress for the counter achievements, better empty/offline states, mobile check.
-- [ ] **Font**: not happy yet. Cinzel + Averia Serif Libre is the current pick; try other self-hosted options (OFL), compare in the browser, keep it readable for the long item lists.
+- [ ] **Dashboard rework**, rest: better empty/offline states, mobile check, fold the three Slay rows into one, readable names for a few pieces ("Levelground").
+
+## Done
+- Font: compared 8 OFL pairs in the browser (2026-11-26), kept Cinzel + Averia Serif Libre.
+- Dashboard rework, part 1: co-op framing (no leaderboard), Saga panel with non-achievement stats from the save (travel, slaying, gathering, building, life), The Road (what is left per biome, who still needs it), achievements grouped by category, player page `#player/<name>`, characters matched to the shown world.
 
 ## Raw upload (done)
 Server takes raw `.fch` (`POST /upload?name=X`, parsed with upstream `parse()`), Go parser removed, `fchsync.sh` is the Linux/macOS client (tested on Linux with six real characters: numbers identical to the old Go path; garbage/empty/old-version uploads give 400).
@@ -13,7 +16,6 @@ Server takes raw `.fch` (`POST /upload?name=X`, parsed with upstream `parse()`),
 
 ## Also open
 - TLS: handled later by a separate reverse proxy (out of scope here; uploads are plain HTTP with a shared token until then).
-- [ ] Match characters to worlds (a character file knows its worlds; the dashboard shows one world only).
 - [ ] Upstream Melichor has no license: ask the author or rewrite the achievement tables before sharing widely.
 - [ ] More world data: boss altars/locations, structure counts, day length from the save instead of the 1800 s default.
 - [ ] README screenshots.
