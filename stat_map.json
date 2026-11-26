@@ -1,0 +1,536 @@
+{
+"Arrived": {
+"set": 1,
+"stats": [
+[
+151,
+1.0
+]
+]
+},
+"BigFish": {
+"set": 1,
+"stats": [
+[
+165,
+1.0
+]
+]
+},
+"Boss1Eikthyr": {
+"enemies": [
+[
+"$enemy_eikthyr",
+1.0
+]
+],
+"set": 1
+},
+"Boss2Elder": {
+"enemies": [
+[
+"$enemy_gdking",
+1.0
+]
+],
+"set": 1
+},
+"Boss3Bonemass": {
+"enemies": [
+[
+"$enemy_bonemass",
+1.0
+]
+],
+"set": 1
+},
+"Boss4Moder": {
+"enemies": [
+[
+"$enemy_dragon",
+1.0
+]
+],
+"set": 1
+},
+"Boss5Yagluth": {
+"enemies": [
+[
+"$enemy_goblinking",
+1.0
+]
+],
+"set": 1
+},
+"Boss6Queen": {
+"enemies": [
+[
+"$enemy_seekerqueen",
+1.0
+]
+],
+"set": 1
+},
+"Boss7Fader": {
+"enemies": [
+[
+"$enemy_fader",
+1.0
+]
+],
+"set": 1
+},
+"Boss8FrozenKing": {
+"enemies": [
+[
+"$enemy_frozenking_p3",
+1.0
+]
+],
+"set": 1
+},
+"BuildDyrnwyn": {
+"crafts": [
+[
+"$item_sword_dyrnwyn",
+1.0
+]
+],
+"set": 1
+},
+"BuildHigh": {
+"set": 1,
+"stats": [
+[
+130,
+49.0
+]
+]
+},
+"BuildHighWorld": {
+"set": 1,
+"stats": [
+[
+131,
+432.0
+]
+]
+},
+"BuildHouse": {
+"set": 1,
+"stats": [
+[
+174,
+6.0
+],
+[
+175,
+8.0
+],
+[
+176,
+4.0
+],
+[
+178,
+1.0
+],
+[
+179,
+1.0
+],
+[
+181,
+1.0
+]
+]
+},
+"BuildVillage": {
+"set": 1,
+"stats": [
+[
+173,
+10.0
+],
+[
+174,
+40.0
+],
+[
+175,
+40.0
+],
+[
+176,
+20.0
+],
+[
+177,
+10.0
+],
+[
+178,
+10.0
+],
+[
+179,
+5.0
+],
+[
+180,
+5.0
+]
+]
+},
+"ChildOfOdin": {
+"others": [
+"ExploreNSEWNoMap",
+"AllBossesHard",
+"KillAllCreaturesHard",
+"GrindDays"
+],
+"set": 1
+},
+"DeathByAllTypes": {
+"set": 1,
+"stats": [
+[
+56,
+1.0
+],
+[
+58,
+1.0
+],
+[
+59,
+1.0
+],
+[
+60,
+1.0
+],
+[
+61,
+1.0
+],
+[
+62,
+1.0
+],
+[
+63,
+1.0
+],
+[
+65,
+1.0
+],
+[
+68,
+1.0
+],
+[
+71,
+1.0
+],
+[
+73,
+1.0
+],
+[
+105,
+1.0
+],
+[
+107,
+1.0
+],
+[
+108,
+1.0
+],
+[
+203,
+1.0
+],
+[
+204,
+1.0
+]
+]
+},
+"DeathByObliterator": {
+"set": 1,
+"stats": [
+[
+108,
+1.0
+]
+]
+},
+"DeathByTree": {
+"set": 1,
+"stats": [
+[
+68,
+1.0
+]
+]
+},
+"DeathByTreeAll": {
+"set": 1,
+"stats": [
+[
+199,
+1.0
+],
+[
+200,
+1.0
+],
+[
+201,
+1.0
+],
+[
+202,
+1.0
+],
+[
+193,
+1.0
+],
+[
+194,
+1.0
+],
+[
+195,
+1.0
+],
+[
+196,
+1.0
+],
+[
+197,
+1.0
+],
+[
+198,
+1.0
+]
+]
+},
+"ExploreNSEW": {
+"set": 1,
+"stats": [
+[
+138,
+1.0
+],
+[
+139,
+1.0
+],
+[
+140,
+1.0
+],
+[
+141,
+1.0
+]
+]
+},
+"ExploreNSEWNoMap": {
+"set": 1,
+"stats": [
+[
+142,
+1.0
+],
+[
+143,
+1.0
+],
+[
+144,
+1.0
+],
+[
+145,
+1.0
+]
+]
+},
+"FirstDeath": {
+"set": 1,
+"stats": [
+[
+0,
+1.0
+]
+]
+},
+"GrindBuild": {
+"set": 1,
+"stats": [
+[
+169,
+500.0
+]
+]
+},
+"GrindComfort": {
+"set": 1,
+"stats": [
+[
+132,
+20.0
+]
+]
+},
+"GrindCook": {
+"set": 1,
+"stats": [
+[
+109,
+100.0
+]
+]
+},
+"GrindDays": {
+"set": 1,
+"stats": [
+[
+129,
+30.0
+]
+]
+},
+"GrindEat": {
+"set": 1,
+"stats": [
+[
+49,
+500.0
+]
+]
+},
+"GrindForager": {
+"set": 1,
+"stats": [
+[
+124,
+250.0
+],
+[
+125,
+250.0
+]
+]
+},
+"GrindHarvest": {
+"set": 1,
+"stats": [
+[
+123,
+500.0
+]
+]
+},
+"GrindHoney": {
+"set": 1,
+"stats": [
+[
+76,
+500.0
+]
+]
+},
+"GrindLeviathan": {
+"set": 1,
+"stats": [
+[
+136,
+1.0
+]
+]
+},
+"GrindSail": {
+"set": 1,
+"stats": [
+[
+19,
+131946.0
+]
+]
+},
+"GrindSailHelm": {
+"set": 1,
+"stats": [
+[
+150,
+65973.0
+]
+]
+},
+"GrindTreasure": {
+"set": 1,
+"stats": [
+[
+133,
+10.0
+]
+]
+},
+"GrindTrees": {
+"set": 1,
+"stats": [
+[
+28,
+500.0
+]
+]
+},
+"KingsQueens": {
+"others": [
+"AllBosses",
+"ExploreNSEW",
+"AllBuildPieces",
+"KillAllCreatures",
+"AllFoodCooked",
+"AllItemCraft"
+],
+"set": 1
+},
+"MultiplayerBoss": {
+"set": 1,
+"stats": [
+[
+146,
+1.0
+]
+]
+},
+"SailEdge": {
+"set": 1,
+"stats": [
+[
+65,
+1.0
+]
+]
+},
+"SoloBoss": {
+"set": 1,
+"stats": [
+[
+147,
+1.0
+]
+]
+}
+}

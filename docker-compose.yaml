@@ -1,0 +1,33 @@
+services:
+  valheim:
+    image: ghcr.io/community-valheim-tools/valheim-server
+    container_name: valheim-server
+    cap_add: [sys_nice]
+    stop_grace_period: 2m
+    ports:
+      - "2456-2457:2456-2457/udp"
+    volumes:
+      - ./config:/config        # worlds_local/<world> goes in here
+      - ./data:/opt/valheim     # server install cache
+    environment:
+      SERVER_NAME: "${SERVER_NAME:-valheim}"
+      WORLD_NAME: "${WORLD_NAME:-roota}"
+      SERVER_PASS: "${SERVER_PASS:?set SERVER_PASS in .env}"
+      SERVER_PUBLIC: "false"
+      BACKUPS: "true"
+    restart: unless-stopped
+
+  tracker:
+    build: .
+    container_name: valheim-tracker
+    depends_on: [valheim]
+    environment:
+      TRACKER_TOKEN: "${TRACKER_TOKEN:?set TRACKER_TOKEN in .env}"
+      WORLD_DIR: "/worlds/${WORLD_NAME:-roota}"
+      STALE_MINUTES: "${STALE_MINUTES:-10}"
+    volumes:
+      - ./config/worlds_local:/worlds:ro   # world files, read-only
+      - ./tracker-state:/app/state
+    ports:
+      - "8088:8080"
+    restart: unless-stopped

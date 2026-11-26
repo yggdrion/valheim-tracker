@@ -1,0 +1,15 @@
+.env
+config/
+data/
+tracker-state/
+state/
+*.log
+__pycache__/
+bin/
+*.exe
+testdata/
+tools/
+ref/
+srv/
+tracker/
+.cache/
