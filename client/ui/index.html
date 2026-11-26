@@ -12,10 +12,18 @@
 html{background:var(--ink)}
 body{margin:0;color:var(--parch);font:14px/1.45 var(--body);min-height:100vh;user-select:none;
  background:radial-gradient(700px 300px at 50% -100px,#2d3b45 0%,transparent 70%),var(--ink)}
-main{padding:14px 14px 18px;display:flex;flex-direction:column;gap:12px}
+html,body{height:100%;overflow:hidden}
+body{display:flex;flex-direction:column}
+.tb{flex:none;height:34px;display:flex;align-items:center;background:rgba(0,0,0,.4);border-bottom:1px solid var(--line)}
+.tb .ttl{flex:1;height:100%;display:flex;align-items:center;padding-left:14px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);pointer-events:auto}
+.tb button{width:46px;height:34px;border:0;border-radius:0;background:transparent;color:var(--parch);padding:0;display:grid;place-items:center}
+.tb button:hover{background:rgba(255,255,255,.09)}
+.tb button.x:hover{background:#c42b1c;color:#fff}
+.tb svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.1;pointer-events:none}
+main{flex:1;min-height:0;overflow:auto;padding:12px 14px 12px;display:flex;flex-direction:column;gap:12px}
 header{text-align:center}
-.rune{color:var(--gold);letter-spacing:.35em;font-size:11px;opacity:.8}
-h1{margin:2px 0 0;font-family:var(--head);font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.rune{color:var(--gold);letter-spacing:.35em;font-size:10px;opacity:.7}
+h1{margin:0;font-family:var(--head);font-weight:700;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
 .panel{background:linear-gradient(180deg,var(--wood2),var(--wood));border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 h2{margin:0 0 8px;font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px}
 h2 .sp{flex:1}
@@ -49,20 +57,35 @@ input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .chk{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mut);cursor:pointer}
 .err{color:var(--bad)}
+#warriors{display:flex;flex-direction:column;min-height:0}
+#chars{overflow-y:auto;min-height:0;flex:1;margin-right:-8px;padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+#chars::-webkit-scrollbar{width:7px}#chars::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}#chars::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+.link{border:0;background:none;padding:0;font-size:12px;color:var(--mut);text-decoration:underline;text-underline-offset:3px}
+.link:hover{color:var(--gold2);border:0}.link:disabled{opacity:.6;text-decoration:none;cursor:default}
+li{cursor:default}
 #upd{display:none;align-items:center;gap:10px;justify-content:center;border-color:var(--gold)}
 #upd.on{display:flex}
 #warriors{order:1}#hallp{order:2}#dirp{order:3}.foot{order:4}header{order:0}
 body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
+@media(max-width:879px){#chars{max-height:46vh}}
 @media(min-width:880px){
- main{display:grid;grid-template-columns:minmax(330px,400px) 1fr;grid-template-rows:auto auto auto 1fr auto;align-items:start;max-width:1200px;margin:0 auto}
+ main{display:grid;grid-template-columns:minmax(330px,400px) 1fr;grid-template-rows:auto auto auto 1fr auto;align-items:start;width:100%;max-width:1200px;margin:0 auto}
  header{grid-column:1/-1}
  #hallp,body.setup #hallp{grid-column:1;grid-row:2}
  #dirp,body.setup #dirp{grid-column:1;grid-row:3}
- #warriors,body.setup #warriors{grid-column:2;grid-row:2/5}
+ #warriors,body.setup #warriors{grid-column:2;grid-row:2/5;align-self:stretch}
  .foot{grid-column:1/-1;grid-row:5}
+ #upd{grid-column:1/-1}
 }
 </style></head>
-<body><main>
+<body>
+<div class="tb" data-tauri-drag-region>
+  <div class="ttl" data-tauri-drag-region>Valheim Tracker Sync</div>
+  <button id="wmin" title="minimize"><svg viewBox="0 0 10 10"><path d="M0 5.5h10"/></svg></button>
+  <button id="wmax" title="maximize"><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></button>
+  <button id="wclose" class="x" title="close"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button>
+</div>
+<main>
 <header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Tracker Sync</h1></header>
 
 <section class="panel" id="upd"><span id="updmsg"></span><button class="main" id="updgo">Update &amp; restart</button></section>
@@ -92,7 +115,7 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 
 <div class="foot">
   <label class="chk"><input type="checkbox" id="autostart"> Start with my computer</label>
-  <span class="small"><span id="ver"></span> <button id="updchk" title="check for a new version">Check for updates</button> · read-only on your game files</span>
+  <span class="small">read-only on your game files · <span id="ver"></span> · <button class="link" id="updchk">Check for updates</button></span>
 </div>
 </main>
 <script>
@@ -108,22 +131,31 @@ function show(s){S=s;document.body.classList.toggle('setup',!s.server.startsWith
   $('hall').disabled=!s.settings.server;
   $('dir').textContent=s.dir||'No characters folder found.';$('dir').classList.toggle('err',!s.dir);
   $('dirnote').textContent=s.dir_auto?(s.dir?'detected automatically':'Valheim saves not found in the usual places: choose the folder.'):'chosen by you';
-  const c=$('cands');c.replaceChildren();
+  const c=$('cands'),ck=s.dir+'|'+s.dir_auto+'|'+s.candidates.join();if(c.dataset.k!==ck){c.dataset.k=ck;c.replaceChildren();
   if(s.dir_auto&&s.candidates.length>1){c.append(el('div','small','Other folders with characters:'));
-    for(const p of s.candidates)if(p!==s.dir){const b=el('button','',p);b.onclick=()=>call('set_dir',{dir:p}).then(show);c.append(b)}}
+    for(const p of s.candidates)if(p!==s.dir){const b=el('button','',p);b.onclick=()=>call('set_dir',{dir:p}).then(show);c.append(b)}}}
   $('paused').checked=s.settings.paused;
-  const ul=$('chars');ul.replaceChildren();
-  if(!s.chars.length)ul.append(el('li','empty',s.dir?'No characters in this folder yet.':'Choose the characters folder above.'));
-  for(const ch of s.chars){const li=el('li',(ch.selected?'':'off ')+'s-'+ch.status);
-    const cb=el('input');cb.type='checkbox';cb.checked=ch.selected;cb.title='sync this character';
-    cb.onchange=()=>call('set_selected',{name:ch.name,on:cb.checked}).then(show);
-    const mid=el('div');mid.append(el('div','nm',ch.name));
-    const st=el('div','st');st.append(el('span','dot'),el('b','',LABEL[ch.status]||ch.status));
-    if(ch.message)st.append(': '+ch.message);
-    mid.append(st);
-    const right=el('div','st',ch.last_upload?'last upload '+ago(ch.last_upload):ch.modified?'saved '+ago(ch.modified):'');
-    li.append(cb,mid,right);ul.append(li)}
-}
+  renderChars(s)}
+const rows=new Map();
+function renderChars(s){const ul=$('chars');
+  if(!s.chars.length){rows.clear();ul.replaceChildren(el('li','empty',s.dir?'No characters in this folder yet.':'Choose the characters folder above.'));return}
+  ul.querySelector('.empty')?.remove();
+  const seen=new Set();let prev=null;
+  for(const ch of s.chars){seen.add(ch.name);let r=rows.get(ch.name);
+    if(!r){const li=el('li'),cb=el('input'),mid=el('div'),nm=el('div','nm',ch.name),st=el('div','st'),dot=el('span','dot'),lab=el('b'),msg=document.createTextNode(''),right=el('div','st');
+      cb.type='checkbox';cb.title='sync this character';
+      cb.onchange=()=>{li.classList.toggle('off',!cb.checked);pending++;call('set_selected',{name:ch.name,on:cb.checked}).then(show).finally(()=>pending--)};
+      st.append(dot,lab,msg);mid.append(nm,st);li.append(cb,mid,right);
+      r={li,cb,lab,msg,right};rows.set(ch.name,r)}
+    r.li.className=(ch.selected?'':'off ')+'s-'+ch.status;
+    if(document.activeElement!==r.cb)r.cb.checked=ch.selected;
+    r.lab.textContent=LABEL[ch.status]||ch.status;r.msg.nodeValue=ch.message?': '+ch.message:'';
+    r.right.textContent=ch.last_upload?'last upload '+ago(ch.last_upload):ch.modified?'saved '+ago(ch.modified):'';
+    const want=prev?prev.nextSibling:ul.firstChild;
+    if(want!==r.li)ul.insertBefore(r.li,want);
+    prev=r.li}
+  for(const[n,r]of rows)if(!seen.has(n)){r.li.remove();rows.delete(n)}}
+let pending=0;
 $('server').oninput=$('token').oninput=()=>{edited=true};
 $('show').onclick=()=>{const t=$('token');t.type=t.type==='password'?'text':'password';$('show').textContent=t.type==='password'?'show':'hide'};
 $('save').onclick=async()=>{$('smsg').textContent='connecting…';$('smsg').className='msg';
@@ -137,7 +169,7 @@ $('now').onclick=()=>call('sync_now');
 $('autostart').onchange=async e=>{try{e.target.checked=await call('set_autostart',{on:e.target.checked})}catch(x){e.target.checked=!e.target.checked;$('smsg').textContent='autostart: '+x}};
 for(const id of ['server','token'])$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('save').click()});
 async function checkUpdate(manual){const b=$('updchk');if(manual){b.disabled=true;b.textContent='checking…'}
-  try{const u=await call('check_update');$('ver').textContent='v'+u.current;
+  try{const u=await call('check_update');
     if(u.available){$('updmsg').textContent='Version '+u.available+' is available.';$('upd').classList.add('on')}
     else if(manual)b.textContent='up to date'}
   catch(e){if(manual)b.textContent='check failed';console.warn('update check',e)}
@@ -145,8 +177,11 @@ async function checkUpdate(manual){const b=$('updchk');if(manual){b.disabled=tru
 $('updchk').onclick=()=>checkUpdate(true);
 $('updgo').onclick=async()=>{const b=$('updgo');b.disabled=true;b.textContent='updating…';
   try{await call('install_update')}catch(e){b.disabled=false;b.textContent='Update & restart';$('updmsg').textContent='Update failed: '+e}};
+const W=T.window.getCurrentWindow();
+$('wmin').onclick=()=>W.minimize();$('wmax').onclick=()=>W.toggleMaximize();$('wclose').onclick=()=>W.close();
+T.app.getVersion().then(v=>$('ver').textContent='v'+v);
 checkUpdate(false);setInterval(()=>checkUpdate(false),6*3600*1000);
-T.event.listen('status',e=>show(e.payload));
+T.event.listen('status',e=>{if(!pending)show(e.payload)});
 call('get_status').then(show);call('get_autostart').then(v=>$('autostart').checked=v);
 </script>
 </body></html>
