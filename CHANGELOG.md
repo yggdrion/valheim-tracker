@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/yggdrion/valheim-tracker/compare/v1.2.1...v1.3.0) (2026-11-26)
+
+### ✨ Features
+
+* Tracker Sync updates itself from signed GitHub releases ([4a1f551](https://github.com/yggdrion/valheim-tracker/commit/4a1f551592f0bf7fd59148024b75423e72e7f850))
+
 ## [1.2.1](https://github.com/yggdrion/valheim-tracker/compare/v1.2.0...v1.2.1) (2026-11-26)
 
 ### 🐛 Bug Fixes
