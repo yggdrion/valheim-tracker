@@ -1,23 +1,56 @@
-# One trigger builds everything: the tracker image (ghcr.io) and the Tracker Sync app (client/).
-#   push to main   -> image :latest, :main, :sha-<short>   + app installers as run artifacts
-#   tag vX.Y.Z     -> image :X.Y.Z, :X.Y                    + draft GitHub release vX.Y.Z with the installers
-#                     (the app gets version X.Y.Z; publish the draft by hand)
-#   pull request   -> both build, nothing is published
+# Every push to main builds the tracker image and the Tracker Sync app together, and releases them when the
+# commits since the last release call for it (conventional commits, as semantic-release reads them):
+#   feat: -> minor   fix: / chore: -> patch   docs: / ci: / test: -> build only, no release
+# A release: image ghcr.io/<owner>/valheim-tracker:X.Y.Z (+ :X.Y, :latest), tag vX.Y.Z, a GitHub release with the
+# app installers and the notes, and a CHANGELOG.md commit back to main ([skip ci]).
+# The installers live in the GitHub release; the Actions artifacts only pass them between jobs (kept 3 days).
+# Pull requests build both and publish nothing.
 name: build
 
 on:
   push:
     branches: [main]
-    tags: ["v*"]
   pull_request:
   workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  SEMREL: semantic-release@24 @semantic-release/changelog@6 @semantic-release/git@10 @semantic-release/github@11 conventional-changelog-conventionalcommits@8
 
 jobs:
+  version:
+    runs-on: ubuntu-latest
+    permissions:            # semantic-release checks push rights even in a dry run
+      contents: write
+      issues: read
+      pull-requests: read
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: v
+        name: Next version (empty = no release)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install -g $SEMREL >/dev/null
+          out=$(semantic-release --dry-run 2>&1 || true)
+          echo "$out" | tail -20
+          v=$(echo "$out" | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "next version: ${v:-none (no release)}"
+
   image:
+    needs: version
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -39,9 +72,9 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
             type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}},value=${{ needs.version.outputs.version }},enable=${{ needs.version.outputs.version != '' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ needs.version.outputs.version }},enable=${{ needs.version.outputs.version != '' }}
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -53,6 +86,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   app:
+    needs: version
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +99,7 @@ jobs:
             args: ""
     runs-on: ${{ matrix.os }}
     permissions:
-      contents: write
+      contents: read
     defaults:
       run:
         working-directory: client
@@ -85,27 +119,17 @@ jobs:
           workspaces: client/src-tauri
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - name: App version from the tag
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: App version = release version
+        if: needs.version.outputs.version != ''
         run: |
-          v="${GITHUB_REF_NAME#v}"
+          v="${{ needs.version.outputs.version }}"
           sed -i.bak "s/\"version\": \"[^\"]*\"/\"version\": \"$v\"/" src-tauri/tauri.conf.json && rm src-tauri/tauri.conf.json.bak
       - uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           projectPath: client
           tauriScript: bun run tauri
           args: ${{ matrix.args }}
-          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
-          releaseName: ${{ startsWith(github.ref, 'refs/tags/v') && format('valheim-tracker {0}', github.ref_name) || '' }}
-          releaseBody: |
-            Server image: `ghcr.io/${{ github.repository_owner }}/valheim-tracker:${{ github.ref_name }}` (without the v), or `:latest`.
-            Tracker Sync app: installers below. Enter the server address and token; it uploads your changed Valheim characters.
-            The app is not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open).
-          releaseDraft: true
       - uses: actions/upload-artifact@v4
-        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         with:
           name: tracker-sync-${{ runner.os }}
           path: |
@@ -114,4 +138,36 @@ jobs:
             client/src-tauri/target/**/release/bundle/**/*.dmg
             client/src-tauri/target/**/release/bundle/**/*.AppImage
             client/src-tauri/target/**/release/bundle/**/*.deb
-          if-no-files-found: warn
+          if-no-files-found: error
+          retention-days: 3   # only carries the installers to the release job; the release keeps them
+
+  release:
+    needs: [version, image, app]
+    if: needs.version.outputs.version != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Collect the installers
+        run: |
+          mkdir -p release-assets
+          find artifacts -type f \( -name '*.msi' -o -name '*-setup.exe' -o -name '*.dmg' -o -name '*.AppImage' -o -name '*.deb' \) \
+            -exec cp {} release-assets/ \;
+          ls -la release-assets
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install -g $SEMREL >/dev/null
+          semantic-release

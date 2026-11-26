@@ -1,0 +1,20 @@
+{
+  "branches": ["main"],
+  "tagFormat": "v${version}",
+  "plugins": [
+    ["@semantic-release/commit-analyzer", { "preset": "conventionalcommits", "releaseRules": [{ "type": "chore", "release": "patch" }] }],
+    ["@semantic-release/release-notes-generator", {
+      "preset": "conventionalcommits",
+      "presetConfig": { "types": [
+        { "type": "feat", "section": "✨ Features" },
+        { "type": "fix", "section": "🐛 Bug Fixes" },
+        { "type": "chore", "section": "🔧 Chores" },
+        { "type": "docs", "section": "📝 Documentation" },
+        { "type": "ci", "section": "👷 CI" }
+      ] }
+    }],
+    "@semantic-release/changelog",
+    ["@semantic-release/github", { "assets": "release-assets/*", "releasedLabels": false, "successComment": false, "failComment": false, "failTitle": false }],
+    ["@semantic-release/git", { "assets": ["CHANGELOG.md"], "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}" }]
+  ]
+}

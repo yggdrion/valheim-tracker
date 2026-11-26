@@ -18,7 +18,7 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
     TRACKER_TOKEN=<token> ./fchsync.sh -s http://host:8088          # Linux / macOS / Steam Deck
     ./fchsync.sh -d "<characters folder>" -s http://host:8088 -t <token> -1   # explicit folder, sync once
 
-Desktop (Windows, macOS, Linux): **Tracker Sync** in `client/` (Tauri). Download it from the releases (tag `vX.Y.Z`, same version as the server image), enter the server address and token; it finds the characters folder and uploads changed characters. Build locally: `cd client && bun install && bun run build`.
+Desktop (Windows, macOS, Linux): **Tracker Sync** in `client/` (Tauri). Download it from the GitHub releases (each release `vX.Y.Z` has the installers and the matching server image `:X.Y.Z`), enter the server address and token; it finds the characters folder and uploads changed characters. Build locally: `cd client && bun install && bun run build`.
 
 Windows without the app: copy `fchsync.env.example` to `fchsync.env`, set server URL and token, double-click `fchsync.bat` (or `.\fchsync.ps1 -Server http://host:8088 -Token <token>`).
 
@@ -34,3 +34,7 @@ Character files live on the player's PC (`%USERPROFILE%\AppData\LocalLow\IronGat
 - No TLS: put a reverse proxy in front before exposing it.
 - The server parses uploads with the vendored upstream `parse()`; bad or garbage uploads get HTTP 400. Quick local check: `python analyze.py Some.fch`.
 - Game data files, regenerate after a patch (read-only on the game install): `scripts/extract_stat_names.py` (stat_names.json, needs dnfile), `scripts/extract_names.py` (names.json, needs UnityPy), `scripts/extract_location_names.py <world folder>` (location_names.json).
+
+## Releases
+
+Automatic: every push to `main` builds the server image and the app (`.github/workflows/build.yml`). When the commits since the last release include `feat:` (minor), `fix:` or `chore:` (patch), semantic-release tags `vX.Y.Z`, publishes the image as `:X.Y.Z` and `:latest`, creates the GitHub release with the installers and commits `CHANGELOG.md`. `docs:` / `ci:` commits only build.
