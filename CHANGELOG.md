@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/yggdrion/valheim-tracker/compare/v1.1.0...v1.2.0) (2026-11-26)
+
+### ✨ Features
+
+* own save parser and game data instead of Melichor's achi_hunter.py ([cf64eee](https://github.com/yggdrion/valheim-tracker/commit/cf64eee18bb876a899c1aa9c564325e47762fd16))
+
+### 🔧 Chores
+
+* remove the fchsync scripts, Tracker Sync replaces them ([855a7bc](https://github.com/yggdrion/valheim-tracker/commit/855a7bc76a5d248eef5b1a56e6e7b45ba6bb76ba))
+
 ## [1.1.0](https://github.com/yggdrion/valheim-tracker/compare/v1.0.0...v1.1.0) (2026-11-26)
 
 ### ✨ Features
