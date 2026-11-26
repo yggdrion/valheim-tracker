@@ -5,8 +5,6 @@ tracker-state/
 state/
 *.log
 __pycache__/
-bin/
-*.exe
 testdata/
 tools/
 ref/

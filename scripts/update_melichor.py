@@ -3,7 +3,7 @@
 
   python scripts/update_melichor.py                 # dry run: fetch upstream, report drift
   python scripts/update_melichor.py --apply         # also copy achi_hunter.py to vendor/ + write vendor/UPSTREAM.json
-  python scripts/update_melichor.py --apply --fch some.fch   # + parity check Go parser vs reference on a real save
+  python scripts/update_melichor.py --apply --fch some.fch   # + smoke test: parse + analyse a real save with the new vendor/
 
 Read-only on game files. Needs git. Exit 1 on any FAIL.
 """
@@ -60,8 +60,6 @@ def facts(src):
 
 
 def ours():
-    go = open(os.path.join(ROOT, "fchparse", "fchparse.go"), encoding="utf8").read()
-    g = lambda n: int(re.search(rf"{n}\s*=\s*(\d+)", go)[1])
     an = ast.parse(open(os.path.join(ROOT, "analyze.py"), encoding="utf8").read())
     sec = {}
     for n in an.body:
@@ -69,8 +67,8 @@ def ours():
             sec = ast.literal_eval(n.value)
     sm = json.load(open(os.path.join(ROOT, "stat_map.json"), encoding="utf8"))
     bosses = [t for e in sm.values() for t, _ in e.get("enemies", [])]
-    return {"go": {"MIN_PROFILE_VERSION": g("MinVersion"), "STAT_COUNT": g("StatCount"), "SET_COUNT": g("SetCount")},
-            "SECTION_ACH": sec, "stat_map": sm, "boss_tokens": bosses}
+    top = max(i for e in sm.values() for i, _ in e.get("stats", []))
+    return {"max_stat": top, "SECTION_ACH": sec, "stat_map": sm, "boss_tokens": bosses}
 
 
 def main():
@@ -96,7 +94,7 @@ def main():
                 say("WARN", "old sha not in history (force-push?)")
         for k in ("parse_hash", "reader_hash"):
             if old.get(k) != up[k]:
-                say("WARN", f"upstream {k[:-5]}() changed -> re-read it and port the difference to fchparse/fchparse.go")
+                say("INFO", f"upstream {k[:-5]}() changed (the server uses it directly; check a real save with --fch)")
         for k, v in up["constants"].items():
             if old["constants"].get(k) != v:
                 say("INFO", f"constant {k}: {old['constants'].get(k)!r} -> {v!r}")
@@ -105,9 +103,10 @@ def main():
 
     # does our code still match upstream's layout and indices?
     me = ours()
-    for k, v in me["go"].items():
-        if up["constants"].get(k) != v:
-            say("FAIL", f"Go parser {k}={v} but upstream {k}={up['constants'].get(k)} -> update fchparse/fchparse.go")
+    if me["max_stat"] >= up["constants"].get("STAT_COUNT", 0):
+        say("FAIL", f"stat_map.json uses stat index {me['max_stat']} but upstream STAT_COUNT={up['constants'].get('STAT_COUNT')} -> rerun the stat-map scripts")
+    elif old and old["constants"].get("STAT_COUNT") != up["constants"].get("STAT_COUNT"):
+        say("WARN", "STAT_COUNT changed: stat indices in stat_map.json may have shifted -> rerun the stat-map scripts")
     dk = up["death_kinds"]
     sm = me["stat_map"]
     if sm["DeathByTree"]["stats"][0][0] != dk.get("Tree") or sm["DeathByObliterator"]["stats"][0][0] != dk.get("Incinerator"):
@@ -121,18 +120,19 @@ def main():
     if new:
         say("INFO", f"upstream sections we do not map to a Steam achievement: {new}")
     if not bad:
-        say("OK", "Go constants, stat_map.json and analyze.py mappings match upstream")
+        say("OK", "stat_map.json and analyze.py mappings match upstream")
 
     if a.apply:
         open(VENDOR, "w", encoding="utf8", newline="").write(up_src)
         json.dump({"repo": REPO, "sha": sha, "date": date, **up}, open(META, "w", encoding="utf8"), indent=1)
         say("OK", "copied achi_hunter.py to vendor/ and wrote vendor/UPSTREAM.json")
         if a.fch:
-            r = subprocess.run([sys.executable, os.path.join(ROOT, "analyze.py"), "--check", a.fch], cwd=ROOT,
-                               capture_output=True, text=True, encoding="utf8")
-            say("OK" if r.returncode == 0 else "FAIL", "parity: " + (r.stdout.strip() or r.stderr.strip().splitlines()[-1])[:200])
+            r = subprocess.run([sys.executable, "-c", "import analyze as a; d=a.ah.parse(__import__('sys').argv[1]); "
+                                "print(len(a.analyze_parsed(d)), 'sections,', len(a.achievements(d, a.analyze_parsed(d))), 'achievements')", a.fch],
+                               cwd=ROOT, capture_output=True, text=True, encoding="utf8")
+            say("OK" if r.returncode == 0 else "FAIL", "smoke: " + (r.stdout.strip() or r.stderr.strip().splitlines()[-1])[:200])
     elif a.fch:
-        say("INFO", "--fch only runs together with --apply (parity uses vendor/)")
+        say("INFO", "--fch only runs together with --apply (uses vendor/)")
     sys.exit(1 if bad else 0)
 
 

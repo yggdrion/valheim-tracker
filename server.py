@@ -1,12 +1,14 @@
 """Tracker receiver + dashboard. stdlib only.
   TRACKER_TOKEN=secret python server.py [--port 8080] [--state state]
-POST /upload?name=X (X-Token header, body = fchsync JSON) -> stores analysed progress
+POST /upload?name=X (X-Token header, body = raw .fch bytes) -> stores analysed progress
 GET  /                -> dashboard      GET /api/characters, /api/character/<name>
 """
-import argparse, hashlib, hmac, json, os, re, time
+import argparse, hashlib, hmac, json, os, re, struct, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
+
 import analyze, worlds
+import achi_hunter as ah
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOKEN = os.environ.get("TRACKER_TOKEN", "")
@@ -52,16 +54,20 @@ class H(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length", 0))
         if not NAME_OK.match(name) or n <= 0 or n > MAX_BODY:
             return self.send(400, {"error": "bad name or size"})
+        raw = self.rfile.read(n)
         try:
-            d = json.loads(self.rfile.read(n))
-            secs = analyze.analyze_go_json(d)
-        except Exception as e:
-            return self.send(400, {"error": f"bad payload: {e}"})
+            d = ah.parse(raw)
+            secs = analyze.analyze_parsed(d)
+            ach = analyze.achievements(d, secs)
+        except ah.SaveError as e:
+            return self.send(400, {"error": str(e)})
+        except (struct.error, IndexError, KeyError, UnicodeDecodeError, AssertionError, ValueError, MemoryError, OverflowError):
+            return self.send(400, {"error": "not a readable Valheim .fch file"})
         worlds = sorted(d["sets"][0]["worlds"])
         tmp = os.path.join(STATE, name + ".tmp")
         with open(tmp, "w", encoding="utf8") as f:
             json.dump({"name": name, "updated": time.time(), "av": AV, "version": d["version"], "worlds": worlds, "sections": secs,
-                       "achievements": analyze.achievements(d, secs)}, f)
+                       "achievements": ach}, f)
         SEEN[name] = time.time()
         os.replace(tmp, os.path.join(STATE, name + ".json"))
         self.send(200, {"ok": True})

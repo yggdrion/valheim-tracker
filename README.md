@@ -2,8 +2,8 @@
 
 Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mods.
 
-- `cmd/fchsync` (Go, per player PC): reads `.fch` character files, posts parsed counters. Never writes to the game folder.
-- `server.py` (Python, stdlib): receives uploads, analyses them, reads the world folder read-only, serves the dashboard.
+- `fchsync.sh` (bash + curl, per player PC; a Windows `fchsync.ps1` is still to do): uploads changed `.fch` character files raw. Never writes to the game folder.
+- `server.py` (Python, stdlib): receives raw uploads, parses and analyses them, reads the world folder read-only, serves the dashboard.
 - `docker-compose.yaml`: dedicated server ([community-valheim-tools/valheim-server-docker](https://github.com/community-valheim-tools/valheim-server-docker)) + tracker.
 
 ## Run
@@ -14,8 +14,11 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
 
 ## Player upload
 
-    go build -o fchsync ./cmd/fchsync
-    ./fchsync -dir "<characters_local or Steam remote/characters>" -server http://host:8088 -token <TRACKER_TOKEN>
+    TRACKER_TOKEN=<token> ./fchsync.sh -s http://host:8088          # Linux / macOS / Steam Deck
+    ./fchsync.sh -d "<characters folder>" -s http://host:8088 -t <token> -1   # explicit folder, sync once
+
+Without `-d` it looks in `~/.config/unity3d/IronGate/Valheim/characters_local`, the Steam Cloud `userdata/*/892970/remote/characters`
+and the Proton prefix. Env alternatives: `TRACKER_SERVER`, `TRACKER_TOKEN`, `FCH_DIR`.
 
 Character files live on the player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or
 `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud). The server never has them.
@@ -24,5 +27,5 @@ Character files live on the player's PC (`%USERPROFILE%\AppData\LocalLow\IronGat
 
 - Achievement tables in `vendor/achi_hunter.py` come from [Melichor/ValheimSaveParser](https://github.com/Melichor/ValheimSaveParser). To update after a patch: `python scripts/update_melichor.py` (see `.claude/skills/update-melichor/SKILL.md`), and `python scripts/update_achievements.py` for the Steam list.
 - No TLS: put a reverse proxy in front before exposing it.
-- Self-check of the Go parser against the reference: `python analyze.py --check Some.fch`.
+- The server parses uploads with the vendored upstream `parse()`; bad or garbage uploads get HTTP 400. Quick local check: `python analyze.py Some.fch`.
 - Not done: the other ~47 Steam achievements, per-world character matching.
