@@ -12,8 +12,10 @@ Server takes raw `.fch` (`POST /upload?name=X`, parsed with upstream `parse()`),
 - [ ] Autostart how-to (systemd user unit / Task Scheduler); macOS paths in `fchsync.sh` are untested.
 
 ## Also open
-- [ ] Reverse proxy + TLS in front of the tracker (planned, not done; uploads are plain HTTP with a shared token).
+- TLS: handled later by a separate reverse proxy (out of scope here; uploads are plain HTTP with a shared token until then).
 - [ ] Match characters to worlds (a character file knows its worlds; the dashboard shows one world only).
 - [ ] Upstream Melichor has no license: ask the author or rewrite the achievement tables before sharing widely.
 - [ ] More world data: boss altars/locations, structure counts, day length from the save instead of the 1800 s default.
 - [ ] README screenshots.
+- [ ] **GHCR image**: build and publish the tracker image to `ghcr.io` (GitHub Actions on tag/main), then point `docker-compose.yaml` at the image instead of `build: .`.
+- [ ] **Tiny GUI client** for Windows/macOS/Linux: enter server URL + token (optionally the characters folder), it autodetects the folder and syncs in the background (status, last upload, errors), remembers settings, autostart option. Same protocol as `fchsync.sh` (raw `.fch` upload + heartbeat). Candidates: Go + small GUI toolkit, or Wails/Tauri; decide, then retire the scripts or keep them as the headless option.
