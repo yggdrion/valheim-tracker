@@ -15,10 +15,10 @@ TOKEN = os.environ.get("TRACKER_TOKEN", "")
 MAX_BODY = 5_000_000
 NAME_OK = re.compile(r"^[A-Za-z0-9_. -]{1,64}$")
 STATE = "state"
-STALE = float(os.environ.get("STALE_MINUTES", "10")) * 60   # hide characters whose client has not reported for this long
+STALE = float(os.environ.get("STALE_MINUTES", "10")) * 60   # a character is 'resting' (offline) after this long without contact
 # version of the analysis code+tables: a stored character from an older version is re-uploaded by the client
 AV = hashlib.sha1(b"".join(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), "rb").read()
-                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "vendor/achi_hunter.py"))).hexdigest()[:12]
+                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "names.json", "vendor/achi_hunter.py"))).hexdigest()[:12]
 SEEN = {}   # name -> last contact (upload or heartbeat), in memory
 WORLD = os.environ.get("WORLD_DIR", "")   # folder of ONE world, e.g. /config/worlds_local/roota (mounted read-only)
 _wcache = (None, None)
@@ -78,16 +78,14 @@ class H(BaseHTTPRequestHandler):
             return self.send(200, open(os.path.join(HERE, "dashboard.html"), "rb").read(), "text/html; charset=utf-8")
         if p == "/api/characters":
             out = []
-            hidden = 0
             for fn in sorted(os.listdir(STATE)):
                 if fn.endswith(".json"):
                     c = load(fn[:-5])
-                    seen = SEEN.get(c["name"], 0)
-                    if time.time() - seen > STALE:
-                        hidden += 1; continue
-                    out.append({k: c[k] for k in ("name", "updated", "version", "worlds")} | {"seen": seen} |
+                    seen = SEEN.get(c["name"]) or c["updated"]   # after a restart: the last upload
+                    out.append({k: c[k] for k in ("name", "updated", "version", "worlds")} |
+                               {"seen": seen, "online": time.time() - SEEN.get(c["name"], 0) <= STALE} |
                                {"sections": [{k: s[k] for k in ("id", "title", "done", "total")} for s in c["sections"]]})
-            return self.send(200, {"characters": out, "offline_hidden": hidden, "stale_minutes": STALE / 60})
+            return self.send(200, {"characters": out, "stale_minutes": STALE / 60})
         m = re.fullmatch(r"/fonts/([a-z0-9-]+\.woff2)", p)
         if m and os.path.exists(os.path.join(HERE, "fonts", m[1])):
             b = open(os.path.join(HERE, "fonts", m[1]), "rb").read()

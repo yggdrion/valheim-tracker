@@ -104,6 +104,12 @@ a.nm{text-decoration:none}a.nm:hover{text-decoration:underline}
 .top{margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:6px}
 .top .kv{font-size:12.5px}.top .kv span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .top .lab{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
+@media(max-width:560px){.themes{grid-template-columns:1fr 1fr;gap:8px}.theme{padding:8px 9px}.kv{font-size:12px}.kv.big b{font-size:18px}
+ .top .kv{font-size:11.5px}.panel{padding:12px}.seg.bios button{padding:5px 8px;font-size:12px}.who button{padding:5px 9px}
+ .ph{grid-template-columns:1fr}.pbig{grid-column:1;grid-row:auto;text-align:left}.pcat{grid-template-columns:110px 1fr 40px}}
+.warn{background:#3a1d14;border:1px solid var(--ember);color:#f3c7a8;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.who button.rest i{opacity:.2;box-shadow:none}.who button.rest.on i{opacity:.6}
+.empty b{color:var(--gold2);font-style:normal;font-family:var(--head);letter-spacing:.06em}
 /* achievement states */
 .st-unlocked{--sc:var(--s-unlocked)}.st-byplayers{--sc:var(--s-byplayers)}.st-partial{--sc:var(--s-partial)}.st-locked{--sc:var(--s-locked)}.st-unknown{--sc:var(--s-unknown)}
 .ic{width:100%;aspect-ratio:1;border-radius:8px;display:block;background:#0a0b0d;object-fit:cover}
@@ -168,16 +174,17 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 <header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Achievement Hall</h1><div class="sub">the fellowship's road to all 53</div></header>
 <div class="divider"></div>
 
+<div class="warn" id="warn" hidden></div>
 <section class="panel saga" id="sagap" hidden><h2 id="sagah">Saga of the Fellowship</h2><div class="sub2" id="sagas"></div><div class="themes" id="saga"></div></section>
 <section class="panel" id="worldp" hidden><div class="world" id="world"></div></section>
 <section class="panel"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
 
-<section class="panel road"><h2>The Road</h2>
+<section class="panel road" id="roadp"><h2>The Road</h2>
   <div class="bar2"><div class="seg bios" id="bios"></div><label class="chk"><input type="checkbox" id="hideall"> hide what's done</label></div>
   <div id="road"></div>
 </section>
 
-<section class="panel">
+<section class="panel" id="achp">
   <h2>Achievements</h2>
   <div class="bar2">
     <div class="seg" id="views"><button data-v="cards">Cards</button><button data-v="list">List</button><button data-v="matrix">Matrix</button></div>
@@ -210,7 +217,7 @@ const CATS=[
  ['Legacy',['GrindDays','KingsQueens','ChildOfOdin']]];
 const catOf=api=>(CATS.find(c=>c[1].includes(api))||['Other'])[0];
 let route=null;
-let WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},hidden=0,stale=10;
+let WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
 let view=ls('view')||'cards',flt=new Set(JSON.parse(ls('flt')||'[]')),q='',open=null;
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('vh_'+k);localStorage.setItem('vh_'+k,v)}catch(e){}}
 const $=id=>document.getElementById(id);
@@ -239,7 +246,7 @@ async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(u+' '+r.stat
 async function load(){
   try{
     if(!ACH.length)ACH=await j('/api/achievements');
-    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));hidden=r.offline_hidden;stale=r.stale_minutes;
+    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;
     const w=await j('/api/world');WNAME=(w&&!w.error&&w.name||'').toLowerCase();renderWorld(w);
     const known=new Set(chars.map(c=>c.name));
     if(first){const here=chars.filter(inWorld);(here.length?here:chars).forEach(c=>sel.add(c.name));first=false}
@@ -248,8 +255,9 @@ async function load(){
     for(const n of [...sel])if(!known.has(n))sel.delete(n);
     await Promise.all(chars.filter(c=>sel.has(c.name)||c.name===route).map(async c=>{full[c.name]=await j('/api/character/'+encodeURIComponent(c.name))}));
 
-    $('foot').textContent='';
-  }catch(e){$('foot').textContent='server unreachable: '+e.message}
+    lost='';
+  }catch(e){lost=e.message}
+  const wb=$('warn');wb.hidden=!lost;wb.textContent=lost?`Lost contact with the hall (${lost}). Showing the last known state; retrying every 15 s.`:'';
   render();
 }
 const seenBefore=new Set();
@@ -276,11 +284,12 @@ function renderPlayer(){
   $('wh').textContent='Warrior';
   const c=chars.find(x=>x.name===route);
   const back=el('a','back','← the fellowship');back.href='#';who.append(back);
-  if(!c){pr.append(el('div','empty',`${route} is not online. Characters disappear after ${stale} min without contact.`));return}
+  if(!c){pr.append(el('div','empty',chars.length||lost?`No warrior named “${route}” has reported to this hall.`:'Loading…'));$('roadp').hidden=$('achp').hidden=true;$('sagap').hidden=true;return}
+  $('roadp').hidden=$('achp').hidden=false;
   if(!full[c.name])return;
   const h=tint(el('div','ph'),c.name),got=ACH.filter(a=>{const p=prog(c.name,a);return p&&p.done}).length;
   h.append(el('div','pname',c.name),el('div','wmeta',[(c.worlds||[]).length?'worlds: '+c.worlds.join(', '):'has not joined a world',
-    `save v${c.version}`,`updated ${ago(c.updated)}`,`seen ${ago(c.seen)}`].join(' · ')));
+    `save v${c.version}`,`updated ${ago(c.updated)}`,c.online?'online now':`resting, last seen ${ago(c.seen)}`].join(' · ')));
   const big=el('div','pbig');big.append(el('b','',got),` / ${ACH.length} unlocked`);h.append(big);pr.append(h);
   const g=el('div','pcats');
   for(const [cat,apis] of CATS){const n=apis.filter(a=>{const p=full[c.name].achievements[a];return p&&p[0]>=p[1]&&p[1]>0}).length;
@@ -292,13 +301,16 @@ function render(){
   if(route){renderPlayer();const P=shown();renderSaga(P);renderRoad(P);renderMain(P);return}
   $('wh').textContent='The Fellowship';
   const who=$('who');who.replaceChildren();
-  if(!chars.length)who.append(el('div','empty',`No warrior online. Characters disappear after ${stale} min without contact; start fchsync on a player PC.`));
+  $('roadp').hidden=$('achp').hidden=!chars.length;
+  if(!chars.length&&!lost){const e=el('div','empty');e.append(el('b','','The hall is still empty.'),el('br'),
+    'No warrior has reported yet. Run the sync client (fchsync) on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
   for(const c of chars){
     const b=tint(el('button',sel.has(c.name)?'on':''),c.name);b.append(el('i'),el('span','',c.name));
     if(WNAME&&!inWorld(c)){b.classList.add('away');b.append(el('span','wd',(c.worlds||[]).length?'in '+c.worlds.join(', '):'no world yet'))}
-    b.title=(c.worlds||[]).length?'worlds: '+c.worlds.join(', '):'has not joined a world';
+    if(!c.online){b.classList.add('rest');b.append(el('span','wd','resting'))}
+    b.title=[(c.worlds||[]).length?'worlds: '+c.worlds.join(', '):'has not joined a world',c.online?'online now':`resting · last seen ${ago(c.seen)}`].join('\n');
     b.onclick=async()=>{if(sel.has(c.name))sel.delete(c.name);else{sel.add(c.name);if(!full[c.name])full[c.name]=await j('/api/character/'+encodeURIComponent(c.name))}render()};who.append(b)}
-  if(chars.length)who.append(el('small','',`${sel.size} of ${chars.length} shown`+(hidden?` · ${hidden} offline hidden`:'')));
+  if(chars.length){const on=chars.filter(c=>c.online).length;who.append(el('small','',`${sel.size} of ${chars.length} shown · ${on?on+' online':'nobody online right now'}`))}
   const P=shown(),pr=$('prog');pr.replaceChildren();
   if(P.length){
     const all=ACH.filter(a=>P.every(c=>{const p=prog(c.name,a);return p&&p.done})).length,
@@ -307,12 +319,12 @@ function render(){
     if(P.length>1)t.append(el('small','',` · ${sum} of ${ACH.length*P.length} unlocks gathered together`));
     const bar=el('div','bar'),i1=el('i');i1.style.width=(100*sum/(ACH.length*P.length))+'%';bar.append(i1);f.append(t,bar);
     const pg=el('div','pages');pg.append('warrior pages: ');
-    P.forEach((c,k)=>{const a=tint(el('a','',c.name),c.name);a.href='#player/'+encodeURIComponent(c.name);if(k)pg.append(' · ');pg.append(a,el('small','',` seen ${ago(c.seen)}`))});
+    P.forEach((c,k)=>{const a=tint(el('a','',c.name),c.name);a.href='#player/'+encodeURIComponent(c.name);if(k)pg.append(' · ');pg.append(a,el('small','',c.online?' online':` resting, seen ${ago(c.seen)}`))});
     f.append(pg);pr.append(f)}
   renderSaga(P);renderRoad(P);renderMain(P);
 }
 
-const RSEC=[['bosses-any','Slay'],['bosses-normal','Slay (normal+)'],['bosses-hard','Slay (hard)'],['minibosses','Mini-boss'],
+const RSEC=[['slay','Slay'],['minibosses','Mini-boss'],
  ['enemies','Kill'],['enemies-hard','Kill (hard)'],['trophies','Trophy'],['crafted','Craft'],['weapons','Craft weapon'],['built','Build'],
  ['cooked','Cook'],['food-eaten','Eat'],['fishing','Catch'],['deaths','Die by'],['tree-deaths','Crushed by tree']];
 let bio=ls('bio')||'Meadows',hideAll=ls('hideall')!=='0';
@@ -321,26 +333,34 @@ function renderRoad(P){
   const bs=$('bios'),r=$('road');bs.replaceChildren();r.replaceChildren();$('hideall').checked=hideAll;
   if(!P.length){r.append(el('div','empty','Pick at least one warrior.'));return}
   // per biome: entries of every section, done-flags per player
-  const secs=P.map(c=>Object.fromEntries(full[c.name].sections.map(x=>[x.id,x])));
+  const secs=P.map(c=>{const S=Object.fromEntries(full[c.name].sections.map(x=>[x.id,x]));
+    // one Slay row from the three boss lists: done = slain on hard; any/normal count as partial
+    const A=S['bosses-any'],N=S['bosses-normal'],H=S['bosses-hard'];
+    if(A&&N&&H)S.slay={entries:A.entries.map((e,k)=>{const h=H.entries[k].count>0,n=N.entries[k].count>0,a=e.count>0;
+      return{...e,lv:h?1:n?2/3:a?1/3:0,how:h?'slain on hard':n?'slain on normal, not yet on hard':a?'slain, not yet on normal or hard':'not slain yet'}})};
+    return S});
+  const lv=(S,sid,k)=>{const e=S[sid].entries[k];return e.lv??(e.count>0?1:0)};
   const stat={};
   for(const [sid] of RSEC)(secs[0][sid]?.entries||[]).forEach((e,k)=>{const b=bioOf(e),st=stat[b]??={d:0,t:0};
-    for(const S of secs){st.t++;if(S[sid].entries[k].count>0)st.d++}});
+    for(const S of secs){st.t++;st.d+=lv(S,sid,k)}});
   const order=[...BIO,'Other'].filter(b=>stat[b]);if(!order.includes(bio))bio=order[0];
   for(const b of order){const x=el('button',b===bio?'on':'');x.append(b,el('small','',Math.floor(100*stat[b].d/stat[b].t)+'%'));
     x.onclick=()=>{bio=b;ls('bio',b);renderRoad(P)};bs.append(x)}
   let any=false;
   for(const [sid,lab] of RSEC){
     const es=(secs[0][sid]?.entries||[]).map((e,k)=>({e,k})).filter(x=>bioOf(x.e)===bio);if(!es.length)continue;
-    const rows=es.map(({e,k})=>({e,got:secs.map(S=>S[sid].entries[k].count>0)})),
-          nAll=rows.filter(x=>x.got.every(Boolean)).length,show=rows.filter(x=>!hideAll||!x.got.every(Boolean));
+    const rows=es.map(({e,k})=>({e,got:secs.map(S=>lv(S,sid,k)),how:secs.map(S=>S[sid].entries[k].how)})),
+          full1=x=>x.got.every(v=>v>=1),nAll=rows.filter(full1).length,show=rows.filter(x=>!hideAll||!full1(x));
     const h=el('div','rsec');h.append(lab,el('small','',`${nAll} / ${rows.length} done${P.length>1?' by everyone':''}`));
     if(!show.length){if(!hideAll)r.append(h);continue}
     any=true;r.append(h);const m=el('div','tiles');
-    show.sort((x,y)=>y.got.filter(Boolean).length-x.got.filter(Boolean).length||x.e.name.localeCompare(y.e.name));
-    for(const {e,got} of show){const n=got.filter(Boolean).length,t=el('span','rt'+(n===P.length?' all':n?'':' none'));t.append(e.name);
-      if(P.length>1){const d=el('span','pd');P.forEach((c,i)=>{const o=tint(el('i','pdot'+(got[i]?' y':'')),c.name);o.title=c.name+(got[i]?': done':': missing');d.append(o)});t.append(d)}
-      t.title=P.filter((c,i)=>!got[i]).map(c=>c.name).join(', ')+(n<P.length?' still missing':'');m.append(t)}
-    r.append(m)}
+    const sum=x=>x.got.reduce((a,b)=>a+b,0);
+    if(sid!=='slay')show.sort((x,y)=>sum(y)-sum(x)||x.e.name.localeCompare(y.e.name));
+    for(const {e,got,how} of show){const n=sum({got}),t=el('span','rt'+(n>=P.length?' all':n?'':' none'));t.append(e.name);
+      const tip=(c,i)=>c.name+': '+(how[i]||(got[i]?'done':'missing'));
+      if(P.length>1||how[0]){const d=el('span','pd');P.forEach((c,i)=>{const o=tint(el('i','pdot'+(got[i]>=1?' y':got[i]>0?' h':'')),c.name);o.title=tip(c,i);d.append(o)});t.append(d)}
+      t.title=P.map(tip).join('\n');m.append(t)}
+    r.append(m);if(sid==='slay')r.append(el('div','note','full dot: slain on hard · half: slain on an easier difficulty'))}
   if(!any)r.append(el('div','empty',`Nothing left in ${bio}: everyone has it all.`));
 }
 $('hideall').onchange=e=>{hideAll=e.target.checked;ls('hideall',hideAll?'1':'0');renderRoad(shown())};

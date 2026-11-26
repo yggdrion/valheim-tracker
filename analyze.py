@@ -1,6 +1,6 @@
 """Server side: turn a parsed .fch into achievement progress, via achi_hunter's tables.
 usage: python analyze.py FILE.fch"""
-import json, sys, os
+import json, os, re, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor"))
 import achi_hunter as ah  # ponytail: no license upstream; fine locally, ask author before redistributing
 
@@ -53,7 +53,9 @@ def achievements(d, sections):
 # Not-achievement stats for the dashboard's saga: the game's own counter names (scripts/extract_stat_names.py).
 STAT_NAMES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "stat_names.json"), encoding="utf8"))
 assert len(STAT_NAMES) == ah.STAT_COUNT, "stat_names.json is out of date (run scripts/extract_stat_names.py)"
-_NAMES = {**ah.CRAFTABLE, **ah.BUILDABLE, **ah.TROPHIES, **ah.FOOD_EATEN, **ah.ENEMIES, **ah.BOSSES, **ah.MINIBOSSES, **ah.FISH}
+_HERE = os.path.dirname(os.path.abspath(__file__))
+# game's English names (scripts/extract_names.py), then achi_hunter's own tables on top
+_NAMES = {**json.load(open(os.path.join(_HERE, "names.json"), encoding="utf8")), **ah.CRAFTABLE, **ah.BUILDABLE, **ah.TROPHIES, **ah.FOOD_EATEN, **ah.ENEMIES, **ah.BOSSES, **ah.MINIBOSSES, **ah.FISH}
 
 
 def _nm(tok):
@@ -68,7 +70,7 @@ def meta(d):
     return {"stats": {n: round(v, 1) for n, v in zip(STAT_NAMES, s["stats"]) if v},
             "kills": cnt(s["kills"]), "picked_up": cnt(s["picked_up"]), "eaten": cnt(s["foods_eaten"]),
             "built": cnt(s["pieces_built"]),
-            "harvested": {k: int(v) for k, v in sorted(s["pickables"].items(), key=lambda kv: -kv[1]) if v > 0},
+            "harvested": {re.sub(r"(?<=[a-z])(?=[A-Z])", " ", k): int(v) for k, v in sorted(s["pickables"].items(), key=lambda kv: -kv[1]) if v > 0},
             "worlds": {k: round(v) for k, v in s["worlds"].items()}}
 
 if __name__ == "__main__":
