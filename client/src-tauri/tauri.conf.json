@@ -11,8 +11,15 @@
     ],
     "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:" }
   },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENCRjIxNEU5N0RERjk2NkMKUldSc2x0OTk2UlR5eTVlL1cxYzRialBkZkUzZ1Z1R1B3VmJIeXJVaFZWYmxyVFVYQzUwMjgvai8K",
+      "endpoints": ["https://github.com/yggdrion/valheim-tracker/releases/latest/download/latest.json"]
+    }
+  },
   "bundle": {
     "active": true,
+    "createUpdaterArtifacts": true,
     "targets": "all",
     "category": "Utility",
     "shortDescription": "Valheim character sync for valheim-tracker",

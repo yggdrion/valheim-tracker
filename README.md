@@ -61,7 +61,7 @@ player PC                                     server (docker compose)
 
 ### Players
 
-**Tracker Sync**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open).
+**Tracker Sync**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open). After that the app updates itself: it checks the latest release on start and every 6 hours and offers an *Update & restart* button (updates are signed with a minisign key, `TAURI_SIGNING_PRIVATE_KEY` repo secret; the public key is in `client/src-tauri/tauri.conf.json`).
 
 Character files live on each player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud); the server only sees what Tracker Sync uploads.
 

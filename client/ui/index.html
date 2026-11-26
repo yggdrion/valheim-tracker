@@ -49,6 +49,8 @@ input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .chk{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mut);cursor:pointer}
 .err{color:var(--bad)}
+#upd{display:none;align-items:center;gap:10px;justify-content:center;border-color:var(--gold)}
+#upd.on{display:flex}
 #warriors{order:1}#hallp{order:2}#dirp{order:3}.foot{order:4}header{order:0}
 body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 @media(min-width:880px){
@@ -62,6 +64,8 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 </style></head>
 <body><main>
 <header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Tracker Sync</h1></header>
+
+<section class="panel" id="upd"><span id="updmsg"></span><button class="main" id="updgo">Update &amp; restart</button></section>
 
 <section class="panel" id="hallp">
   <h2>The Hall</h2>
@@ -88,7 +92,7 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 
 <div class="foot">
   <label class="chk"><input type="checkbox" id="autostart"> Start with my computer</label>
-  <span class="small">read-only on your game files</span>
+  <span class="small"><span id="ver"></span> <button id="updchk" title="check for a new version">Check for updates</button> · read-only on your game files</span>
 </div>
 </main>
 <script>
@@ -132,6 +136,16 @@ $('paused').onchange=async e=>show(await call('set_paused',{paused:e.target.chec
 $('now').onclick=()=>call('sync_now');
 $('autostart').onchange=async e=>{try{e.target.checked=await call('set_autostart',{on:e.target.checked})}catch(x){e.target.checked=!e.target.checked;$('smsg').textContent='autostart: '+x}};
 for(const id of ['server','token'])$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('save').click()});
+async function checkUpdate(manual){const b=$('updchk');if(manual){b.disabled=true;b.textContent='checking…'}
+  try{const u=await call('check_update');$('ver').textContent='v'+u.current;
+    if(u.available){$('updmsg').textContent='Version '+u.available+' is available.';$('upd').classList.add('on')}
+    else if(manual)b.textContent='up to date'}
+  catch(e){if(manual)b.textContent='check failed';console.warn('update check',e)}
+  if(manual)setTimeout(()=>{b.disabled=false;b.textContent='Check for updates'},3000)}
+$('updchk').onclick=()=>checkUpdate(true);
+$('updgo').onclick=async()=>{const b=$('updgo');b.disabled=true;b.textContent='updating…';
+  try{await call('install_update')}catch(e){b.disabled=false;b.textContent='Update & restart';$('updmsg').textContent='Update failed: '+e}};
+checkUpdate(false);setInterval(()=>checkUpdate(false),6*3600*1000);
 T.event.listen('status',e=>show(e.payload));
 call('get_status').then(show);call('get_autostart').then(v=>$('autostart').checked=v);
 </script>

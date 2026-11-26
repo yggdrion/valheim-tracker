@@ -13,6 +13,7 @@ use tauri::{AppHandle, Emitter, Manager, State};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
+use tauri_plugin_updater::UpdaterExt;
 
 const TICK: Duration = Duration::from_secs(2);
 const HEARTBEAT: Duration = Duration::from_secs(30);
@@ -454,11 +455,35 @@ fn open_hall(app: AppHandle, sh: State<Shared>) -> Result<(), String> {
     app.opener().open_url(url, None::<&str>).map_err(|e| e.to_string())
 }
 
+// ---- self-update (signed releases on GitHub, see plugins.updater in tauri.conf.json) --------------
+
+#[derive(Serialize, Clone)]
+struct UpdateInfo {
+    current: String,
+    /// newest version if it is newer than the running one
+    available: Option<String>,
+}
+
+#[tauri::command]
+async fn check_update(app: AppHandle) -> Result<UpdateInfo, String> {
+    let u = app.updater().map_err(|e| e.to_string())?.check().await.map_err(|e| e.to_string())?;
+    Ok(UpdateInfo { current: app.package_info().version.to_string(), available: u.map(|u| u.version) })
+}
+
+#[tauri::command]
+async fn install_update(app: AppHandle) -> Result<(), String> {
+    let u = app.updater().map_err(|e| e.to_string())?.check().await.map_err(|e| e.to_string())?;
+    let Some(u) = u else { return Ok(()) };
+    u.download_and_install(|_, _| {}, || {}).await.map_err(|e| e.to_string())?;
+    app.restart()
+}
+
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .setup(|app| {
             let config = app.path().app_config_dir()?.join("settings.json");
             let settings: Settings =
@@ -491,7 +516,7 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             get_status, save_server, test_server, set_selected, set_paused, sync_now, set_dir, pick_dir,
-            get_autostart, set_autostart, open_hall
+            get_autostart, set_autostart, open_hall, check_update, install_update
         ])
         .run(tauri::generate_context!())
         .expect("error while running the app");

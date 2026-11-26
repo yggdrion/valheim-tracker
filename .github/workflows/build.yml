@@ -127,6 +127,9 @@ jobs:
           v="${{ needs.version.outputs.version }}"
           sed -i.bak "s/\"version\": \"[^\"]*\"/\"version\": \"$v\"/" src-tauri/tauri.conf.json && rm src-tauri/tauri.conf.json.bak
       - uses: tauri-apps/tauri-action@v0
+        env:   # signs the updater bundles (createUpdaterArtifacts); the public key is in tauri.conf.json
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           projectPath: client
           tauriScript: bun run tauri
@@ -140,6 +143,10 @@ jobs:
             client/src-tauri/target/**/release/bundle/**/*.dmg
             client/src-tauri/target/**/release/bundle/**/*.AppImage
             client/src-tauri/target/**/release/bundle/**/*.deb
+            client/src-tauri/target/**/release/bundle/**/*-setup.exe.sig
+            client/src-tauri/target/**/release/bundle/**/*.app.tar.gz
+            client/src-tauri/target/**/release/bundle/**/*.app.tar.gz.sig
+            client/src-tauri/target/**/release/bundle/**/*.AppImage.sig
           if-no-files-found: error
           retention-days: 3   # only carries the installers to the release job; the release keeps them
 
@@ -167,6 +174,8 @@ jobs:
           mkdir -p release-assets
           find artifacts -type f \( -name '*.msi' -o -name '*-setup.exe' -o -name '*.dmg' -o -name '*.AppImage' -o -name '*.deb' \) \
             -exec cp {} release-assets/ \;
+          python3 scripts/make_latest_json.py "${{ needs.version.outputs.version }}" artifacts release-assets \
+            "https://github.com/${{ github.repository }}/releases/download/v${{ needs.version.outputs.version }}"
           ls -la release-assets
       - name: Release
         env:
