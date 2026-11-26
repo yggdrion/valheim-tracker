@@ -11,7 +11,7 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
 
     cp .env.example .env            # edit passwords/token
     # put your world folder into config/worlds_local/<WORLD_NAME>/
-    docker compose up -d --build    # dashboard: http://localhost:8088
+    docker compose up -d            # dashboard: http://localhost:8088 (image from ghcr.io, see TRACKER_TAG)
 
 ## Player upload
 

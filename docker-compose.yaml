@@ -18,7 +18,8 @@ services:
     restart: unless-stopped
 
   tracker:
-    build: .
+    image: ghcr.io/yggdrion/valheim-tracker:${TRACKER_TAG:-latest}   # built by .github/workflows/image.yml
+    # build: .                     # instead of image:, to run local changes
     container_name: valheim-tracker
     depends_on: [valheim]
     environment:
