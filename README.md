@@ -18,7 +18,7 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
     TRACKER_TOKEN=<token> ./fchsync.sh -s http://host:8088          # Linux / macOS / Steam Deck
     ./fchsync.sh -d "<characters folder>" -s http://host:8088 -t <token> -1   # explicit folder, sync once
 
-Desktop (Windows, macOS, Linux): **Tracker Sync** in `client/` (Tauri). Download it from the releases (tag `client-v*`), enter the server address and token; it finds the characters folder and uploads changed characters. Build locally: `cd client && bun install && bun run build`.
+Desktop (Windows, macOS, Linux): **Tracker Sync** in `client/` (Tauri). Download it from the releases (tag `vX.Y.Z`, same version as the server image), enter the server address and token; it finds the characters folder and uploads changed characters. Build locally: `cd client && bun install && bun run build`.
 
 Windows without the app: copy `fchsync.env.example` to `fchsync.env`, set server URL and token, double-click `fchsync.bat` (or `.\fchsync.ps1 -Server http://host:8088 -Token <token>`).
 
