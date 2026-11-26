@@ -4,6 +4,7 @@ Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mo
 
 - `fchsync.sh` (bash + curl) / `fchsync.ps1` + `fchsync.bat` (Windows), per player PC: uploads changed `.fch` character files raw. Never writes to the game folder.
 - `server.py` (Python, stdlib): receives raw uploads, parses and analyses them, reads the world folder read-only, serves the dashboard.
+- Dashboard: the Hall (saga stats, what is left per biome, achievements, player pages) and the Map (`#map`): biomes from the world seed (`worldgen.js`), everyone's explored area, pins, beds, boss altars, traders and dungeons.
 - `docker-compose.yaml`: dedicated server ([community-valheim-tools/valheim-server-docker](https://github.com/community-valheim-tools/valheim-server-docker)) + tracker.
 
 ## Run
@@ -30,4 +31,4 @@ Character files live on the player's PC (`%USERPROFILE%\AppData\LocalLow\IronGat
 - Achievement tables in `vendor/achi_hunter.py` come from [Melichor/ValheimSaveParser](https://github.com/Melichor/ValheimSaveParser). To update after a patch: `python scripts/update_melichor.py` (see `.claude/skills/update-melichor/SKILL.md`), and `python scripts/update_achievements.py` for the Steam list.
 - No TLS: put a reverse proxy in front before exposing it.
 - The server parses uploads with the vendored upstream `parse()`; bad or garbage uploads get HTTP 400. Quick local check: `python analyze.py Some.fch`.
-- Not done: the other ~47 Steam achievements, per-world character matching.
+- Game data files, regenerate after a patch (read-only on the game install): `scripts/extract_stat_names.py` (stat_names.json, needs dnfile), `scripts/extract_names.py` (names.json, needs UnityPy), `scripts/extract_location_names.py <world folder>` (location_names.json).

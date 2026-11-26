@@ -7,7 +7,7 @@ import argparse, hashlib, hmac, json, os, re, struct, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
-import analyze, worlds
+import analyze, mapdata, worlds
 import achi_hunter as ah
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +18,7 @@ STATE = "state"
 STALE = float(os.environ.get("STALE_MINUTES", "10")) * 60   # a character is 'resting' (offline) after this long without contact
 # version of the analysis code+tables: a stored character from an older version is re-uploaded by the client
 AV = hashlib.sha1(b"".join(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), "rb").read()
-                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "names.json", "vendor/achi_hunter.py"))).hexdigest()[:12]
+                           for f in ("analyze.py", "stat_map.json", "stat_names.json", "names.json", "mapdata.py", "vendor/achi_hunter.py"))).hexdigest()[:12]
 SEEN = {}   # name -> last contact (upload or heartbeat), in memory
 WORLD = os.environ.get("WORLD_DIR", "")   # folder of ONE world, e.g. /config/worlds_local/roota (mounted read-only)
 _wcache = (None, None)
@@ -29,6 +29,35 @@ def world():
     if _wcache[0] != n:
         _wcache = (n, worlds.read_world(WORLD))
     return _wcache[1]
+
+_lcache = (None, None)
+
+
+def world_locations():
+    global _lcache
+    n = worlds.latest_save(WORLD)
+    if _lcache[0] != n:
+        _lcache = (n, worlds.locations(WORLD))
+    return _lcache[1]
+
+
+def world_map():
+    """Everything the map page needs for the shown world: seed, locations, and each character's map data in it."""
+    w = world()
+    locs = world_locations()
+    names = sorted({n for n, _x, _z in locs})
+    idx = {n: i for i, n in enumerate(names)}
+    players = []
+    for fn in sorted(os.listdir(STATE)):
+        if fn.endswith(".map.json"):
+            name = fn[:-9]
+            with open(os.path.join(STATE, fn), encoding="utf8") as f:
+                m = json.load(f).get(w["uid"])
+            if m and m.get("explored"):
+                players.append({"name": name} | m)
+    return {"world": {k: w[k] for k in ("name", "seed", "seed_int", "uid", "gen_version")},
+            "location_names": names, "locations": [[idx[n], x, z] for n, x, z in locs], "players": players}
+
 
 def load(name):
     with open(os.path.join(STATE, name + ".json"), encoding="utf8") as f:
@@ -63,11 +92,18 @@ class H(BaseHTTPRequestHandler):
             return self.send(400, {"error": str(e)})
         except (struct.error, IndexError, KeyError, UnicodeDecodeError, AssertionError, ValueError, MemoryError, OverflowError):
             return self.send(400, {"error": "not a readable Valheim .fch file"})
+        try:
+            maps = mapdata.worlds(raw)   # the map is a bonus: a layout it cannot read must not block the upload
+        except Exception:
+            maps = {}
         worlds = sorted(d["sets"][0]["worlds"])
         tmp = os.path.join(STATE, name + ".tmp")
         with open(tmp, "w", encoding="utf8") as f:
             json.dump({"name": name, "updated": time.time(), "av": AV, "version": d["version"], "worlds": worlds, "sections": secs,
                        "achievements": ach, "meta": analyze.meta(d)}, f)
+        with open(tmp + "m", "w", encoding="utf8") as f:
+            json.dump(maps, f)
+        os.replace(tmp + "m", os.path.join(STATE, name + ".map.json"))
         SEEN[name] = time.time()
         os.replace(tmp, os.path.join(STATE, name + ".json"))
         self.send(200, {"ok": True})
@@ -79,7 +115,7 @@ class H(BaseHTTPRequestHandler):
         if p == "/api/characters":
             out = []
             for fn in sorted(os.listdir(STATE)):
-                if fn.endswith(".json"):
+                if fn.endswith(".json") and not fn.endswith(".map.json"):
                     c = load(fn[:-5])
                     seen = SEEN.get(c["name"]) or c["updated"]   # after a restart: the last upload
                     out.append({k: c[k] for k in ("name", "updated", "version", "worlds")} |
@@ -94,6 +130,11 @@ class H(BaseHTTPRequestHandler):
             self.end_headers(); return self.wfile.write(b)
         if p == "/api/achievements":
             return self.send(200, open(os.path.join(HERE, "achievements.json"), "rb").read())
+        if p == "/worldgen.js":
+            return self.send(200, open(os.path.join(HERE, "worldgen.js"), "rb").read(), "text/javascript; charset=utf-8")
+        if p == "/api/map":
+            try: return self.send(200, world_map())
+            except Exception as e: return self.send(200, {"error": str(e)})
         if p == "/api/world":
             try: return self.send(200, world())
             except Exception as e: return self.send(200, {"error": str(e)})

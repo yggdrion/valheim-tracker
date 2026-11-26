@@ -1,6 +1,6 @@
 """Read-only parser for a Valheim 1.0 world folder (_main.N.fwl2 / .db2 / .ok).
 Gives: name, seed, in-game day, global keys (boss kills etc.), world modifiers."""
-import glob, os, re, struct, zlib
+import glob, json, os, re, struct, zlib
 
 DAY_SEC = 1800  # ponytail: default Valheim day length, not read from the save
 BOSSES = [  # (global key, label)
@@ -62,6 +62,7 @@ def read_fwl2(path):
         v = d[pos:pos + ln].decode("utf8", "replace"); pos += ln
         return v
     name, seed = s(), s()
+    seed_int, uid, gen_version = struct.unpack_from("<iqi", d, pos)
     mods = {}
     for m in re.finditer(rb"[\x05-\x40]([a-zA-Z][a-zA-Z_]{2,30}) ([a-z0-9_.:]{1,80})", d[pos:]):
         if m.group(0)[0] == len(m.group(0)) - 1:
@@ -69,7 +70,8 @@ def read_fwl2(path):
     preset = re.search(rb"preset ([a-z_:]+)", d)
     if preset:
         mods["preset"] = preset.group(1).decode()
-    return {"version": ver, "name": name, "seed": seed, "modifiers": mods}
+    return {"version": ver, "name": name, "seed": seed, "seed_int": seed_int, "uid": str(uid),
+            "gen_version": gen_version, "modifiers": mods}
 
 
 def read_world(folder):
@@ -87,6 +89,47 @@ def read_world(folder):
     return {**meta, "save": n, "save_mtime": os.path.getmtime(os.path.join(folder, f"_main.{n}.db2")),
             "day": int(net // DAY_SEC) + 1, "net_seconds": net, "bosses": bosses,
             "keys": sorted(k for k in keys if k.lower() not in known)}
+
+
+def stable_hash(s):
+    """The game's string.GetStableHashCode (uint32)."""
+    h1 = h2 = 5381
+    for i in range(0, len(s), 2):
+        h1 = ((h1 << 5) + h1 ^ ord(s[i])) & 0xFFFFFFFF
+        if i + 1 < len(s):
+            h2 = ((h2 << 5) + h2 ^ ord(s[i + 1])) & 0xFFFFFFFF
+    return (h1 + h2 * 1566083941) & 0xFFFFFFFF
+
+
+_LOC_NAMES = {stable_hash(n): n for n in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "location_names.json")))}
+
+
+def locations(folder):
+    """Placed locations of the latest save: [[name, x, z], ...] (boss altars, traders, dungeons, ruins, ...).
+    The db2 holds int32 count + (uint32 name hash, vec3 pos, bool placed) per location; every world has exactly
+    one StartTemple, which anchors the search."""
+    n = latest_save(folder)
+    d = open(os.path.join(folder, f"_main.{n}.db2"), "rb").read()
+    raw = zlib.decompressobj(31).decompress(d[16:])
+    i = raw.find(struct.pack("<I", stable_hash("StartTemple")))
+    if i < 0:
+        return []
+    def ok(q):
+        if q < 0 or raw[q + 16] > 1:
+            return False
+        x, y, z = struct.unpack_from("<3f", raw, q + 4)
+        return abs(x) < 11000 and abs(z) < 11000 and -500 < y < 3000
+    start = i
+    while ok(start - 17):
+        start -= 17
+    count, = struct.unpack_from("<i", raw, start - 4)
+    if not 0 < count <= (len(raw) - start) // 17:
+        return []
+    out = []
+    for k in range(count):
+        h, x, _y, z, _placed = struct.unpack_from("<I3f?", raw, start + 17 * k)
+        out.append([_LOC_NAMES.get(h, f"#{h:08x}"), round(x), round(z)])
+    return out
 
 
 if __name__ == "__main__":

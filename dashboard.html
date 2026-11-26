@@ -110,6 +110,17 @@ a.nm{text-decoration:none}a.nm:hover{text-decoration:underline}
 .warn{background:#3a1d14;border:1px solid var(--ember);color:#f3c7a8;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
 .who button.rest i{opacity:.2;box-shadow:none}.who button.rest.on i{opacity:.6}
 .empty b{color:var(--gold2);font-style:normal;font-family:var(--head);letter-spacing:.06em}
+.nav{margin-top:8px;font-family:var(--head);font-size:13px;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:10px;justify-content:center;color:var(--mut)}
+.nav a{color:var(--mut);text-decoration:none;padding:2px 4px;border-bottom:1px solid transparent}.nav a:hover{color:var(--gold2)}.nav a.on{color:var(--gold2);border-color:var(--gold)}
+body.mapmode main>section:not(#mapp),body.mapmode #warn{display:none!important}
+body.mapmode main{max-width:none}
+.mbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:6px}.mbar h2{margin:0}
+.mstat{margin-left:auto;color:var(--mut);font-size:12.5px;font-style:italic}
+.mlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--mut);margin-bottom:8px}.mlegend b{font-weight:normal}
+.who2{display:flex;gap:10px}.who2 span{color:var(--c)}
+.mwrap{position:relative;height:calc(100vh - 230px);min-height:360px;border-radius:8px;overflow:hidden;background:#08090b;border:1px solid var(--line);cursor:grab;touch-action:none}
+.mwrap canvas{position:absolute;inset:0;width:100%;height:100%}
+.mtip{position:absolute;pointer-events:none;background:var(--wood);border:1px solid var(--gold);padding:3px 8px;border-radius:6px;font-size:13px;display:none;white-space:nowrap}
 /* achievement states */
 .st-unlocked{--sc:var(--s-unlocked)}.st-byplayers{--sc:var(--s-byplayers)}.st-partial{--sc:var(--s-partial)}.st-locked{--sc:var(--s-locked)}.st-unknown{--sc:var(--s-unknown)}
 .ic{width:100%;aspect-ratio:1;border-radius:8px;display:block;background:#0a0b0d;object-fit:cover}
@@ -171,7 +182,8 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .empty{color:var(--mut);font-style:italic;padding:20px;text-align:center}
 footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 </style></head><body><main>
-<header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Achievement Hall</h1><div class="sub">the fellowship's road to all 53</div></header>
+<header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Achievement Hall</h1><div class="sub">the fellowship's road to all 53</div>
+<nav class="nav"><a href="#" id="nav-hall">The Hall</a><span>·</span><a href="#map" id="nav-map">Map</a></nav></header>
 <div class="divider"></div>
 
 <div class="warn" id="warn" hidden></div>
@@ -194,6 +206,15 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
   <div id="view"></div>
 </section>
 <footer id="foot"></footer>
+<section class="panel mapp" id="mapp" hidden>
+  <div class="mbar"><h2 id="mapt">Map</h2>
+    <label class="chk"><input type="checkbox" id="mreveal"> reveal undiscovered land &amp; places</label>
+    <label class="chk"><input type="checkbox" id="mminor" checked> ruins &amp; minor places</label>
+    <span class="mstat" id="mstat"></span></div>
+  <div class="mlegend"><span><b style="color:#e0813a">◆</b> boss altar</span><span><b style="color:#5fc2b0">⚑</b> trader</span><span><b style="color:#c487d8">✝</b> dungeon</span><span><b style="color:#f0cf86">▲</b> start</span><span><b>☗</b> bed</span><span><b>✕</b> death</span><span><b style="color:#d4a84f">●</b> pin</span><span class="who2" id="mwho"></span></div>
+  <div class="mwrap" id="mwrap"><canvas id="mcv"></canvas><div class="mtip" id="mtip"></div></div>
+  <div class="note">Drag to pan, wheel or pinch to zoom, hover a marker for its name. Land is drawn from the world seed; colours show where any warrior has been.</div>
+</section>
 </main>
 <dialog id="dlg"></dialog>
 <script>
@@ -216,7 +237,7 @@ const CATS=[
  ['Deaths',['FirstDeath','DeathByAllTypes','DeathByTree','DeathByTreeAll','DeathByObliterator']],
  ['Legacy',['GrindDays','KingsQueens','ChildOfOdin']]];
 const catOf=api=>(CATS.find(c=>c[1].includes(api))||['Other'])[0];
-let route=null;
+let route=null,page='hall';
 let WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
 let view=ls('view')||'cards',flt=new Set(JSON.parse(ls('flt')||'[]')),q='',open=null;
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('vh_'+k);localStorage.setItem('vh_'+k,v)}catch(e){}}
@@ -261,9 +282,10 @@ async function load(){
   render();
 }
 const seenBefore=new Set();
-async function onRoute(){const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null;
+function parseRoute(){const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null;page=location.hash==='#map'?'map':route?'player':'hall'}
+async function onRoute(){parseRoute();
   if(route&&!full[route]&&chars.some(c=>c.name===route))full[route]=await j('/api/character/'+encodeURIComponent(route));
-  document.title=route?route+' · Achievement Hall':'Valheim Achievement Hall';render();scrollTo(0,0)}
+  document.title=page==='map'?'Map · Achievement Hall':route?route+' · Achievement Hall':'Valheim Achievement Hall';render();scrollTo(0,0)}
 addEventListener('hashchange',onRoute);
 const inWorld=c=>!WNAME||(c.worlds||[]).some(x=>x.toLowerCase()===WNAME);
 
@@ -298,6 +320,9 @@ function renderPlayer(){
   pr.append(g);
 }
 function render(){
+  document.body.classList.toggle('mapmode',page==='map');$('mapp').hidden=page!=='map';
+  $('nav-map').classList.toggle('on',page==='map');$('nav-hall').classList.toggle('on',page!=='map');
+  if(page==='map'){if(!M.data||Date.now()-M.at>60000)loadMap();else drawMap();return}
   if(route){renderPlayer();const P=shown();renderSaga(P);renderRoad(P);renderMain(P);return}
   $('wh').textContent='The Fellowship';
   const who=$('who');who.replaceChildren();
@@ -394,6 +419,78 @@ function renderSaga(P){
     box.append(t)}
 }
 
+// ---- map page (#map) ----
+const MBOSS={Eikthyrnir:'Eikthyr',GDKing:'The Elder',Bonemass:'Bonemass',Dragonqueen:'Moder',GoblinKing:'Yagluth',Mistlands_DvergrBossEntrance1:'The Queen',FaderLocation:'Fader',DN_Bossroom:'Kall Fimbulbringer'};
+const MTRADE={Vendor_BlackForest:'Haldor the trader',Hildir_camp:'Hildir',BogWitch_Camp:'The Bog Witch'};
+const MDUNG=[[/^Crypt\d/,'Burial chamber'],[/^SunkenCrypt/,'Sunken crypt'],[/^TrollCave/,'Troll cave'],[/^MountainCave/,'Frost cave'],[/^Mistlands_DvergrTownEntrance/,'Infested mine'],[/^MorgenHole/,'Morgen hole'],[/^Hildir_(cave|crypt|plainsfortress)/,'Hildir\'s treasure dungeon'],[/^CharredFortress/,'Charred fortress']];
+const MCOL={1:[121,152,66],8:[44,70,38],2:[106,84,58],4:[214,218,226],16:[201,182,96],512:[96,88,118],32:[140,52,38],64:[196,222,240],256:[34,62,92]};
+const M={data:null,seed:null,bio:null,hgt:null,ex:null,base:null,size:2048,scale:1,ox:0,oy:0,marks:[],loading:false,fitted:false};
+async function loadMap(){
+  if(M.loading)return;M.loading=true;
+  try{const d=await j('/api/map');if(d.error){$('mstat').textContent='No world to draw: '+d.error;return}
+    M.data=d;M.at=Date.now();$('mapt').textContent='Map of '+d.world.name;M.size=d.players[0]?.size||2048;const S=M.size;
+    if(M.seed!==d.world.seed_int){const {worldGen}=await import('/worldgen.js'),WG=worldGen(d.world.seed_int,d.world.gen_version);
+      M.bio=new Uint16Array(S*S);M.hgt=new Float32Array(S*S);
+      for(let y=0;y<S;y++){if(y%128===0){$('mstat').textContent='drawing the world from its seed… '+Math.round(100*y/S)+'%';await new Promise(r=>setTimeout(r))}
+        const wz=(y-S/2)*12;for(let x=0;x<S;x++){const wx=(x-S/2)*12,i=y*S+x;if(wx*wx+wz*wz>10600*10600)continue;M.bio[i]=WG.biome(wx,wz);M.hgt[i]=WG.baseHeight(wx,wz)}}
+      M.seed=d.world.seed_int}
+    M.ex=new Uint8Array(S*S);
+    for(const p of d.players){const z=Uint8Array.from(atob(p.explored),c=>c.charCodeAt(0));
+      const bits=new Uint8Array(await new Response(new Blob([z]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());
+      for(let i=0;i<S*S;i++)if(bits[i>>3]>>(i&7)&1)M.ex[i]=1}
+    let n=0;for(let i=0;i<S*S;i++)n+=M.ex[i];
+    $('mstat').textContent=d.players.length?`explored by ${d.players.map(p=>p.name).join(', ')} · ${Math.round(n*144/1e6*10)/10} km² of ~${Math.round(Math.PI*100)} km²`:'nobody has a map of this world yet';
+    const w=$('mwho');w.replaceChildren();for(const p of d.players)w.append(tint(el('span','',p.name),p.name));
+    paintMap();
+  }catch(e){$('mstat').textContent='map failed: '+e.message}finally{M.loading=false}
+  drawMap()}
+function paintMap(){const S=M.size,im=new ImageData(S,S),rev=$('mreveal').checked;
+  for(let y=0;y<S;y++)for(let x=0;x<S;x++){const i=y*S+x,o=((S-1-y)*S+x)*4,b=M.bio[i];let c;
+    if(!b)c=[8,9,11];else{c=MCOL[b];const h=M.hgt[i];
+      if(b===256){const d=Math.max(0,Math.min(1,-h*4));c=[c[0]*(1-d*.5),c[1]*(1-d*.5),c[2]*(1-d*.4)]}
+      else{const l=Math.max(-.15,Math.min(.25,(h-.15)*.8));c=c.map(v=>v+(l>0?(255-v)*l:v*l))}
+      if(!M.ex[i])c=rev?c.map(v=>v*.45+20):[46,40,33]}
+    im.data[o]=c[0];im.data[o+1]=c[1];im.data[o+2]=c[2];im.data[o+3]=255}
+  M.base=document.createElement('canvas');M.base.width=M.base.height=S;M.base.getContext('2d').putImageData(im,0,0)}
+const mIsEx=(x,z)=>{const S=M.size,X=Math.round(x/12+S/2),Y=Math.round(z/12+S/2);return X>=0&&Y>=0&&X<S&&Y<S&&M.ex[Y*S+X]};
+const cssCol=n=>getComputedStyle(document.documentElement).getPropertyValue(COL[idx(n)%COL.length]).trim()||'#d4a84f';
+function fitMap(){const r=$('mwrap').getBoundingClientRect(),S=M.size;let x0=S,x1=-1,y0=S,y1=-1;
+  for(let i=0;i<S*S;i++)if(M.ex[i]){const x=i%S,y=S-1-Math.floor(i/S);if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  if(x1<0){x0=y0=0;x1=y1=S}   // nothing explored: the whole world
+  const pad=40,w=x1-x0+pad,h=y1-y0+pad;M.scale=Math.min(8,Math.min(r.width/w,r.height/h));
+  M.ox=r.width/2-(x0+x1)/2*M.scale;M.oy=r.height/2-(y0+y1)/2*M.scale;M.fitted=true}
+function drawMap(){const cv=$('mcv'),r=$('mwrap').getBoundingClientRect(),dpr=devicePixelRatio||1;if(!r.width)return;
+  cv.width=r.width*dpr;cv.height=r.height*dpr;const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle='#08090b';g.fillRect(0,0,r.width,r.height);
+  if(!M.base)return;if(!M.fitted)fitMap();
+  g.imageSmoothingEnabled=M.scale<1;g.save();g.translate(M.ox,M.oy);g.scale(M.scale,M.scale);g.drawImage(M.base,0,0);g.restore();M.marks=[];
+  const S=M.size,rev=$('mreveal').checked,minor=$('mminor').checked,D=M.data;
+  const put=(x,z,ch,col,lab,sz=14)=>{const sx=(x/12+S/2)*M.scale+M.ox,sy=(S/2-z/12)*M.scale+M.oy;if(sx<-20||sy<-20||sx>r.width+20||sy>r.height+20)return;
+    g.font=`${sz}px Georgia,serif`;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#000b';g.fillText(ch,sx+1,sy+1);g.fillStyle=col;g.fillText(ch,sx,sy);M.marks.push([sx,sy,lab])};
+  for(const [k,x,z] of D.locations){const n=D.location_names[k],seen=mIsEx(x,z);if(!seen&&!rev)continue;const dim=seen?'':'99',un=seen?'':' (undiscovered)';
+    if(MBOSS[n])put(x,z,'◆','#e0813a'+dim,MBOSS[n]+'\'s altar'+un,16);
+    else if(MTRADE[n])put(x,z,'⚑','#5fc2b0'+dim,MTRADE[n]+un,16);
+    else if(n==='StartTemple')put(x,z,'▲','#f0cf86','The sacrificial stones (start)',16);
+    else{const dg=MDUNG.find(([re])=>re.test(n));if(dg)put(x,z,'✝','#c487d8'+dim,dg[1]+un,13);
+      else if(minor&&M.scale>1.5)put(x,z,'·','#a39a85'+dim,n.replace(/_/g,' ').replace(/(\D)(\d)/,'$1 $2'),14)}}
+  for(const p of D.players){const c=cssCol(p.name);
+    if(p.home)put(p.home[0],p.home[1],'☗',c,p.name+'\'s bed',15);
+    if(p.death)put(p.death[0],p.death[1],'✕',c,p.name+'\'s last death',14);
+    for(const q of p.pins||[]){const nm=q.name.startsWith('$hud_mapday')?'died on day '+q.name.split(' ')[1]:q.name.startsWith('$')?q.name.replace(/^\$\w+?_/,'').replace(/_/g,' '):q.name||'pin';
+      put(q.x,q.z,q.type===4?'✕':'●',q.type===4?c:'#d4a84f',nm+' · '+p.name+'\'s pin',q.type===4?13:11)}}}
+{const w=$('mwrap');let drag=null,pts=new Map(),pinch=null;
+  w.addEventListener('pointerdown',e=>{w.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);drag=[e.clientX-M.ox,e.clientY-M.oy];M.touched=true;w.style.cursor='grabbing'});
+  w.addEventListener('pointerup',e=>{pts.delete(e.pointerId);pinch=null;drag=pts.size?drag:null;w.style.cursor='grab'});
+  w.addEventListener('pointermove',e=>{const r=w.getBoundingClientRect();
+    if(pts.has(e.pointerId))pts.set(e.pointerId,[e.clientX,e.clientY]);
+    if(pts.size===2){const [a,b]=[...pts.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]),cx=(a[0]+b[0])/2-r.left,cy=(a[1]+b[1])/2-r.top;
+      if(pinch){const f=d/pinch;M.ox=cx-(cx-M.ox)*f;M.oy=cy-(cy-M.oy)*f;M.scale*=f}pinch=d;drawMap();return}
+    if(drag&&pts.size===1){M.ox=e.clientX-drag[0];M.oy=e.clientY-drag[1];drawMap()}
+    const mx=e.clientX-r.left,my=e.clientY-r.top,t=$('mtip'),m=M.marks.find(([x,y])=>Math.hypot(x-mx,y-my)<9);
+    t.style.display=m?'block':'none';if(m){t.textContent=m[2];t.style.left=Math.min(mx+12,r.width-160)+'px';t.style.top=my+12+'px'}});
+  w.addEventListener('wheel',e=>{e.preventDefault();const r=w.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,f=Math.exp(-e.deltaY*0.0015);
+    M.ox=mx-(mx-M.ox)*f;M.oy=my-(my-M.oy)*f;M.scale*=f;M.touched=true;drawMap()},{passive:false});
+  $('mreveal').onchange=()=>{paintMap();drawMap()};$('mminor').onchange=drawMap;addEventListener('resize',()=>{if(!M.touched)M.fitted=false;if(page==='map')drawMap()})}
+
 function renderMain(P){
   document.querySelectorAll('#views button').forEach(b=>b.classList.toggle('on',b.dataset.v===view));
   const all=ACH.map(a=>({a,S:P.length?stateOf(a,P):{s:'unknown',ps:[],best:0,nDone:0}}));
@@ -481,6 +578,6 @@ $('dlg').addEventListener('click',e=>{if(e.target.id==='dlg'){open=null;e.target
 $('dlg').addEventListener('close',()=>{open=null});
 $('views').onclick=e=>{const v=e.target.dataset&&e.target.dataset.v;if(v){view=v;ls('view',v);render()}};
 $('q').oninput=e=>{q=e.target.value.toLowerCase();render()};
-{const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null}
+parseRoute();
 load();setInterval(load,15000);
 </script></body></html>
