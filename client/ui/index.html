@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valheim Tracker Sync</title>
+<style>
+@font-face{font-family:'Cinzel';src:url(fonts/cinzel.woff2) format('woff2');font-weight:400 900}
+@font-face{font-family:'Averia Serif Libre';src:url(fonts/averia-400.woff2) format('woff2');font-weight:400}
+@font-face{font-family:'Averia Serif Libre';src:url(fonts/averia-400i.woff2) format('woff2');font-weight:400;font-style:italic}
+@font-face{font-family:'Averia Serif Libre';src:url(fonts/averia-700.woff2) format('woff2');font-weight:700}
+:root{--head:'Cinzel',Georgia,serif;--body:'Averia Serif Libre',Georgia,serif;--ink:#0d0f12;--wood:#2a1f17;--wood2:#3a2b1f;--line:#4a3a2a;
+ --gold:#d4a84f;--gold2:#f0cf86;--parch:#e9dfc8;--mut:#a39a85;--ember:#e0813a;--ok:#8fbf6a;--bad:#e05a3a;--frost:#7fc4e0}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;color:var(--parch);font:14px/1.45 var(--body);min-height:100vh;user-select:none;
+ background:radial-gradient(700px 300px at 50% -100px,#2d3b45 0%,transparent 70%),var(--ink)}
+main{padding:14px 14px 18px;display:flex;flex-direction:column;gap:12px}
+header{text-align:center}
+.rune{color:var(--gold);letter-spacing:.35em;font-size:11px;opacity:.8}
+h1{margin:2px 0 0;font-family:var(--head);font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.panel{background:linear-gradient(180deg,var(--wood2),var(--wood));border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+h2{margin:0 0 8px;font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px}
+h2 .sp{flex:1}
+label.f{display:block;font-size:12px;color:var(--mut);margin:6px 0 2px}
+input[type=text],input[type=password],input[type=url]{width:100%;font:inherit;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:7px;color:var(--parch);padding:6px 9px;user-select:text}
+input:focus{outline:none;border-color:var(--gold)}
+.row{display:flex;gap:8px;align-items:center}
+.row>input{flex:1}
+button{font:inherit;font-size:13px;color:var(--parch);background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:7px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+button:hover{border-color:var(--gold)}
+button.main{background:var(--gold);color:#1a1208;border-color:var(--gold)}
+button.main:hover{background:var(--gold2)}
+.msg{font-size:12.5px;margin-top:8px;color:var(--mut);font-style:italic;min-height:1em}
+.msg.good{color:var(--ok)}.msg.bad{color:var(--bad)}
+.path{font-size:12.5px;color:var(--parch);word-break:break-all;background:rgba(0,0,0,.25);border-radius:6px;padding:5px 8px;user-select:text}
+.small{font-size:12px;color:var(--mut)}
+.cands{margin-top:6px;display:flex;flex-direction:column;gap:4px}
+.cands button{text-align:left;white-space:normal;word-break:break-all;font-size:12px}
+ul{list-style:none;margin:0;padding:0}
+li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:7px 2px;border-bottom:1px solid rgba(255,255,255,.06)}
+li:last-child{border:0}
+li .nm{font-family:var(--head);font-weight:700;font-size:14px;letter-spacing:.04em}
+li .st{font-size:12px;color:var(--mut)}
+li .st b{font-weight:normal}
+li.off .nm{color:var(--mut)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;background:var(--mut);vertical-align:middle}
+.s-uploaded .dot{background:var(--ok);box-shadow:0 0 6px var(--ok)}.s-idle .dot{background:var(--frost)}
+.s-rejected .dot,.s-error .dot{background:var(--bad)}.s-unreachable .dot{background:var(--ember)}.s-paused .dot,.s-off .dot{background:#5a5348}
+input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}
+.empty{color:var(--mut);font-style:italic;padding:8px 0}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.chk{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mut);cursor:pointer}
+.err{color:var(--bad)}
+#warriors{order:1}#hallp{order:2}#dirp{order:3}.foot{order:4}header{order:0}
+body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
+</style></head>
+<body><main>
+<header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Tracker Sync</h1></header>
+
+<section class="panel" id="hallp">
+  <h2>The Hall</h2>
+  <label class="f" for="server">Server address</label>
+  <input type="url" id="server" placeholder="http://your-server:8088" spellcheck="false">
+  <label class="f" for="token">Token</label>
+  <div class="row"><input type="password" id="token" placeholder="the shared token" spellcheck="false"><button id="show" title="show or hide the token">show</button></div>
+  <div class="row" style="margin-top:10px"><button class="main" id="save">Save &amp; connect</button><button id="test">Test</button><span class="sp" style="flex:1"></span><button id="hall">Open the Hall</button></div>
+  <div class="msg" id="smsg"></div>
+</section>
+
+<section class="panel" id="dirp">
+  <h2>Characters folder</h2>
+  <div class="path" id="dir"></div>
+  <div class="small" id="dirnote"></div>
+  <div class="row" style="margin-top:8px"><button id="pick">Choose folder…</button><button id="auto">Detect automatically</button></div>
+  <div class="cands" id="cands"></div>
+</section>
+
+<section class="panel" id="warriors">
+  <h2>Warriors <span class="sp"></span><label class="chk"><input type="checkbox" id="paused"> pause</label><button id="now">Sync now</button></h2>
+  <ul id="chars"></ul>
+</section>
+
+<div class="foot">
+  <label class="chk"><input type="checkbox" id="autostart"> Start with my computer</label>
+  <span class="small">read-only on your game files</span>
+</div>
+</main>
+<script>
+const T=window.__TAURI__,call=(c,a)=>T.core.invoke(c,a),$=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const ago=t=>{if(!t)return'';const s=Date.now()/1000-t;return s<60?'just now':s<5400?Math.round(s/60)+' min ago':s<172800?Math.round(s/3600)+' h ago':Math.round(s/86400)+' d ago'};
+const LABEL={idle:'waiting for a change',uploaded:'uploaded',rejected:'rejected by the server',unreachable:'server unreachable, retrying',error:'error',paused:'paused',off:'not synced'};
+let S=null,edited=false;
+
+function show(s){S=s;document.body.classList.toggle('setup',!s.server.startsWith('Connected')||!s.dir);
+  if(!edited){$('server').value=s.settings.server;$('token').value=s.settings.token}
+  const m=$('smsg');m.textContent=s.server;m.className='msg'+(s.server.startsWith('Connected')?' good':s.server&&!s.server.startsWith('Enter')?' bad':'');
+  $('hall').disabled=!s.settings.server;
+  $('dir').textContent=s.dir||'No characters folder found.';$('dir').classList.toggle('err',!s.dir);
+  $('dirnote').textContent=s.dir_auto?(s.dir?'detected automatically':'Valheim saves not found in the usual places: choose the folder.'):'chosen by you';
+  const c=$('cands');c.replaceChildren();
+  if(s.dir_auto&&s.candidates.length>1){c.append(el('div','small','Other folders with characters:'));
+    for(const p of s.candidates)if(p!==s.dir){const b=el('button','',p);b.onclick=()=>call('set_dir',{dir:p}).then(show);c.append(b)}}
+  $('paused').checked=s.settings.paused;
+  const ul=$('chars');ul.replaceChildren();
+  if(!s.chars.length)ul.append(el('li','empty',s.dir?'No characters in this folder yet.':'Choose the characters folder above.'));
+  for(const ch of s.chars){const li=el('li',(ch.selected?'':'off ')+'s-'+ch.status);
+    const cb=el('input');cb.type='checkbox';cb.checked=ch.selected;cb.title='sync this character';
+    cb.onchange=()=>call('set_selected',{name:ch.name,on:cb.checked}).then(show);
+    const mid=el('div');mid.append(el('div','nm',ch.name));
+    const st=el('div','st');st.append(el('span','dot'),el('b','',LABEL[ch.status]||ch.status));
+    if(ch.message)st.append(': '+ch.message);
+    mid.append(st);
+    const right=el('div','st',ch.last_upload?'last upload '+ago(ch.last_upload):ch.modified?'saved '+ago(ch.modified):'');
+    li.append(cb,mid,right);ul.append(li)}
+}
+$('server').oninput=$('token').oninput=()=>{edited=true};
+$('show').onclick=()=>{const t=$('token');t.type=t.type==='password'?'text':'password';$('show').textContent=t.type==='password'?'show':'hide'};
+$('save').onclick=async()=>{$('smsg').textContent='connecting…';$('smsg').className='msg';
+  show(await call('save_server',{server:$('server').value,token:$('token').value}));edited=false};
+$('test').onclick=async()=>{$('smsg').textContent='testing…';$('smsg').className='msg';show(await call('test_server'))};
+$('hall').onclick=()=>call('open_hall').catch(e=>{$('smsg').textContent=String(e)});
+$('pick').onclick=async()=>show(await call('pick_dir'));
+$('auto').onclick=async()=>show(await call('set_dir',{dir:''}));
+$('paused').onchange=async e=>show(await call('set_paused',{paused:e.target.checked}));
+$('now').onclick=()=>call('sync_now');
+$('autostart').onchange=async e=>{try{e.target.checked=await call('set_autostart',{on:e.target.checked})}catch(x){e.target.checked=!e.target.checked;$('smsg').textContent='autostart: '+x}};
+for(const id of ['server','token'])$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('save').click()});
+T.event.listen('status',e=>show(e.payload));
+call('get_status').then(show);call('get_autostart').then(v=>$('autostart').checked=v);
+</script>
+</body></html>
