@@ -1,7 +1,5 @@
 # TODO
 
-## Wanted next
-- [ ] Map extras: rivers and real terrain height (the game's GetBiomeHeight/rivers are not ported), per-player explored overlay, worlds other than the one in WORLD_DIR.
 
 ## Done
 - Font: compared 8 OFL pairs in the browser (2026-11-26), kept Cinzel + Averia Serif Libre.
@@ -14,9 +12,7 @@
 
 ## Raw upload (done; the fchsync scripts were replaced by Tracker Sync)
 Server takes raw `.fch` (`POST /upload?name=X`, parsed with our `fch.py`), Go parser removed, `fchsync.sh` was the first client (tested on Linux with six real characters: numbers identical to the old Go path; garbage/empty/old-version uploads give 400).
-- [ ] Optional: keep the last raw file per character in `state/` to recompute after a table update; per-name rate limit.
 
 ## Also open
 - TLS: handled later by a separate reverse proxy (out of scope here; uploads are plain HTTP with a shared token until then).
-- [ ] More world data: boss altars/locations, structure counts, day length from the save instead of the 1800 s default.
 - [ ] Tracker Sync client: try the Windows and macOS builds (from the releases). Untested so far: folder picker, autostart, "Open the Hall" (tested on Linux: detection, token check, upload, rejections, selection).
