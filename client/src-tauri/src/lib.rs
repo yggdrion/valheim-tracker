@@ -1,6 +1,6 @@
 //! Valheim Tracker Sync: watches the Valheim characters folder and uploads changed .fch files raw to a
 //! valheim-tracker server (POST /upload?name=X, X-Token header), plus a heartbeat every 30 s for unchanged ones.
-//! Same protocol as fchsync.sh. It never parses a save and never writes to the game folder.
+//! It never parses a save and never writes to the game folder.
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
