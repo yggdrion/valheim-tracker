@@ -21,5 +21,4 @@ Server takes raw `.fch` (`POST /upload?name=X`, parsed with upstream `parse()`),
 - TLS: handled later by a separate reverse proxy (out of scope here; uploads are plain HTTP with a shared token until then).
 - [ ] Upstream Melichor has no license: ask the author or rewrite the achievement tables before sharing widely.
 - [ ] More world data: boss altars/locations, structure counts, day length from the save instead of the 1800 s default.
-- [ ] README screenshots.
 - [ ] Tracker Sync client: try the Windows and macOS builds (from the `build` workflow), then delete `fchsync.ps1` / `fchsync.bat`. Untested so far: folder picker, autostart, "Open the Hall" (tested on Linux: detection, token check, upload, rejections, selection).

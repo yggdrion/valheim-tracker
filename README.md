@@ -2,6 +2,24 @@
 
 Read-only achievement tracker for a Valheim 1.0 all-achievements run. No game mods.
 
+![The Hall: the saga of the fellowship, the world and its bosses](docs/screenshots/hall.webp)
+
+![The Map: biomes drawn from the world seed, the explored area, boss altars, traders and dungeons (undiscovered places revealed here)](docs/screenshots/map.webp)
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/road.webp" alt="The Road: what is still missing per biome, one dot per warrior"><br><sub><b>The Road</b>: what is still missing in each biome, one dot per warrior</sub></td>
+<td width="50%"><img src="docs/screenshots/achievements.webp" alt="Achievements grouped by category"><br><sub><b>Achievements</b> by category, with progress shared by the fellowship</sub></td>
+</tr>
+</table>
+
+![A warrior's page: categories at a glance](docs/screenshots/player.webp)
+
+<img src="docs/screenshots/sync-app.webp" alt="Tracker Sync desktop app" width="320" align="right">
+
+**Tracker Sync**, the desktop app for Windows, macOS and Linux: enter the server address and token once, it finds the characters folder and uploads every character that changed. Untick the ones you don't want to share.
+<br clear="right">
+
 - `fchsync.sh` (bash + curl) / `fchsync.ps1` + `fchsync.bat` (Windows), per player PC: uploads changed `.fch` character files raw. Never writes to the game folder.
 - `server.py` (Python, stdlib): receives raw uploads, parses and analyses them, reads the world folder read-only, serves the dashboard.
 - Dashboard: the Hall (saga stats, what is left per biome, achievements, player pages) and the Map (`#map`): biomes from the world seed (`worldgen.js`), everyone's explored area, pins, beds, boss altars, traders and dungeons.
