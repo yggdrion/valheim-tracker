@@ -1,3 +1,37 @@
+## [1.4.0](https://github.com/yggdrion/valheim-tracker/compare/v1.3.1...v1.4.0) (2026-11-27)
+
+### ✨ Features
+
+* **core:** achievement and saga analysis in Rust ([3f5b3e5](https://github.com/yggdrion/valheim-tracker/commit/3f5b3e5b02983cdf90a0736005d89e6b2bd122dc))
+* **core:** character state store compatible with the Python layout ([e8d8615](https://github.com/yggdrion/valheim-tracker/commit/e8d86153cd28470cf596fe00ba3dba4a0f6cee59))
+* **core:** explored map, pins and points from saves in Rust ([9ec275e](https://github.com/yggdrion/valheim-tracker/commit/9ec275ef990aaca336607b0491de428f3018d2f3))
+* **core:** the Hall's HTTP routes in Rust ([ea8055f](https://github.com/yggdrion/valheim-tracker/commit/ea8055f8dfb91667b07560848f9b6cca91cf3986))
+* **core:** Valheim .fch reader in Rust ([83072f0](https://github.com/yggdrion/valheim-tracker/commit/83072f06ce492f7bcebb48f732e4b40e12ef4c7a))
+* **core:** world folder reader in Rust ([707de1f](https://github.com/yggdrion/valheim-tracker/commit/707de1f6ffcc49ef611964763945f9969216bebc))
+* Python runtime replaced by the Rust core ([f446a57](https://github.com/yggdrion/valheim-tracker/commit/f446a57559c10b2910d405fd1801509767dc1169))
+* the app is now called Valheim Tracker (was Tracker Sync) ([ba0f180](https://github.com/yggdrion/valheim-tracker/commit/ba0f18099aa140f6256ba758001cd4b196ece39f))
+* the Hall inside Tracker Sync, with Local and Group views ([6d27af4](https://github.com/yggdrion/valheim-tracker/commit/6d27af425275077acc6d8bfefd7dca5cf2edfd39))
+* Tracker Sync runs the Hall itself for local play ([b5c0066](https://github.com/yggdrion/valheim-tracker/commit/b5c0066c15a0c3b5979d6692b33708f1e696ce0a))
+* tracker-server, the Rust Hall server ([9443c05](https://github.com/yggdrion/valheim-tracker/commit/9443c058b1e8f2b00fdf6ea2490ec8051adb1882))
+
+### 🐛 Bug Fixes
+
+* **core:** Hall world cache survives parser panics and caches only successes ([a19f58c](https://github.com/yggdrion/valheim-tracker/commit/a19f58c759b324b104217ee5a6a9cbf675d49cba))
+* **core:** serialise store writes and guard analysis panics ([eac747c](https://github.com/yggdrion/valheim-tracker/commit/eac747c7d59458a033fac14f6c5e4b54f7c4d104))
+* **core:** Store::names, float zero explored is empty, Host on Request, world cache keyed by folder ([7236b39](https://github.com/yggdrion/valheim-tracker/commit/7236b39150cc9a193c559610a8b50fc03211eea0))
+* **scripts:** tracker-server binary name with .exe on Windows ([c390716](https://github.com/yggdrion/valheim-tracker/commit/c390716eb4ff7fff9db6f59da8aa97b8f85dc006))
+* **sync:** no panic or ghost characters when the folder changes mid-tick, local Hall checks Host and keeps its port ([c49d2d3](https://github.com/yggdrion/valheim-tracker/commit/c49d2d3849d2d4f02582ad74f4edbbfeb0d23058))
+* **sync:** proxy only origin-form paths, no file I/O under the state lock, keep characters on unreadable folders ([14c0474](https://github.com/yggdrion/valheim-tracker/commit/14c0474b165261dff59bf1db0afebb53ddd04b55))
+
+### 🔧 Chores
+
+* cargo workspace with tracker-core and parity goldens script ([b6745f2](https://github.com/yggdrion/valheim-tracker/commit/b6745f23c504baf9f39eae231e768e350c01e5b3))
+
+### 📝 Documentation
+
+* design for a local-first tracker with one Rust core ([2afc108](https://github.com/yggdrion/valheim-tracker/commit/2afc1085ccf4717ceddf2bc75ec7ba9ea3f0240d))
+* implementation plan for the local-first tracker ([b54589c](https://github.com/yggdrion/valheim-tracker/commit/b54589c96bb1fa693ceff15a1401f76c45509efc))
+
 ## [1.3.1](https://github.com/yggdrion/valheim-tracker/compare/v1.3.0...v1.3.1) (2026-11-26)
 
 ### 🐛 Bug Fixes
