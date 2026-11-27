@@ -6,3 +6,5 @@ edition = "2021"
 
 [dependencies]
 tracker-core = { path = "../core" }
+serde = "1"
+serde_json = { version = "1", features = ["preserve_order"] }

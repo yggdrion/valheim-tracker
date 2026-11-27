@@ -186,6 +186,17 @@ pub fn stable_hash(s: &str) -> u32 {
 /// The db2 holds int32 count + (uint32 name hash, vec3 pos, bool placed) per location; every world has
 /// exactly one StartTemple, which anchors the search.
 pub fn locations(dir: &Path) -> Vec<(String, i64, i64)> {
+    location_hashes(dir)
+        .into_iter()
+        .map(|(h, x, z)| {
+            let name = LOC_NAMES.get(&h).map(|s| s.to_string()).unwrap_or_else(|| format!("#{h:08x}"));
+            (name, x, z)
+        })
+        .collect()
+}
+
+/// Like [`locations`] but with the raw uint32 name hash instead of the name.
+pub fn location_hashes(dir: &Path) -> Vec<(u32, i64, i64)> {
     let Some(n) = latest_save(dir) else { return Vec::new() };
     let Ok(d) = std::fs::read(dir.join(format!("_main.{n}.db2"))) else { return Vec::new() };
     let raw = db2_body(&d);
@@ -210,8 +221,7 @@ pub fn locations(dir: &Path) -> Vec<(String, i64, i64)> {
         .map(|k| {
             let p = start + 17 * k;
             let h = u32::from_le_bytes(raw[p..p + 4].try_into().unwrap());
-            let name = LOC_NAMES.get(&h).map(|s| s.to_string()).unwrap_or_else(|| format!("#{h:08x}"));
-            (name, (f32_at(p + 4) as f64).round_ties_even() as i64, (f32_at(p + 12) as f64).round_ties_even() as i64)
+            (h, (f32_at(p + 4) as f64).round_ties_even() as i64, (f32_at(p + 12) as f64).round_ties_even() as i64)
         })
         .collect()
 }
