@@ -24,12 +24,19 @@ pub fn valid_name(name: &str) -> bool {
 pub struct Store {
     dir: PathBuf,
     seen: Mutex<HashMap<String, f64>>,
+    /// Serialises writes (ingest, touch, remove) so tmp files and `seen` never race.
+    io: Mutex<()>,
+}
+
+/// Runs `f`, turning a panic into `None`.
+pub fn guarded<T>(f: impl FnOnce() -> T) -> Option<T> {
+    std::panic::catch_unwind(std::panic::AssertUnwindSafe(f)).ok()
 }
 
 impl Store {
     pub fn open(dir: PathBuf) -> io::Result<Store> {
         std::fs::create_dir_all(&dir)?;
-        Ok(Store { dir, seen: Mutex::new(HashMap::new()) })
+        Ok(Store { dir, seen: Mutex::new(HashMap::new()), io: Mutex::new(()) })
     }
 
     fn path(&self, file: &str) -> PathBuf {
@@ -45,23 +52,35 @@ impl Store {
             return Err(IngestError::Bad("bad name or size".into()));
         }
         let parsed = fch::parse(raw).map_err(|e| IngestError::Bad(e.0))?;
-        let secs = analyze::sections(&parsed);
-        let ach = analyze::achievements(&parsed, &secs);
-        let maps = mapdata::worlds(raw, &parsed);
+        let unreadable = || IngestError::Bad("not a readable Valheim .fch file".into());
+        let (secs, ach, meta) = guarded(|| {
+            let secs = analyze::sections(&parsed);
+            let ach = analyze::achievements(&parsed, &secs);
+            (secs, ach, analyze::meta(&parsed))
+        })
+        .ok_or_else(unreadable)?;
+        let maps = guarded(|| mapdata::worlds(raw, &parsed)).unwrap_or_default();
         let mut worlds: Vec<&String> = parsed.sets[0].worlds.keys().collect();
         worlds.sort();
         let doc = json!({
             "name": name, "updated": at, "av": data::analysis_version(), "version": parsed.version,
-            "worlds": worlds, "sections": secs, "achievements": ach, "meta": analyze::meta(&parsed),
+            "worlds": worlds, "sections": secs, "achievements": ach, "meta": meta,
         });
-        let io_err = |e: io::Error| IngestError::Bad(format!("could not store the character: {e}"));
         let tmp = self.path(&format!("{name}.tmp"));
         let tmpm = self.path(&format!("{name}.tmpm"));
-        std::fs::write(&tmp, serde_json::to_vec(&doc).unwrap()).map_err(io_err)?;
-        std::fs::write(&tmpm, serde_json::to_vec(&maps).unwrap()).map_err(io_err)?;
-        std::fs::rename(&tmpm, self.path(&format!("{name}.map.json"))).map_err(io_err)?;
+        let _g = self.io.lock().unwrap();
+        let write = || -> io::Result<()> {
+            std::fs::write(&tmp, serde_json::to_vec(&doc).unwrap())?;
+            std::fs::write(&tmpm, serde_json::to_vec(&maps).unwrap())?;
+            std::fs::rename(&tmpm, self.path(&format!("{name}.map.json")))?;
+            std::fs::rename(&tmp, self.path(&format!("{name}.json")))
+        };
+        if let Err(e) = write() {
+            let _ = std::fs::remove_file(&tmp);
+            let _ = std::fs::remove_file(&tmpm);
+            return Err(IngestError::Bad(format!("could not store the character: {e}")));
+        }
         self.seen.lock().unwrap().insert(name.to_string(), at);
-        std::fs::rename(&tmp, self.path(&format!("{name}.json"))).map_err(io_err)?;
         Ok(())
     }
 
@@ -69,6 +88,7 @@ impl Store {
         if !valid_name(name) {
             return false;
         }
+        let _g = self.io.lock().unwrap();
         match self.load(name) {
             Some(c) if c["av"].as_str() == Some(data::analysis_version()) => {
                 self.seen.lock().unwrap().insert(name.to_string(), at);
@@ -79,6 +99,7 @@ impl Store {
     }
 
     pub fn remove(&self, name: &str) {
+        let _g = self.io.lock().unwrap();
         if valid_name(name) {
             let _ = std::fs::remove_file(self.path(&format!("{name}.json")));
             let _ = std::fs::remove_file(self.path(&format!("{name}.map.json")));

@@ -104,3 +104,35 @@ fn remove_forgets() {
     assert!(s.characters(1.0, 600.0)["characters"].as_array().unwrap().is_empty());
     assert!(s.character("a").is_none());
 }
+
+#[test]
+fn guarded_maps_panic_to_none() {
+    assert_eq!(tracker_core::store::guarded(|| 5), Some(5));
+    assert_eq!(tracker_core::store::guarded(|| -> i32 { panic!("boom") }), None);
+}
+
+#[test]
+fn concurrent_ingest_same_name() {
+    let dir = tmp("conc");
+    let s = std::sync::Arc::new(Store::open(dir.clone()).unwrap());
+    let raw = std::sync::Arc::new(FchBuilder::new(47).build());
+    let hs: Vec<_> = (0..8)
+        .map(|i| {
+            let (s, raw) = (s.clone(), raw.clone());
+            std::thread::spawn(move || {
+                for j in 0..10 {
+                    assert_eq!(s.ingest("same", &raw, (i * 10 + j) as f64), Ok(()));
+                    let _ = s.characters(1e9, 600.0);
+                    if let Some(b) = s.character("same") {
+                        serde_json::from_slice::<Value>(&b).expect("torn read");
+                    }
+                }
+            })
+        })
+        .collect();
+    for h in hs {
+        h.join().unwrap();
+    }
+    serde_json::from_slice::<Value>(&s.character("same").unwrap()).unwrap();
+    assert!(!dir.join("same.tmp").exists() && !dir.join("same.tmpm").exists());
+}
