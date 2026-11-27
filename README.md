@@ -30,7 +30,7 @@ The world drawn from its seed with the game's own biome rules, coloured where an
 
 ![The Map: biomes from the world seed, explored area, altars, traders and dungeons](docs/screenshots/map.webp)
 
-**The Valheim Tracker app** (desktop app for Windows, macOS and Linux; called Tracker Sync before 1.5)
+**The Valheim Tracker app** (desktop app for Windows, macOS and Linux; called Tracker Sync before 1.4)
 
 Enter the server address and token once; it finds the characters folder, uploads every character that changes and shows the status of each one. Untick characters you don't want to share.
 
@@ -61,7 +61,7 @@ player PC                                     server (docker compose)
 
 ### Players
 
-**The app**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open). Playing solo? The app is all you need: leave the server empty and the Hall shows your own characters and the newest 1.0 world next to them (pick another world in Settings). With a server set, a **Local / Group** switch appears: Local is your own characters, Group is the server's Hall. Upgrading from Tracker Sync (before 1.5) on Windows: the update installs *Valheim Tracker* as a new app next to the old one; uninstall *Valheim Tracker Sync* once and tick "Start with my computer" again in the new app (settings carry over). The app updates itself: it checks the latest release on start and every 6 hours and offers an *Update & restart* button (updates are signed with a minisign key, `TAURI_SIGNING_PRIVATE_KEY` repo secret; the public key is in `client/src-tauri/tauri.conf.json`).
+**The app**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open). Playing solo? The app is all you need: leave the server empty and the Hall shows your own characters and the newest 1.0 world next to them (pick another world in Settings). With a server set, a **Local / Group** switch appears: Local is your own characters, Group is the server's Hall. Upgrading from Tracker Sync (before 1.4) on Windows: the update installs *Valheim Tracker* as a new app next to the old one; uninstall *Valheim Tracker Sync* once and tick "Start with my computer" again in the new app (settings carry over). The app updates itself: it checks the latest release on start and every 6 hours and offers an *Update & restart* button (updates are signed with a minisign key, `TAURI_SIGNING_PRIVATE_KEY` repo secret; the public key is in `client/src-tauri/tauri.conf.json`).
 
 Character files live on each player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud); the server only sees what the app uploads.
 
