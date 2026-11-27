@@ -21,11 +21,6 @@ body{margin:0;color:var(--parch);font:15px/1.5 var(--body);min-height:100vh;
    repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 2px,transparent 2px 6px),var(--ink)}
 main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
 .rune{color:var(--gold);letter-spacing:.35em;font-size:13px;opacity:.8}
-header{text-align:center;padding:14px 0 6px}
-h1{margin:6px 0 0;font-family:var(--head);font-weight:700;font-size:clamp(26px,5vw,40px);letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);text-shadow:0 2px 0 #000,0 0 22px rgba(212,168,79,.28)}
-.sub{color:var(--mut);font-size:13px;font-style:italic}
-.divider{height:14px;margin:12px auto 18px;max-width:520px;background:linear-gradient(90deg,transparent,var(--gold) 50%,transparent) center/100% 1px no-repeat;position:relative}
-.divider:after{content:'ᛟ';position:absolute;left:50%;top:-9px;transform:translateX(-50%);background:var(--ink);padding:0 10px;color:var(--gold)}
 .panel{background:linear-gradient(180deg,var(--wood2),var(--wood));border:1px solid var(--line);border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 18px rgba(0,0,0,.45);padding:14px 16px;margin-bottom:16px}
 .panel h2{margin:0 0 10px;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 button{font:inherit;color:var(--parch);cursor:pointer}
@@ -110,10 +105,15 @@ a.nm{text-decoration:none}a.nm:hover{text-decoration:underline}
 .warn{background:#3a1d14;border:1px solid var(--ember);color:#f3c7a8;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
 .who button.rest i{opacity:.2;box-shadow:none}.who button.rest.on i{opacity:.6}
 .empty b{color:var(--gold2);font-style:normal;font-family:var(--head);letter-spacing:.06em}
-.nav{margin-top:8px;font-family:var(--head);font-size:13px;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:10px;justify-content:center;color:var(--mut)}
-.nav a{color:var(--mut);text-decoration:none;padding:2px 4px;border-bottom:1px solid transparent}.nav a:hover{color:var(--gold2)}.nav a.on{color:var(--gold2);border-color:var(--gold)}
 body.mapmode main>section:not(#mapp),body.mapmode #warn{display:none!important}
 body.mapmode main{max-width:none}
+.tabs{display:flex;gap:4px;margin:0 0 14px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;font-family:var(--head);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;color:var(--mut);text-decoration:none;padding:9px 14px 8px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
+.tabs a:hover{color:var(--gold2)}.tabs a.on{color:var(--gold2);border-color:var(--gold)}
+body.player .tabs a[data-t=world]{display:none}
+body:not(.t-saga) #sagap,body:not(.t-world) #worldp,body.player #worldp,body:not(.t-road) #roadp,body:not(.t-ach) #achp{display:none!important}
+@media(max-width:560px){.tabs{font-size:12px;letter-spacing:.1em}.tabs a{padding:8px 10px 7px}}
 .mbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:6px}.mbar h2{margin:0}
 .mstat{margin-left:auto;color:var(--mut);font-size:12.5px;font-style:italic}
 .mlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--mut);margin-bottom:8px}.mlegend b{font-weight:normal}
@@ -182,14 +182,12 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .empty{color:var(--mut);font-style:italic;padding:20px;text-align:center}
 footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 </style></head><body><main>
-<header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Achievement Hall</h1><div class="sub">the fellowship's road to all 53</div>
-<nav class="nav"><a href="#" id="nav-hall">The Hall</a><span>·</span><a href="#map" id="nav-map">Map</a></nav></header>
-<div class="divider"></div>
+<nav class="tabs" id="tabs"><a data-t="saga">Saga</a><a data-t="world">The World</a><a data-t="road">The Road</a><a data-t="ach">Achievements</a><a data-t="map" href="#map">Map</a></nav>
 
 <div class="warn" id="warn" hidden></div>
+<section class="panel" id="felp"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
 <section class="panel saga" id="sagap" hidden><h2 id="sagah">Saga of the Fellowship</h2><div class="sub2" id="sagas"></div><div class="themes" id="saga"></div></section>
 <section class="panel" id="worldp" hidden><div class="world" id="world"></div></section>
-<section class="panel"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
 
 <section class="panel road" id="roadp"><h2>The Road</h2>
   <div class="bar2"><div class="seg bios" id="bios"></div><label class="chk"><input type="checkbox" id="hideall"> hide what's done</label></div>
@@ -287,6 +285,9 @@ async function onRoute(){parseRoute();
   if(route&&!full[route]&&chars.some(c=>c.name===route))full[route]=await j('/api/character/'+encodeURIComponent(route));
   document.title=page==='map'?'Map · Achievement Hall':route?route+' · Achievement Hall':'Valheim Achievement Hall';render();scrollTo(0,0)}
 addEventListener('hashchange',onRoute);
+const TABS=['saga','world','road','ach'];let tab=TABS.includes(ls('tab'))?ls('tab'):'saga';
+for(const a of document.querySelectorAll('#tabs a'))if(a.dataset.t!=='map')a.onclick=e=>{e.preventDefault();tab=a.dataset.t;ls('tab',tab);
+  if(page==='map')location.hash='';else{render();scrollTo(0,0)}};
 const inWorld=c=>!WNAME||(c.worlds||[]).some(x=>x.toLowerCase()===WNAME);
 
 function renderWorld(w){
@@ -321,7 +322,10 @@ function renderPlayer(){
 }
 function render(){
   document.body.classList.toggle('mapmode',page==='map');$('mapp').hidden=page!=='map';
-  $('nav-map').classList.toggle('on',page==='map');$('nav-hall').classList.toggle('on',page!=='map');
+  const t=page==='map'?'map':route&&tab==='world'?'saga':tab;
+  document.body.classList.toggle('player',!!route);
+  for(const k of TABS)document.body.classList.toggle('t-'+k,t===k);
+  for(const a of $('tabs').children)a.classList.toggle('on',a.dataset.t===t);
   if(page==='map'){if(!M.data||Date.now()-M.at>60000)loadMap();else drawMap();return}
   if(route){renderPlayer();const P=shown();renderSaga(P);renderRoad(P);renderMain(P);return}
   $('wh').textContent='The Fellowship';
