@@ -172,3 +172,39 @@ fn serve_passes_the_host_header() {
     let v: Value = serde_json::from_str(&ureq::get(&base).set("Host", "evil.example").call().unwrap().into_string().unwrap()).unwrap();
     assert_eq!(v["host"], "evil.example");
 }
+
+fn names(h: &Hall) -> (Vec<String>, bool) {
+    let v = json(&call(h, "GET", "/api/characters", "", None, b""));
+    let n = v["characters"].as_array().unwrap().iter().map(|c| c["name"].as_str().unwrap().to_string()).collect();
+    (n, v["world_only"] == true)
+}
+
+fn upload_in(h: &Hall, name: &str, world: &str) {
+    let save = FchBuilder::new(47).dict(0, "worlds", world, 3.0).build();
+    assert_eq!(call(h, "POST", "/upload", &format!("name={name}"), Some("t"), &save).status, 200);
+}
+
+#[test]
+fn world_only_without_a_world_lists_everyone() {
+    let h = hall("wonly-none", None);
+    upload_in(&h, "A", "roota");
+    upload_in(&h, "B", "savheim");
+    h.set_world_only(true);
+    assert_eq!(names(&h), (vec!["A".to_string(), "B".to_string()], false));
+}
+
+#[test]
+fn world_only_lists_the_shown_worlds_characters() {
+    let Some(g) = support::golden_dir() else { return };
+    let manifest: Value = serde_json::from_slice(&std::fs::read(g.join("manifest.json")).unwrap()).unwrap();
+    let dir = PathBuf::from(manifest["world"].as_str().unwrap());
+    let h = hall("wonly", Some(dir));
+    let wname = json(&call(&h, "GET", "/api/world", "", None, b""))["name"].as_str().unwrap().to_uppercase();
+    upload_in(&h, "In", &wname);
+    upload_in(&h, "Out", "elsewhere");
+    assert_eq!(names(&h).0.len(), 2);
+    h.set_world_only(true);
+    assert_eq!(names(&h), (vec!["In".to_string()], true));
+    h.set_world_only(false);
+    assert_eq!(names(&h).0.len(), 2);
+}

@@ -35,6 +35,7 @@ fn stale_secs() -> f64 {
 pub fn start(state_dir: PathBuf, preferred: u16) -> io::Result<LocalHall> {
     let store = Arc::new(Store::open(state_dir)?);
     let hall = Arc::new(Hall::new(store, None, None, stale_secs()));
+    hall.set_world_only(true);
     let listener = match preferred {
         0 => TcpListener::bind("127.0.0.1:0")?,
         p => TcpListener::bind(("127.0.0.1", p)).or_else(|_| TcpListener::bind("127.0.0.1:0"))?,

@@ -237,7 +237,7 @@ const CATS=[
  ['Legacy',['GrindDays','KingsQueens','ChildOfOdin']]];
 const catOf=api=>(CATS.find(c=>c[1].includes(api))||['Other'])[0];
 let route=null,page='hall';
-let WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
+let wonly=false,WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
 let view=ls('view')||'cards',flt=new Set(JSON.parse(ls('flt')||'[]')),q='',open=null;
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('vh_'+k);localStorage.setItem('vh_'+k,v)}catch(e){}}
 const $=id=>document.getElementById(id);
@@ -266,7 +266,7 @@ async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(u+' '+r.stat
 async function load(){
   try{
     if(!ACH.length)ACH=await j('/api/achievements');
-    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;
+    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;wonly=!!r.world_only;
     const w=await j('/api/world');WNAME=(w&&!w.error&&w.name||'').toLowerCase();renderWorld(w);
     const known=new Set(chars.map(c=>c.name));
     if(first){const here=chars.filter(inWorld);(here.length?here:chars).forEach(c=>sel.add(c.name));first=false}
@@ -333,7 +333,7 @@ function render(){
   const who=$('who');who.replaceChildren();
   $('roadp').hidden=$('achp').hidden=!chars.length;
   if(!chars.length&&!lost){const e=el('div','empty');e.append(el('b','','The hall is still empty.'),el('br'),
-    'No warrior has reported yet. Start the Valheim Tracker app on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
+    wonly?'No character in this folder has been to this world yet. Play it once, or pick another world in Settings.':'No warrior has reported yet. Start the Valheim Tracker app on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
   for(const c of chars){
     const b=tint(el('button',sel.has(c.name)?'on':''),c.name);b.append(el('i'),el('span','',c.name));
     if(WNAME&&!inWorld(c)){b.classList.add('away');b.append(el('span','wd',(c.worlds||[]).length?'in '+c.worlds.join(', '):'no world yet'))}

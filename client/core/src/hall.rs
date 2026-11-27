@@ -3,6 +3,7 @@ use crate::store::{guarded, valid_name, IngestError, Store};
 use crate::{data, worlds};
 use serde_json::{json, Value};
 use std::path::PathBuf;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -50,6 +51,8 @@ pub struct Hall {
     world_dir: Mutex<Option<PathBuf>>,
     token: Option<String>,
     stale_secs: f64,
+    /// the app's Local view: list only the characters who have been in the shown world
+    world_only: AtomicBool,
     world: Cached<Value>,
     locs: Cached<Vec<(String, i64, i64)>>,
 }
@@ -100,6 +103,7 @@ impl Hall {
             world_dir: Mutex::new(world_dir),
             token: token.filter(|t| !t.is_empty()),
             stale_secs,
+            world_only: AtomicBool::new(false),
             world: Mutex::new(None),
             locs: Mutex::new(None),
         }
@@ -109,6 +113,29 @@ impl Hall {
         *lock(&self.world_dir) = dir;
         *lock(&self.world) = None;
         *lock(&self.locs) = None;
+    }
+
+    pub fn set_world_only(&self, on: bool) {
+        self.world_only.store(on, Ordering::Relaxed);
+    }
+
+    /// The character list; with `world_only`, cut to those whose saves name the shown world (all of them when
+    /// no world can be read, so a missing world folder never empties the Hall).
+    fn characters(&self) -> Value {
+        let mut v = self.store.characters(now(), self.stale_secs);
+        if !self.world_only.load(Ordering::Relaxed) {
+            return v;
+        }
+        let Some(name) = self.world().ok().and_then(|w| w["name"].as_str().map(str::to_lowercase)) else {
+            return v;
+        };
+        if let Some(a) = v["characters"].as_array_mut() {
+            a.retain(|c| {
+                c["worlds"].as_array().is_some_and(|ws| ws.iter().any(|w| w.as_str().is_some_and(|w| w.to_lowercase() == name)))
+            });
+        }
+        v["world_only"] = json!(true);
+        v
     }
 
     pub fn store(&self) -> &Arc<Store> {
@@ -149,7 +176,7 @@ impl Hall {
         let p = percent_decode(req.path, false);
         match p.as_str() {
             "/" => return Response::raw(200, "text/html; charset=utf-8", data::DASHBOARD_HTML.as_bytes().to_vec()),
-            "/api/characters" => return Response::json(200, &self.store.characters(now(), self.stale_secs)),
+            "/api/characters" => return Response::json(200, &self.characters()),
             "/api/achievements" => return Response::raw(200, "application/json", data::ACHIEVEMENTS_JSON.as_bytes().to_vec()),
             "/worldgen.js" => return Response::raw(200, "text/javascript; charset=utf-8", data::WORLDGEN_JS.as_bytes().to_vec()),
             "/api/world" => {
