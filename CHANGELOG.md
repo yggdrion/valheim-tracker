@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/yggdrion/valheim-tracker/compare/v1.4.0...v1.5.0) (2026-11-27)
+
+### ✨ Features
+
+* the Hall in tabs (Saga, The World, The Road, Achievements, Map), no big header ([78f32e4](https://github.com/yggdrion/valheim-tracker/commit/78f32e4a4c891a04920efb7094e751ab910fae6a))
+
+### 📝 Documentation
+
+* the rename shipped in 1.4.0 ([1d5d28a](https://github.com/yggdrion/valheim-tracker/commit/1d5d28a3581f4748fa36089b3c9fd8851d7864fa))
+
 ## [1.4.0](https://github.com/yggdrion/valheim-tracker/compare/v1.3.1...v1.4.0) (2026-11-27)
 
 ### ✨ Features
