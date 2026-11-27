@@ -4,7 +4,7 @@
 use serde_json::Value;
 use std::path::PathBuf;
 
-/// Directory with the goldens dumped by `scripts/parity.py`, or `None` (parity tests then skip).
+/// Directory with the goldens dumped from the original Python implementation, or `None` (parity tests then skip).
 pub fn golden_dir() -> Option<PathBuf> {
     let dir = match std::env::var_os("VT_GOLDEN") {
         Some(d) => PathBuf::from(d),
@@ -47,7 +47,7 @@ pub fn assert_json_close(path: &str, got: &Value, want: &Value) {
 
 use indexmap::IndexMap;
 
-/// Builds a synthetic Valheim 1.0 `.fch` file (layout as the docstring of `fch.py`).
+/// Builds a synthetic Valheim 1.0 `.fch` file (layout as the game's `PlayerProfile.SavePlayerToDisk`).
 pub struct FchBuilder {
     version: i32,
     stats: Vec<Vec<f32>>,

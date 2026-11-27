@@ -1,4 +1,4 @@
-//! Character state directory (the storage half of `server.py`): analysed saves on disk,
+//! Character state directory (the storage half of the original Python server): analysed saves on disk,
 //! last-contact times in memory.
 use crate::{analyze, data, fch, mapdata};
 use serde_json::{json, Map, Value};

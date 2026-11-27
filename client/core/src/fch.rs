@@ -1,4 +1,4 @@
-//! Reader for a Valheim 1.0 character file (`.fch`); port of `fch.py`.
+//! Reader for a Valheim 1.0 character file (`.fch`); ported from the original Python implementation.
 //!
 //! File: int32 payload length | payload | int32 hash length | hash. Payload (little-endian; strings are 7-bit
 //! length prefixed UTF-8; a "dict" is int32 count + (string key, float32 value) pairs):

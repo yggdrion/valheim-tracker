@@ -41,12 +41,12 @@ Enter the server address and token once; it finds the characters folder, uploads
 ```
 player PC                                     server (docker compose)
   Valheim writes <name>.fch                     valheim-server ──── world save (read-only) ───┐
-  Tracker Sync ──────── raw .fch ─────▶  tracker (server.py): parses and analyses      ├──▶ dashboard :8088
+  Tracker Sync ──────── raw .fch ─────▶  tracker (tracker-server): parses and analyses ├──▶ dashboard :8088
                                + shared token    every upload, reads the world folder ─────────┘
 ```
 
 - Tracker Sync uploads the **raw** character file when it changes, plus a heartbeat. It never parses a save and never writes to the game folder.
-- `server.py` (Python, standard library only) does all the parsing: achievements, stats, the explored map. It reads the world folder read-only for the seed, bosses and locations.
+- One Rust core (`client/core`) does all the parsing: achievements, stats, the explored map. It reads the world folder read-only for the seed, bosses and locations. The server (`tracker-server`, in the Docker image) and Tracker Sync run the same code: the app serves the Hall itself on `127.0.0.1` for local play, so one player can use it without any server.
 - A character that stops reporting is shown as "resting"; its progress stays.
 
 ## Setup
@@ -61,7 +61,7 @@ player PC                                     server (docker compose)
 
 ### Players
 
-**Tracker Sync**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open). After that the app updates itself: it checks the latest release on start and every 6 hours and offers an *Update & restart* button (updates are signed with a minisign key, `TAURI_SIGNING_PRIVATE_KEY` repo secret; the public key is in `client/src-tauri/tauri.conf.json`).
+**Tracker Sync**: download the installer for your system from the [latest release](https://github.com/yggdrion/valheim-tracker/releases/latest), start it, enter the server address and the token. The builds are not signed: Windows SmartScreen and macOS Gatekeeper warn the first time (macOS: right-click > Open). Playing solo? Tracker Sync is all you need: leave the server empty and the Hall shows your own characters and the newest 1.0 world next to them (pick another world in Settings). With a server set, a **Local / Group** switch appears: Local is your own characters, Group is the server's Hall. The app updates itself: it checks the latest release on start and every 6 hours and offers an *Update & restart* button (updates are signed with a minisign key, `TAURI_SIGNING_PRIVATE_KEY` repo secret; the public key is in `client/src-tauri/tauri.conf.json`).
 
 Character files live on each player's PC (`%USERPROFILE%\AppData\LocalLow\IronGate\Valheim\characters_local`, or `Steam\userdata\<id>\892970\remote\characters` with Steam Cloud); the server only sees what Tracker Sync uploads.
 
@@ -71,14 +71,17 @@ Automatic on every push to `main` (`.github/workflows/build.yml`): the server im
 
 ## Development
 
-    TRACKER_TOKEN=dev WORLD_DIR=<world folder> python server.py --port 8088      # dashboard without docker
-    python analyze.py Some.fch                                                    # quick check of one character
-    cd client && bun install && bun run dev                                       # Tracker Sync (needs Rust)
+    cd client && cargo run -p tracker-server -- --port 8088      # dashboard without docker (env TRACKER_TOKEN=dev WORLD_DIR=<world folder>)
+    cd client && cargo run -p tracker-server -- check Some.fch   # quick check of one character
+    cd client && cargo test --workspace                          # tests (CI runs this on Linux)
+    cd client && bun install && bun run dev                      # Tracker Sync (needs Rust)
+
+The parity tests compare the Rust core with numbers dumped from the former Python runtime and skip when `testdata/golden/` is absent. Goldens can only be dumped from a commit before the Python runtime was removed (the commit before "Python runtime replaced by the Rust core"); `testdata/` is never committed.
 
 Game data, regenerate after a Valheim patch (read-only on the game install):
 
-- `scripts/extract_game_data.py <world folder>` → `gamedata.json`: the achievement sections (what each lists, which save counter and difficulty set it reads) and the earliest biome of every entry for The Road, built from the game's own files by the game's own rules (needs UnityPy and bun or node). Biome links the game hides in attack scripts are in `curated/biome_links.json`; reviewed exceptions in `curated/biome_overrides.json`. It prints any entry left without a biome.
+- `scripts/extract_game_data.py <world folder>` → `gamedata.json`: the achievement sections (what each lists, which save counter and difficulty set it reads) and the earliest biome of every entry for The Road, built from the game's own files by the game's own rules (needs UnityPy, bun or node and a built `tracker-server`: `cd client && cargo build --release -p tracker-server`; set `TRACKER_BIN` to use another binary). Biome links the game hides in attack scripts are in `curated/biome_links.json`; reviewed exceptions in `curated/biome_overrides.json`. It prints any entry left without a biome.
 - `scripts/extract_achievements.py` + `scripts/build_stat_map.py` → `stat_map.json` (the counter achievements), `scripts/update_achievements.py` → `achievements.json` (the Steam list).
-- The save parser (`fch.py`) follows the game's `PlayerProfile.SavePlayerToDisk`; a layout change shows up as a clear upload error.
-- `scripts/extract_stat_names.py` → `stat_names.json` (needs dnfile), `scripts/extract_names.py` → `names.json` (needs UnityPy), `scripts/extract_location_names.py <world folder>` → `location_names.json`.
+- The save parser (`client/core/src/fch.rs`) follows the game's `PlayerProfile.SavePlayerToDisk`; a layout change shows up as a clear upload error.
+- `scripts/extract_stat_names.py` → `stat_names.json` (needs dnfile), `scripts/extract_names.py` → `names.json` (needs UnityPy), `scripts/extract_location_names.py <world folder>` → `location_names.json` (these two scripts also need the built `tracker-server`).
 - The biome generator in `worldgen.js` ports the game's `WorldGenerator`; it was checked against a real world's 12,176 placed locations (every boss altar, trader and dungeon in its own biome).

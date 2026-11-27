@@ -1,4 +1,4 @@
-//! Read-only parser for a Valheim 1.0 world folder (`_main.N.fwl2` / `.db2` / `.ok`); port of `worlds.py`.
+//! Read-only parser for a Valheim 1.0 world folder (`_main.N.fwl2` / `.db2` / `.ok`); ported from the original Python implementation.
 //! Gives: name, seed, in-game day, global keys (boss kills etc.), world modifiers, placed locations.
 
 use crate::data::LOCATION_NAMES;

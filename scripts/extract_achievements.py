@@ -5,7 +5,7 @@
 
 Needs UnityPy (pip install UnityPy, in .cache/venv). Takes a few minutes: it scans the asset bundles.
 The output is a list of each Achievement asset's full typetree (m_id, m_name, m_statTrigger, goals ...).
-scripts/build_stat_map.py turns it into the tables analyze.py uses.
+scripts/build_stat_map.py turns it into the tables the Rust core uses.
 """
 import argparse, glob, json, os, sys, time
 

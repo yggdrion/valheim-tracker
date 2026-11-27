@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turn .cache/achievement_defs.json (scripts/extract_achievements.py) into stat_map.json, which analyze.py reads.
+"""Turn .cache/achievement_defs.json (scripts/extract_achievements.py) into stat_map.json, which the Rust core reads.
 
   python scripts/build_stat_map.py            # dry run: print what would change
   python scripts/build_stat_map.py --apply    # write stat_map.json
@@ -9,7 +9,7 @@ stat_map.json: {api_name: {"set": difficulty-set index,
                            "enemies": [[enemy token, goal], ...]            kills in the set
                            "crafts":  [[item token, goal], ...]
                            "others":  [api_name, ...]}}                     other achievements it embodies
-List-style achievements (dynamic lists, bosses as a group, fish, trophies, ...) are not in here: analyze.py
+List-style achievements (dynamic lists, bosses as a group, fish, trophies, ...) are not in here: the analysis
 reads them from gamedata.json (scripts/extract_game_data.py).
 """
 import argparse, json, os, sys

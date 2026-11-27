@@ -1,4 +1,4 @@
-//! Achievement progress and saga counters from a parsed `.fch` (port of `analyze.py`).
+//! Achievement progress and saga counters from a parsed `.fch` (ported from the original Python implementation).
 use crate::data::{GAMEDATA, NAMES, STAT_MAP, STAT_NAMES};
 use crate::fch::{self, Dict, Parsed, StatSet};
 use indexmap::IndexMap;

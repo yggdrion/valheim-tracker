@@ -1,4 +1,4 @@
-//! Per-world map data from a `.fch`; port of `mapdata.py`.
+//! Per-world map data from a `.fch`; ported from the original Python implementation.
 //!
 //! The map blob: int32 version, int32 n, n bytes of gzip(int32 size, bool[size*size] explored,
 //! bool[size*size] explored by others, int32 pin count, pins); pin: string name, vec3 pos, int32 type,
@@ -91,7 +91,7 @@ fn try_worlds(raw: &[u8], parsed: &Parsed) -> Result<IndexMap<String, Value>, Sa
 }
 
 /// `{world uid: {spawn, logout, death, home: [x, z] or null, size, explored (b64 zlib bitmask), pins}}`.
-/// Any failure means "no map" (as `server.py` treats it), so the result is then empty.
+/// Any failure means "no map" (as the original Python server treated it), so the result is then empty.
 pub fn worlds(raw: &[u8], parsed: &Parsed) -> IndexMap<String, Value> {
     try_worlds(raw, parsed).unwrap_or_default()
 }

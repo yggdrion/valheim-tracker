@@ -26,9 +26,9 @@ def fetch():
 
 
 def tracked():
-    sys.path.insert(0, ROOT)
-    import analyze
-    return set(analyze.SECTION_ACH) | set(analyze.STAT_MAP)
+    gamedata = json.load(open(os.path.join(ROOT, "gamedata.json"), encoding="utf8"))
+    stat_map = json.load(open(os.path.join(ROOT, "stat_map.json"), encoding="utf8"))
+    return {s["achievement"] for s in gamedata["sections"]} | set(stat_map)
 
 
 def main():

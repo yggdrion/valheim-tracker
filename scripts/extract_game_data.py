@@ -26,8 +26,8 @@ exceptions (and the ways to die and trees, which have no place in the world).
 import argparse, collections, glob, json, os, pickle, shutil, subprocess, sys, tempfile, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, ROOT)
-import worlds  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _tracker import world_json  # noqa: E402
 
 DEFAULT_GAME = os.path.expanduser("~/.local/share/Steam/steamapps/common/Valheim")
 ORDER = ["Meadows", "Black Forest", "Ocean", "Swamp", "Mountain", "Plains", "Mistlands", "Ashlands", "Deep North"]
@@ -259,7 +259,8 @@ def build_sections(g, lists, names, stat_names):
 # ---------------------------------------------------------------------------------------------------- biomes
 def location_biomes(world):
     """{location name: {biome: count}} from a real world's placed locations and our port of the biome generator."""
-    w, locs = worlds.read_world(world), worlds.locations(world)
+    j = world_json(world)
+    w, locs = j["world"], j["locations"]
     runner = shutil.which("bun") or shutil.which("node")
     if not runner:
         raise SystemExit("needs bun or node to run worldgen.js")

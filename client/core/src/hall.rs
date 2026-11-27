@@ -1,4 +1,4 @@
-//! The Hall's routes (the request handling of `server.py`), without an HTTP library.
+//! The Hall's routes (the request handling of the original Python server), without an HTTP library.
 use crate::store::{guarded, valid_name, IngestError, Store};
 use crate::{data, worlds};
 use serde_json::{json, Value};

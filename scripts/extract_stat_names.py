@@ -4,7 +4,7 @@ Read-only on the game install. Needs dnfile (pip install dnfile, e.g. in .cache/
 
   python scripts/extract_stat_names.py [--dll "<Valheim>/valheim_Data/Managed/assembly_valheim.dll"]
 
-Run it after a game patch; analyze.py checks that the count matches fch.STAT_COUNT.
+Run it after a game patch; the Rust core checks that the count matches its STAT_COUNT.
 """
 import argparse, json, os
 
