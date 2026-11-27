@@ -328,7 +328,7 @@ function render(){
   const who=$('who');who.replaceChildren();
   $('roadp').hidden=$('achp').hidden=!chars.length;
   if(!chars.length&&!lost){const e=el('div','empty');e.append(el('b','','The hall is still empty.'),el('br'),
-    'No warrior has reported yet. Start Tracker Sync on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
+    'No warrior has reported yet. Start the Valheim Tracker app on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
   for(const c of chars){
     const b=tint(el('button',sel.has(c.name)?'on':''),c.name);b.append(el('i'),el('span','',c.name));
     if(WNAME&&!inWorld(c)){b.classList.add('away');b.append(el('span','wd',(c.worlds||[]).length?'in '+c.worlds.join(', '):'no world yet'))}

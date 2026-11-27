@@ -16,4 +16,4 @@ Server takes raw `.fch` (`POST /upload?name=X`, parsed by the Rust core), Go par
 
 ## Also open
 - TLS: handled later by a separate reverse proxy (out of scope here; uploads are plain HTTP with a shared token until then).
-- [ ] Tracker Sync client: try the Windows and macOS builds (from the releases). Untested so far: folder picker, autostart, "Open the Hall" (tested on Linux: detection, token check, upload, rejections, selection). Also check on both: the Hall iframe (Local and Group views) and the IPC (tabs, settings, world picker) work.
+- [ ] Valheim Tracker app: try the Windows and macOS builds (from the releases). Untested so far: folder picker, autostart, "Open the Hall" (tested on Linux: detection, token check, upload, rejections, selection). Also check on both: the Hall iframe (Local and Group views) and the IPC (tabs, settings, world picker) work.

@@ -1,4 +1,4 @@
-# Every push to main builds the tracker image and the Tracker Sync app together, and releases them when the
+# Every push to main builds the tracker image and the Valheim Tracker app together, and releases them when the
 # commits since the last release call for it (conventional commits, as semantic-release reads them):
 #   feat: -> minor   fix: / chore: -> patch   docs: / ci: / test: -> build only, no release
 # A release: image ghcr.io/<owner>/valheim-tracker:X.Y.Z (+ :X.Y, :latest), tag vX.Y.Z, a GitHub release with the
