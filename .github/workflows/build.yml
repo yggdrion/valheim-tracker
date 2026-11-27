@@ -118,7 +118,10 @@ jobs:
           targets: ${{ runner.os == 'macOS' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
       - uses: Swatinem/rust-cache@v2
         with:
-          workspaces: client/src-tauri
+          workspaces: client -> target
+      - name: Test the Rust workspace
+        if: runner.os == 'Linux'
+        run: cargo test --workspace --locked
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - name: App version = release version
@@ -138,15 +141,15 @@ jobs:
         with:
           name: tracker-sync-${{ runner.os }}
           path: |
-            client/src-tauri/target/**/release/bundle/**/*.msi
-            client/src-tauri/target/**/release/bundle/**/*-setup.exe
-            client/src-tauri/target/**/release/bundle/**/*.dmg
-            client/src-tauri/target/**/release/bundle/**/*.AppImage
-            client/src-tauri/target/**/release/bundle/**/*.deb
-            client/src-tauri/target/**/release/bundle/**/*-setup.exe.sig
-            client/src-tauri/target/**/release/bundle/**/*.app.tar.gz
-            client/src-tauri/target/**/release/bundle/**/*.app.tar.gz.sig
-            client/src-tauri/target/**/release/bundle/**/*.AppImage.sig
+            client/target/**/release/bundle/**/*.msi
+            client/target/**/release/bundle/**/*-setup.exe
+            client/target/**/release/bundle/**/*.dmg
+            client/target/**/release/bundle/**/*.AppImage
+            client/target/**/release/bundle/**/*.deb
+            client/target/**/release/bundle/**/*-setup.exe.sig
+            client/target/**/release/bundle/**/*.app.tar.gz
+            client/target/**/release/bundle/**/*.app.tar.gz.sig
+            client/target/**/release/bundle/**/*.AppImage.sig
           if-no-files-found: error
           retention-days: 3   # only carries the installers to the release job; the release keeps them
 
