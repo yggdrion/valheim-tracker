@@ -68,13 +68,13 @@ pub struct WorldEntry {
     pub map: Option<Vec<u8>>,
 }
 
-struct Reader<'a> {
-    d: &'a [u8],
-    p: usize,
+pub struct Reader<'a> {
+    pub d: &'a [u8],
+    pub p: usize,
 }
 
 impl<'a> Reader<'a> {
-    fn take(&mut self, n: usize) -> Result<&'a [u8], SaveError> {
+    pub fn take(&mut self, n: usize) -> Result<&'a [u8], SaveError> {
         let end = self.p.checked_add(n).ok_or_else(unreadable)?;
         let s = self.d.get(self.p..end).ok_or_else(unreadable)?;
         self.p = end;
@@ -85,7 +85,7 @@ impl<'a> Reader<'a> {
         self.take(N)?.try_into().map_err(|_| unreadable())
     }
 
-    fn i32(&mut self) -> Result<i32, SaveError> {
+    pub fn i32(&mut self) -> Result<i32, SaveError> {
         Ok(i32::from_le_bytes(self.arr()?))
     }
     fn i64(&mut self) -> Result<i64, SaveError> {
@@ -97,11 +97,11 @@ impl<'a> Reader<'a> {
     fn bool(&mut self) -> Result<bool, SaveError> {
         Ok(self.arr::<1>()?[0] != 0)
     }
-    fn vec3(&mut self) -> Result<[f32; 3]> {
+    pub fn vec3(&mut self) -> Result<[f32; 3]> {
         Ok([self.f32()?, self.f32()?, self.f32()?])
     }
 
-    fn string(&mut self) -> Result<String, SaveError> {
+    pub fn string(&mut self) -> Result<String, SaveError> {
         let (mut n, mut shift) = (0usize, 0u32);
         loop {
             let b = self.arr::<1>()?[0];
