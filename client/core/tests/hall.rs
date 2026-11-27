@@ -112,3 +112,49 @@ fn serve_roundtrip() {
     let font = ureq::get(&format!("{base}/fonts/cinzel.woff2")).call().unwrap();
     assert_eq!(font.header("Cache-Control"), Some("public, max-age=86400"));
 }
+
+#[test]
+fn unreadable_world_is_200_error_and_recovers() {
+    let dir = tmp("badworld");
+    std::fs::create_dir_all(&dir).unwrap();
+    std::fs::write(dir.join("_main.1.ok"), b"").unwrap();
+    std::fs::write(dir.join("_main.1.fwl2"), [1u8, 2, 3]).unwrap();
+    std::fs::write(dir.join("_main.1.db2"), [1u8, 2, 3]).unwrap();
+    let h = hall("badworld", Some(dir.clone()));
+    for _ in 0..2 {
+        for p in ["/api/world", "/api/map"] {
+            let r = call(&h, "GET", p, "", None, b"");
+            assert_eq!(r.status, 200, "{p}");
+            assert!(json(&r).get("error").is_some(), "{p}");
+        }
+    }
+    h.set_world_dir(None);
+    assert!(json(&call(&h, "GET", "/api/world", "", None, b""))["error"].is_string());
+}
+
+#[test]
+fn map_matches_goldens() {
+    let Some(g) = support::golden_dir() else { return };
+    let rd = |f: &str| -> Value { serde_json::from_slice(&std::fs::read(g.join(f)).unwrap()).unwrap() };
+    let manifest = rd("manifest.json");
+    let (world, locs) = (rd("world.json"), rd("locations.json"));
+    let h = hall("map", Some(PathBuf::from(manifest["world"].as_str().unwrap())));
+    let r = call(&h, "GET", "/api/map", "", None, b"");
+    assert_eq!(r.status, 200);
+    let m = json(&r);
+    assert!(m.get("error").is_none(), "{m}");
+    for k in ["name", "seed", "seed_int", "uid", "gen_version"] {
+        assert_eq!(m["world"][k], world[k], "{k}");
+    }
+    assert_eq!(m["world"].as_object().unwrap().len(), 5);
+    let names: Vec<&str> = m["location_names"].as_array().unwrap().iter().map(|n| n.as_str().unwrap()).collect();
+    assert!(names.windows(2).all(|w| w[0] < w[1]), "sorted and unique");
+    let (got, want) = (m["locations"].as_array().unwrap(), locs.as_array().unwrap());
+    assert!(!want.is_empty());
+    assert_eq!(got.len(), want.len());
+    for (g, w) in got.iter().zip(want) {
+        assert_eq!(names[g[0].as_u64().unwrap() as usize], w[0].as_str().unwrap());
+        assert_eq!((&g[1], &g[2]), (&w[1], &w[2]));
+    }
+    assert!(m["players"].is_array());
+}

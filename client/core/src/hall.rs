@@ -1,5 +1,5 @@
 //! The Hall's routes (the request handling of `server.py`), without an HTTP library.
-use crate::store::{valid_name, IngestError, Store};
+use crate::store::{guarded, valid_name, IngestError, Store};
 use crate::{data, worlds};
 use serde_json::{json, Value};
 use std::path::PathBuf;
@@ -37,12 +37,17 @@ impl Response {
 
 type Cached<T> = Mutex<Option<(Option<u32>, T)>>;
 
+/// Locks, ignoring poison: the guarded data is a plain cache.
+fn lock<T>(m: &Mutex<T>) -> std::sync::MutexGuard<'_, T> {
+    m.lock().unwrap_or_else(|e| e.into_inner())
+}
+
 pub struct Hall {
     store: Arc<Store>,
     world_dir: Mutex<Option<PathBuf>>,
     token: Option<String>,
     stale_secs: f64,
-    world: Cached<Result<Value, String>>,
+    world: Cached<Value>,
     locs: Cached<Vec<(String, i64, i64)>>,
 }
 
@@ -98,9 +103,9 @@ impl Hall {
     }
 
     pub fn set_world_dir(&self, dir: Option<PathBuf>) {
-        *self.world_dir.lock().unwrap() = dir;
-        *self.world.lock().unwrap() = None;
-        *self.locs.lock().unwrap() = None;
+        *lock(&self.world_dir) = dir;
+        *lock(&self.world) = None;
+        *lock(&self.locs) = None;
     }
 
     pub fn store(&self) -> &Arc<Store> {
@@ -177,35 +182,33 @@ impl Hall {
     }
 
     fn dir_and_save(&self) -> Result<(PathBuf, Option<u32>), String> {
-        let dir = self.world_dir.lock().unwrap().clone().ok_or("no world folder configured")?;
+        let dir = lock(&self.world_dir).clone().ok_or("no world folder configured")?;
         let n = worlds::latest_save(&dir);
         Ok((dir, n))
     }
 
     fn world(&self) -> Result<Value, String> {
         let (dir, n) = self.dir_and_save()?;
-        let mut c = self.world.lock().unwrap();
-        match &*c {
-            Some((k, v)) if *k == n => v.clone(),
-            _ => {
-                let v = worlds::read_world(&dir);
-                *c = Some((n, v.clone()));
-                v
+        if let Some((k, v)) = &*lock(&self.world) {
+            if *k == n {
+                return Ok(v.clone());
             }
         }
+        let v = guarded(|| worlds::read_world(&dir)).unwrap_or_else(|| Err("world unreadable".to_string()))?;
+        *lock(&self.world) = Some((n, v.clone()));
+        Ok(v)
     }
 
     fn locations(&self) -> Result<Vec<(String, i64, i64)>, String> {
         let (dir, n) = self.dir_and_save()?;
-        let mut c = self.locs.lock().unwrap();
-        match &*c {
-            Some((k, v)) if *k == n => Ok(v.clone()),
-            _ => {
-                let v = worlds::locations(&dir);
-                *c = Some((n, v.clone()));
-                Ok(v)
+        if let Some((k, v)) = &*lock(&self.locs) {
+            if *k == n {
+                return Ok(v.clone());
             }
         }
+        let v = guarded(|| worlds::locations(&dir)).ok_or("world unreadable")?;
+        *lock(&self.locs) = Some((n, v.clone()));
+        Ok(v)
     }
 
     fn map(&self) -> Result<Value, String> {
