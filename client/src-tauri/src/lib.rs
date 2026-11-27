@@ -2,6 +2,8 @@
 //! valheim-tracker server (POST /upload?name=X, X-Token header), plus a heartbeat every 30 s for unchanged ones.
 //! It never parses a save and never writes to the game folder.
 
+mod local;
+
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
@@ -9,11 +11,14 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
+use local::{LocalHall, Mode};
 use tauri::{AppHandle, Emitter, Manager, State};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
 use tauri_plugin_updater::UpdaterExt;
+use tracker_core::store::IngestError;
+use tracker_core::worlds::{list_worlds, worlds_root};
 
 const TICK: Duration = Duration::from_secs(2);
 const HEARTBEAT: Duration = Duration::from_secs(30);
@@ -29,6 +34,10 @@ struct Settings {
     /// characters NOT to sync; new characters are synced by default
     excluded: Vec<String>,
     paused: bool,
+    /// world folder name for the Hall's map; empty = the newest
+    world: String,
+    /// "local" | "group"; empty = group when a server is set, else local
+    view: String,
 }
 
 #[derive(Serialize, Clone, Default)]
@@ -45,6 +54,10 @@ struct CharState {
 
 struct Track {
     sig: Option<(u64, u64)>,
+    /// signature of the last file handed to the local Hall
+    ing: Option<(u64, u64)>,
+    /// removed from the local Hall (deselected) since it was last selected
+    purged: bool,
     beat: Option<Instant>,
     st: CharState,
 }
@@ -57,6 +70,10 @@ struct Inner {
     candidates: Vec<String>,
     server: String, // last server check, shown in the UI
     force: bool,
+    local: LocalHall,
+    worlds: Vec<String>,
+    world: String,
+    world_path: Option<PathBuf>,
 }
 
 type Shared = Arc<Mutex<Inner>>;
@@ -69,6 +86,11 @@ struct Status {
     candidates: Vec<String>,
     server: String,
     chars: Vec<CharState>,
+    hall_url: String,
+    /// "local" | "group": what the Hall pane shows
+    view: String,
+    worlds: Vec<String>,
+    world: String,
 }
 
 fn now() -> u64 {
@@ -154,6 +176,42 @@ fn resolve_dir(s: &Settings, cands: &[PathBuf]) -> Option<PathBuf> {
     cands.first().cloned()
 }
 
+/// "group" only with a server set; empty setting = group when a server is set.
+fn effective_view(s: &Settings) -> &'static str {
+    let has_server = !s.server.trim().is_empty();
+    match s.view.as_str() {
+        "local" => "local",
+        _ if has_server => "group",
+        _ => "local",
+    }
+}
+
+fn apply_mode(g: &Inner) {
+    let want = if effective_view(&g.settings) == "group" {
+        Mode::Group { server: g.settings.server.trim().trim_end_matches('/').to_string() }
+    } else {
+        Mode::Local
+    };
+    if let Ok(mut m) = g.local.mode.write() {
+        if *m != want {
+            *m = want;
+        }
+    }
+}
+
+/// Lists the worlds next to the characters folder and points the Hall at the chosen one.
+fn refresh_worlds(g: &mut Inner) {
+    let list = g.dir.as_deref().and_then(worlds_root).map(|r| list_worlds(&r)).unwrap_or_default();
+    g.worlds = list.iter().map(|w| w.name.clone()).collect();
+    let chosen = list.iter().find(|w| w.name == g.settings.world).or(list.first());
+    g.world = chosen.map(|w| w.name.clone()).unwrap_or_default();
+    let path = chosen.map(|w| w.path.clone());
+    if path != g.world_path {
+        g.local.hall.set_world_dir(path.clone());
+        g.world_path = path;
+    }
+}
+
 fn sig(p: &Path) -> Option<(u64, u64)> {
     let m = fs::metadata(p).ok()?;
     let t = m.modified().ok()?.duration_since(UNIX_EPOCH).ok()?.as_millis() as u64;
@@ -218,10 +276,21 @@ fn sync_once(sh: &Shared) {
         let mut g = sh.lock().unwrap();
         g.candidates = cands.iter().map(|p| p.display().to_string()).collect();
         g.dir = dir.clone();
-        g.tracks.retain(|k, _| files.iter().any(|(n, _)| n == k));
+        let local = g.local.clone();
+        g.tracks.retain(|k, _| {
+            let keep = files.iter().any(|(n, _)| n == k);
+            if !keep && !settings.paused {
+                local.hall.store().remove(k); // the file is gone
+            }
+            keep
+        });
+        refresh_worlds(&mut g);
+        apply_mode(&g);
         for (n, p) in &files {
             let t = g.tracks.entry(n.clone()).or_insert_with(|| Track {
                 sig: None,
+                ing: None,
+                purged: false,
                 beat: None,
                 st: CharState { name: n.clone(), status: "idle".into(), ..Default::default() },
             });
@@ -229,34 +298,47 @@ fn sync_once(sh: &Shared) {
             t.st.modified = sig(p).map(|s| s.0 / 1000);
             if force {
                 t.sig = None;
+                t.ing = None;
             }
-            if !t.st.selected {
+            if t.st.selected {
+                t.purged = false;
+            } else {
                 t.st.status = "off".into();
                 t.st.message.clear();
                 t.sig = None;
-            } else if settings.paused {
+                t.ing = None;
+                if !settings.paused && !t.purged {
+                    local.hall.store().remove(n);
+                    t.purged = true;
+                }
+            }
+            if t.st.selected && settings.paused {
                 t.st.status = "paused".into();
-            } else if t.st.status == "off" || t.st.status == "paused" {
+            } else if t.st.selected && (t.st.status == "off" || t.st.status == "paused") {
                 t.st.status = "idle".into();
             }
         }
     }
-    if settings.paused || settings.server.trim().is_empty() || settings.token.is_empty() {
+    if settings.paused {
         return;
     }
+    let has_server = !settings.server.trim().is_empty() && !settings.token.is_empty();
+    let local = sh.lock().unwrap().local.clone();
     for (name, path) in files {
-        let (selected, prev, beat) = {
+        let (selected, prev, ing, beat) = {
             let g = sh.lock().unwrap();
             let t = &g.tracks[&name];
-            (t.st.selected, t.sig, t.beat)
+            (t.st.selected, t.sig, t.ing, t.beat)
         };
         if !selected {
             continue;
         }
         let s = sig(&path);
         let q = urlenc(&name);
-        if s.is_some() && s == prev {
-            if beat.map_or(true, |b| b.elapsed() >= HEARTBEAT) {
+        let need_ing = s.is_none() || s != ing;
+        let need_up = has_server && (s.is_none() || s != prev);
+        if !need_ing && !need_up {
+            if has_server && beat.map_or(true, |b| b.elapsed() >= HEARTBEAT) {
                 let (code, m) = post(&settings.server, &settings.token, &format!("/heartbeat?name={q}"), &[]);
                 let mut g = sh.lock().unwrap();
                 let t = g.tracks.get_mut(&name).unwrap();
@@ -293,6 +375,31 @@ fn sync_once(sh: &Shared) {
                 continue;
             }
         };
+        if need_ing {
+            // the file's mtime is "last seen", so a character is online while its file changed recently
+            let at = s.map_or(0.0, |s| s.0 as f64 / 1000.0);
+            let r = local.hall.store().ingest(&name, &body, at);
+            let mut g = sh.lock().unwrap();
+            let t = g.tracks.get_mut(&name).unwrap();
+            t.ing = s; // a bad file is retried when it changes
+            if !has_server {
+                match r {
+                    Ok(()) => {
+                        if t.st.status == "rejected" || t.st.status == "error" {
+                            t.st.status = "idle".into();
+                        }
+                        t.st.message.clear();
+                    }
+                    Err(IngestError::Bad(m)) => {
+                        t.st.status = "rejected".into();
+                        t.st.message = m;
+                    }
+                }
+            }
+        }
+        if !need_up {
+            continue;
+        }
         let (code, m) = post(&settings.server, &settings.token, &format!("/upload?name={q}"), &body);
         let mut g = sh.lock().unwrap();
         let t = g.tracks.get_mut(&name).unwrap();
@@ -338,7 +445,19 @@ fn status(sh: &Shared) -> Status {
         candidates: g.candidates.clone(),
         server: g.server.clone(),
         chars,
+        hall_url: g.local.url(),
+        view: effective_view(&g.settings).to_string(),
+        worlds: g.worlds.clone(),
+        world: g.world.clone(),
     }
+}
+
+/// Forgets every track and the characters the local Hall got from them (another folder is coming).
+fn clear_tracks(g: &mut Inner) {
+    for n in g.tracks.keys() {
+        g.local.hall.store().remove(n);
+    }
+    g.tracks.clear();
 }
 
 fn save(g: &Inner) -> Result<(), String> {
@@ -362,6 +481,7 @@ async fn save_server(server: String, token: String, sh: State<'_, Shared>) -> Re
         g.settings.server = server.trim().trim_end_matches('/').to_string();
         g.settings.token = token.trim().to_string();
         g.force = true;
+        apply_mode(&g);
         save(&g)?;
         g.settings.clone()
     };
@@ -402,6 +522,34 @@ fn set_paused(paused: bool, sh: State<Shared>) -> Result<Status, String> {
 }
 
 #[tauri::command]
+fn hall_url(sh: State<Shared>) -> String {
+    sh.lock().unwrap().local.url()
+}
+
+#[tauri::command]
+fn set_view(view: String, sh: State<Shared>) -> Result<Status, String> {
+    {
+        let mut g = sh.lock().unwrap();
+        let has_server = !g.settings.server.trim().is_empty();
+        g.settings.view = if view == "group" && has_server { "group".into() } else { "local".into() };
+        apply_mode(&g);
+        save(&g)?;
+    }
+    Ok(status(&sh))
+}
+
+#[tauri::command]
+fn set_world(name: String, sh: State<Shared>) -> Result<Status, String> {
+    {
+        let mut g = sh.lock().unwrap();
+        g.settings.world = name;
+        refresh_worlds(&mut g);
+        save(&g)?;
+    }
+    Ok(status(&sh))
+}
+
+#[tauri::command]
 fn sync_now(sh: State<Shared>) {
     sh.lock().unwrap().force = true;
 }
@@ -411,7 +559,7 @@ fn set_dir(dir: String, sh: State<Shared>) -> Result<Status, String> {
     {
         let mut g = sh.lock().unwrap();
         g.settings.dir = dir;
-        g.tracks.clear();
+        clear_tracks(&mut g);
         save(&g)?;
     }
     Ok(status(&sh))
@@ -428,7 +576,7 @@ async fn pick_dir(app: AppHandle, sh: State<'_, Shared>) -> Result<Status, Strin
         let p = p.into_path().map_err(|e| e.to_string())?;
         let mut g = sh.lock().unwrap();
         g.settings.dir = p.display().to_string();
-        g.tracks.clear();
+        clear_tracks(&mut g);
         save(&g)?;
     }
     Ok(status(&sh))
@@ -488,6 +636,7 @@ pub fn run() {
             let config = app.path().app_config_dir()?.join("settings.json");
             let settings: Settings =
                 fs::read(&config).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default();
+            let local = local::start(app.path().app_data_dir()?.join("local-state"))?;
             let sh: Shared = Arc::new(Mutex::new(Inner {
                 settings,
                 config,
@@ -496,7 +645,12 @@ pub fn run() {
                 candidates: Vec::new(),
                 server: String::new(),
                 force: false,
+                local,
+                worlds: Vec::new(),
+                world: String::new(),
+                world_path: None,
             }));
+            apply_mode(&sh.lock().unwrap());
             app.manage(sh.clone());
             let handle = app.handle().clone();
             {
@@ -516,7 +670,7 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             get_status, save_server, test_server, set_selected, set_paused, sync_now, set_dir, pick_dir,
-            get_autostart, set_autostart, open_hall, check_update, install_update
+            get_autostart, set_autostart, open_hall, hall_url, set_view, set_world, check_update, install_update
         ])
         .run(tauri::generate_context!())
         .expect("error while running the app");

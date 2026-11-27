@@ -4929,6 +4929,7 @@ name = "valheim-tracker-sync"
 version = "0.1.0"
 dependencies = [
  "dirs 5.0.1",
+ "indexmap 2.14.2",
  "serde",
  "serde_json",
  "tauri",
@@ -4937,6 +4938,7 @@ dependencies = [
  "tauri-plugin-dialog",
  "tauri-plugin-opener",
  "tauri-plugin-updater",
+ "tracker-core",
  "ureq",
 ]
 
