@@ -11,6 +11,8 @@ pub struct Request<'a> {
     pub path: &'a str,
     pub query: &'a str,
     pub token: Option<&'a str>,
+    /// the Host header; the server ignores it, the app's local Hall checks it
+    pub host: Option<&'a str>,
     pub body: &'a [u8],
 }
 
@@ -35,7 +37,8 @@ impl Response {
     }
 }
 
-type Cached<T> = Mutex<Option<(Option<u32>, T)>>;
+/// Keyed by world folder and save number, so a value computed for one folder is never served for another.
+type Cached<T> = Mutex<Option<((PathBuf, Option<u32>), T)>>;
 
 /// Locks, ignoring poison: the guarded data is a plain cache.
 fn lock<T>(m: &Mutex<T>) -> std::sync::MutexGuard<'_, T> {
@@ -188,26 +191,26 @@ impl Hall {
     }
 
     fn world(&self) -> Result<Value, String> {
-        let (dir, n) = self.dir_and_save()?;
+        let key = self.dir_and_save()?;
         if let Some((k, v)) = &*lock(&self.world) {
-            if *k == n {
+            if *k == key {
                 return Ok(v.clone());
             }
         }
-        let v = guarded(|| worlds::read_world(&dir)).unwrap_or_else(|| Err("world unreadable".to_string()))?;
-        *lock(&self.world) = Some((n, v.clone()));
+        let v = guarded(|| worlds::read_world(&key.0)).unwrap_or_else(|| Err("world unreadable".to_string()))?;
+        *lock(&self.world) = Some((key, v.clone()));
         Ok(v)
     }
 
     fn locations(&self) -> Result<Vec<(String, i64, i64)>, String> {
-        let (dir, n) = self.dir_and_save()?;
+        let key = self.dir_and_save()?;
         if let Some((k, v)) = &*lock(&self.locs) {
-            if *k == n {
+            if *k == key {
                 return Ok(v.clone());
             }
         }
-        let v = guarded(|| worlds::locations(&dir)).ok_or("world unreadable")?;
-        *lock(&self.locs) = Some((n, v.clone()));
+        let v = guarded(|| worlds::locations(&key.0)).ok_or("world unreadable")?;
+        *lock(&self.locs) = Some((key, v.clone()));
         Ok(v)
     }
 

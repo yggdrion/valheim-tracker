@@ -136,3 +136,23 @@ fn concurrent_ingest_same_name() {
     serde_json::from_slice::<Value>(&s.character("same").unwrap()).unwrap();
     assert!(!dir.join("same.tmp").exists() && !dir.join("same.tmpm").exists());
 }
+
+#[test]
+fn names_lists_stored_characters() {
+    let s = Store::open(tmp("names")).unwrap();
+    assert!(s.names().is_empty());
+    s.ingest("b", &FchBuilder::new(47).build(), 1.0).unwrap();
+    s.ingest("A x", &FchBuilder::new(47).build(), 1.0).unwrap();
+    assert_eq!(s.names(), vec!["A x".to_string(), "b".to_string()]);
+    s.remove("b");
+    assert_eq!(s.names(), vec!["A x".to_string()]);
+}
+
+#[test]
+fn float_zero_explored_is_empty() {
+    let dir = tmp("maps0");
+    let s = Store::open(dir.clone()).unwrap();
+    std::fs::write(dir.join("A.map.json"), r#"{"7": {"explored": 0.0}}"#).unwrap();
+    std::fs::write(dir.join("B.map.json"), r#"{"7": {"explored": 0}}"#).unwrap();
+    assert!(s.maps_for("7").is_empty());
+}

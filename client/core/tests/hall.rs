@@ -18,7 +18,7 @@ fn hall(tag: &str, world: Option<PathBuf>) -> Hall {
 }
 
 fn call(h: &Hall, method: &str, path: &str, query: &str, token: Option<&str>, body: &[u8]) -> Response {
-    h.handle(&Request { method, path, query, token, body })
+    h.handle(&Request { method, path, query, token, host: None, body })
 }
 
 fn json(r: &Response) -> Value {
@@ -157,4 +157,18 @@ fn map_matches_goldens() {
         assert_eq!((&g[1], &g[2]), (&w[1], &w[2]));
     }
     assert!(m["players"].is_array());
+}
+
+#[test]
+fn serve_passes_the_host_header() {
+    let l = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let port = l.local_addr().unwrap().port();
+    std::thread::spawn(move || {
+        tracker_core::serve::serve(l, Arc::new(|r: &Request| Response::json(200, &serde_json::json!({ "host": r.host }))))
+    });
+    let base = format!("http://127.0.0.1:{port}");
+    let v: Value = serde_json::from_str(&ureq::get(&base).call().unwrap().into_string().unwrap()).unwrap();
+    assert_eq!(v["host"], format!("127.0.0.1:{port}"));
+    let v: Value = serde_json::from_str(&ureq::get(&base).set("Host", "evil.example").call().unwrap().into_string().unwrap()).unwrap();
+    assert_eq!(v["host"], "evil.example");
 }

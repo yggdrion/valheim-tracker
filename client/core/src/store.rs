@@ -120,6 +120,15 @@ impl Store {
         v
     }
 
+    /// Names of the stored characters (from `<name>.json`), sorted.
+    pub fn names(&self) -> Vec<String> {
+        self.files(".json")
+            .into_iter()
+            .filter(|f| !f.ends_with(".map.json"))
+            .map(|f| f[..f.len() - 5].to_string())
+            .collect()
+    }
+
     pub fn characters(&self, now: f64, stale_secs: f64) -> Value {
         let seen = self.seen.lock().unwrap().clone();
         let mut out = Vec::new();
@@ -168,7 +177,7 @@ impl Store {
                 continue;
             };
             let Some(w) = m.get(world_uid).and_then(Value::as_object) else { continue };
-            if w.get("explored").map_or(true, |e| e.is_null() || e == &json!(false) || e == &json!(0) || e == &json!("") || e == &json!([]) || e == &json!({})) {
+            if w.get("explored").map_or(true, |e| e.is_null() || e == &json!(false) || e.as_f64() == Some(0.0) || e == &json!("") || e == &json!([]) || e == &json!({})) {
                 continue;
             }
             let mut o = Map::new();
