@@ -1,3 +1,13 @@
+## [1.6.0](https://github.com/yggdrion/valheim-tracker/compare/v1.5.0...v1.6.0) (2026-11-27)
+
+### ✨ Features
+
+* the Local view shows only the characters who have been in the chosen world ([0e4a567](https://github.com/yggdrion/valheim-tracker/commit/0e4a567ae2aa370a554ef5b4376ec7ce0cb3277c))
+
+### 🐛 Bug Fixes
+
+* **dashboard:** keep the tab bar pinned at the top while scrolling ([0100aa2](https://github.com/yggdrion/valheim-tracker/commit/0100aa2be9c84094d0ae74e5512c75471996fb4f))
+
 ## [1.5.0](https://github.com/yggdrion/valheim-tracker/compare/v1.4.0...v1.5.0) (2026-11-27)
 
 ### ✨ Features
