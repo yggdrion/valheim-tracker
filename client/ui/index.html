@@ -19,6 +19,14 @@ body{display:flex;flex-direction:column}
 .tb button{width:46px;height:34px;border:0;border-radius:0;background:transparent;color:var(--parch);padding:0;display:grid;place-items:center}
 .tb button:hover{background:rgba(255,255,255,.09)}
 .tb button.x:hover{background:#c42b1c;color:#fff}
+.tb .tab,.tb .seg button{width:auto;height:100%;padding:0 12px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);border-bottom:2px solid transparent}
+.tb .tab.on{color:var(--gold2);border-bottom-color:var(--gold)}
+.tb .seg{display:none;height:100%;margin-right:6px}.tb .seg.on{display:flex}
+.tb .seg button{padding:0 9px;font-size:10px}.tb .seg button.on{color:var(--gold2);border-bottom-color:var(--gold)}
+#hallv{flex:1;min-height:0;display:none}#hallv iframe{width:100%;height:100%;border:0;display:block;background:var(--ink)}
+body.vh #hallv{display:block}body.vh main{display:none}
+#worldp select{width:100%;font:inherit;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:7px;color:var(--parch);padding:6px 9px}
+#worldp{order:3}
 .tb svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.1;pointer-events:none}
 main{flex:1;min-height:0;overflow:auto;padding:12px 14px 12px;display:flex;flex-direction:column;gap:12px}
 header{text-align:center}
@@ -69,22 +77,27 @@ li{cursor:default}
 body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 @media(max-width:879px){#chars{max-height:46vh}}
 @media(min-width:880px){
- main{display:grid;grid-template-columns:minmax(330px,400px) 1fr;grid-template-rows:auto auto auto 1fr auto;align-items:start;width:100%;max-width:1200px;margin:0 auto}
+ main{display:grid;grid-template-columns:minmax(330px,400px) 1fr;grid-template-rows:auto auto auto auto 1fr auto;align-items:start;width:100%;max-width:1200px;margin:0 auto}
  header{grid-column:1/-1}
  #hallp,body.setup #hallp{grid-column:1;grid-row:2}
  #dirp,body.setup #dirp{grid-column:1;grid-row:3}
- #warriors,body.setup #warriors{grid-column:2;grid-row:2/5;align-self:stretch}
- .foot{grid-column:1/-1;grid-row:5}
+ #worldp{grid-column:1;grid-row:4}
+ #warriors,body.setup #warriors{grid-column:2;grid-row:2/6;align-self:stretch}
+ .foot{grid-column:1/-1;grid-row:6}
  #upd{grid-column:1/-1}
 }
 </style></head>
 <body>
 <div class="tb" data-tauri-drag-region>
   <div class="ttl" data-tauri-drag-region>Valheim Tracker Sync</div>
+  <button class="tab" id="tabhall">Hall</button>
+  <button class="tab" id="tabset">Settings</button>
+  <div class="seg" id="seg"><button id="vlocal">Local</button><button id="vgroup">Group</button></div>
   <button id="wmin" title="minimize"><svg viewBox="0 0 10 10"><path d="M0 5.5h10"/></svg></button>
   <button id="wmax" title="maximize"><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></button>
   <button id="wclose" class="x" title="close"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button>
 </div>
+<div id="hallv"><iframe id="hall" title="The Hall"></iframe></div>
 <main>
 <header><div class="rune">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div><h1>Tracker Sync</h1></header>
 
@@ -96,7 +109,7 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
   <input type="url" id="server" placeholder="http://your-server:8088" spellcheck="false">
   <label class="f" for="token">Token</label>
   <div class="row"><input type="password" id="token" placeholder="the shared token" spellcheck="false"><button id="show" title="show or hide the token">show</button></div>
-  <div class="row" style="margin-top:10px"><button class="main" id="save">Save &amp; connect</button><button id="test">Test</button><span class="sp" style="flex:1"></span><button id="hall">Open the Hall</button></div>
+  <div class="row" style="margin-top:10px"><button class="main" id="save">Save &amp; connect</button><button id="test">Test</button><span class="sp" style="flex:1"></span><button id="openhall">Open the Hall</button></div>
   <div class="msg" id="smsg"></div>
 </section>
 
@@ -113,6 +126,12 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
   <ul id="chars"></ul>
 </section>
 
+<section class="panel" id="worldp" hidden>
+  <h2>World</h2>
+  <select id="world" aria-label="World"></select>
+  <div class="small" id="worldnote"></div>
+</section>
+
 <div class="foot">
   <label class="chk"><input type="checkbox" id="autostart"> Start with my computer</label>
   <span class="small">read-only on your game files · <span id="ver"></span> · <button class="link" id="updchk">Check for updates</button></span>
@@ -123,12 +142,30 @@ const T=window.__TAURI__,call=(c,a)=>T.core.invoke(c,a),$=id=>document.getElemen
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const ago=t=>{if(!t)return'';const s=Date.now()/1000-t;return s<60?'just now':s<5400?Math.round(s/60)+' min ago':s<172800?Math.round(s/3600)+' h ago':Math.round(s/86400)+' d ago'};
 const LABEL={idle:'waiting for a change',uploaded:'uploaded',rejected:'rejected by the server',unreachable:'server unreachable, retrying',error:'error',paused:'paused',off:'not synced'};
-let S=null,edited=false;
+let S=null,edited=false,tabSet=false;
+const reloadHall=()=>{$('hall').src=S.hall_url};
+function setTab(settings){tabSet=settings;document.body.classList.toggle('vh',!settings);
+  $('tabhall').classList.toggle('on',!settings);$('tabset').classList.toggle('on',settings)}
+$('tabhall').onclick=()=>setTab(false);$('tabset').onclick=()=>setTab(true);
+const setView=v=>S&&S.view!==v&&call('set_view',{view:v}).then(s=>{show(s);reloadHall()}).catch(e=>{$('smsg').textContent=String(e)});
+$('vlocal').onclick=()=>setView('local');$('vgroup').onclick=()=>setView('group');
+$('world').onchange=e=>call('set_world',{name:e.target.value}).then(s=>{show(s);reloadHall()}).catch(x=>{$('worldnote').textContent=String(x)});
+function renderWorld(s){const p=$('worldp'),sel=$('world'),k=s.worlds.join('\n')+'|'+s.world;
+  p.hidden=false;
+  if(sel.dataset.k!==k){sel.dataset.k=k;sel.replaceChildren();
+    if(!s.worlds.length){sel.hidden=true;$('worldnote').textContent='No 1.0 world found next to the characters folder.';return}
+    sel.hidden=false;$('worldnote').textContent='';
+    const o=el('option','','newest');o.value='';sel.append(o);
+    for(const w of s.worlds){const x=el('option','',w);x.value=w;sel.append(x)}
+    sel.value=s.world}}
 
-function show(s){S=s;document.body.classList.toggle('setup',!s.server.startsWith('Connected')||!s.dir);
+function show(s){S=s;
+  $('seg').classList.toggle('on',!!s.settings.server);$('vlocal').classList.toggle('on',s.view==='local');$('vgroup').classList.toggle('on',s.view==='group');
+  renderWorld(s);
+document.body.classList.toggle('setup',!s.server.startsWith('Connected')||!s.dir);
   if(!edited){$('server').value=s.settings.server;$('token').value=s.settings.token}
   const m=$('smsg');m.textContent=s.server;m.className='msg'+(s.server.startsWith('Connected')?' good':s.server&&!s.server.startsWith('Enter')?' bad':'');
-  $('hall').disabled=!s.settings.server;
+  $('openhall').disabled=!s.settings.server;
   $('dir').textContent=s.dir||'No characters folder found.';$('dir').classList.toggle('err',!s.dir);
   $('dirnote').textContent=s.dir_auto?(s.dir?'detected automatically':'Valheim saves not found in the usual places: choose the folder.'):'chosen by you';
   const c=$('cands'),ck=s.dir+'|'+s.dir_auto+'|'+s.candidates.join();if(c.dataset.k!==ck){c.dataset.k=ck;c.replaceChildren();
@@ -161,7 +198,7 @@ $('show').onclick=()=>{const t=$('token');t.type=t.type==='password'?'text':'pas
 $('save').onclick=async()=>{$('smsg').textContent='connecting…';$('smsg').className='msg';
   show(await call('save_server',{server:$('server').value,token:$('token').value}));edited=false};
 $('test').onclick=async()=>{$('smsg').textContent='testing…';$('smsg').className='msg';show(await call('test_server'))};
-$('hall').onclick=()=>call('open_hall').catch(e=>{$('smsg').textContent=String(e)});
+$('openhall').onclick=()=>call('open_hall').catch(e=>{$('smsg').textContent=String(e)});
 $('pick').onclick=async()=>show(await call('pick_dir'));
 $('auto').onclick=async()=>show(await call('set_dir',{dir:''}));
 $('paused').onchange=async e=>show(await call('set_paused',{paused:e.target.checked}));
@@ -182,6 +219,6 @@ $('wmin').onclick=()=>W.minimize();$('wmax').onclick=()=>W.toggleMaximize();$('w
 T.app.getVersion().then(v=>$('ver').textContent='v'+v);
 checkUpdate(false);setInterval(()=>checkUpdate(false),6*3600*1000);
 T.event.listen('status',e=>{if(!pending)show(e.payload)});
-call('get_status').then(show);call('get_autostart').then(v=>$('autostart').checked=v);
+call('get_status').then(s=>{show(s);setTab(!s.dir);reloadHall()});call('get_autostart').then(v=>$('autostart').checked=v);
 </script>
 </body></html>
