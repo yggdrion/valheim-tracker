@@ -2,7 +2,8 @@
 import json, os, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BIN = os.environ.get("TRACKER_BIN") or os.path.join(ROOT, "client", "target", "release", "tracker-server")
+BIN = os.environ.get("TRACKER_BIN") or os.path.join(
+    ROOT, "client", "target", "release", "tracker-server" + (".exe" if os.name == "nt" else ""))
 
 
 def world_json(path):
