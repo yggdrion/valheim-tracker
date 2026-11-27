@@ -78,20 +78,25 @@ fn proxy(server: &str, req: &Request) -> Response {
     if req.method != "GET" && req.method != "HEAD" {
         return Response::json(404, &serde_json::json!({ "error": "not found" }));
     }
+    // the path is appended to the configured server: refuse anything that could change the host
+    if !req.path.starts_with('/') || req.path.starts_with("//") {
+        return Response::json(404, &serde_json::json!({ "error": "not found" }));
+    }
     let base = server.trim().trim_end_matches('/');
     let url = if req.query.is_empty() { format!("{base}{}", req.path) } else { format!("{base}{}?{}", req.path, req.query) };
     let agent = ureq::AgentBuilder::new().timeout(Duration::from_secs(15)).build();
     let done = |status: u16, r: ureq::Response| {
         let content_type = static_type(r.content_type());
         let mut body = Vec::new();
-        let _ = std::io::Read::read_to_end(&mut r.into_reader(), &mut body);
-        Response { status, content_type, body, cache: req.path.starts_with("/fonts/") }
+        std::io::Read::read_to_end(&mut r.into_reader(), &mut body).ok()?;
+        Some(Response { status, content_type, body, cache: req.path.starts_with("/fonts/") })
     };
-    match agent.get(&url).call() {
+    let res = match agent.get(&url).call() {
         Ok(r) => done(r.status(), r),
         Err(ureq::Error::Status(code, r)) => done(code, r),
-        Err(_) => unreachable_page(base),
-    }
+        Err(_) => None,
+    };
+    res.unwrap_or_else(|| unreachable_page(base))
 }
 
 #[cfg(test)]
@@ -147,6 +152,15 @@ mod tests {
         match ureq::get(&format!("{}api/nope", lh.url())).call() {
             Err(ureq::Error::Status(404, _)) => {}
             other => panic!("expected 404 passthrough, got {:?}", other.map(|r| r.status())),
+        }
+        // a request target that is not an origin-form path must not change the upstream host
+        for target in ["@evil.example/x", "//evil.example/x"] {
+            use std::io::{Read, Write};
+            let mut c = std::net::TcpStream::connect(("127.0.0.1", lh.port)).unwrap();
+            write!(c, "GET {target} HTTP/1.1\r\nHost: x\r\nConnection: close\r\n\r\n").unwrap();
+            let mut out = String::new();
+            let _ = c.read_to_string(&mut out);
+            assert!(out.starts_with("HTTP/1.1 404"), "{target}: {out}");
         }
         match ureq::post(&format!("{}api/world", lh.url())).send_bytes(b"") {
             Err(ureq::Error::Status(404, _)) => {}

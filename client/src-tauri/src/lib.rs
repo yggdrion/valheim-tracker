@@ -18,7 +18,7 @@ use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
 use tauri_plugin_updater::UpdaterExt;
 use tracker_core::store::IngestError;
-use tracker_core::worlds::{list_worlds, worlds_root};
+use tracker_core::worlds::{list_worlds, worlds_root, WorldDir};
 
 const TICK: Duration = Duration::from_secs(2);
 const HEARTBEAT: Duration = Duration::from_secs(30);
@@ -108,12 +108,12 @@ fn char_name(p: &Path) -> Option<String> {
     Some(stem.to_string())
 }
 
-fn list_chars(dir: &Path) -> Vec<(String, PathBuf)> {
-    let mut v: Vec<_> = fs::read_dir(dir)
-        .map(|rd| rd.flatten().filter_map(|e| char_name(&e.path()).map(|n| (n, e.path()))).collect())
-        .unwrap_or_default();
+/// `None` = the folder could not be read (distinct from "read, no characters").
+fn list_chars(dir: &Path) -> Option<Vec<(String, PathBuf)>> {
+    let rd = fs::read_dir(dir).ok()?;
+    let mut v: Vec<_> = rd.flatten().filter_map(|e| char_name(&e.path()).map(|n| (n, e.path()))).collect();
     v.sort_by(|a, b| a.0.to_lowercase().cmp(&b.0.to_lowercase()));
-    v
+    Some(v)
 }
 
 fn steam_userdata(steam: &Path, out: &mut Vec<PathBuf>) {
@@ -160,7 +160,7 @@ fn candidates() -> Vec<PathBuf> {
         .into_iter()
         .filter(|p| seen.insert(fs::canonicalize(p).unwrap_or_else(|_| p.clone())))
         .filter_map(|p| {
-            let newest = list_chars(&p).iter().filter_map(|(_, f)| sig(f)).map(|s| s.0).max()?;
+            let newest = list_chars(&p).unwrap_or_default().iter().filter_map(|(_, f)| sig(f)).map(|s| s.0).max()?;
             Some((newest, p))
         })
         .collect();
@@ -200,8 +200,12 @@ fn apply_mode(g: &Inner) {
 }
 
 /// Lists the worlds next to the characters folder and points the Hall at the chosen one.
-fn refresh_worlds(g: &mut Inner) {
-    let list = g.dir.as_deref().and_then(worlds_root).map(|r| list_worlds(&r)).unwrap_or_default();
+fn read_worlds(dir: Option<&Path>) -> Vec<WorldDir> {
+    dir.and_then(worlds_root).map(|r| list_worlds(&r)).unwrap_or_default()
+}
+
+/// Cheap: no file reads, `list` comes from `read_worlds` made outside the lock.
+fn refresh_worlds(g: &mut Inner, list: &[WorldDir]) {
     g.worlds = list.iter().map(|w| w.name.clone()).collect();
     let chosen = list.iter().find(|w| w.name == g.settings.world).or(list.first());
     g.world = chosen.map(|w| w.name.clone()).unwrap_or_default();
@@ -271,20 +275,26 @@ fn sync_once(sh: &Shared) {
     };
     let cands = candidates();
     let dir = resolve_dir(&settings, &cands);
-    let files = dir.as_deref().map(list_chars).unwrap_or_default();
+    // None = could not read the folder: keep everything this tick, remove nothing
+    let listing = dir.as_deref().and_then(list_chars);
+    let files = listing.clone().unwrap_or_default();
+    let world_list = read_worlds(dir.as_deref());
+    let mut to_remove: Vec<String> = Vec::new();
+    let local = sh.lock().unwrap().local.clone();
     {
         let mut g = sh.lock().unwrap();
         g.candidates = cands.iter().map(|p| p.display().to_string()).collect();
         g.dir = dir.clone();
-        let local = g.local.clone();
-        g.tracks.retain(|k, _| {
-            let keep = files.iter().any(|(n, _)| n == k);
-            if !keep && !settings.paused {
-                local.hall.store().remove(k); // the file is gone
-            }
-            keep
-        });
-        refresh_worlds(&mut g);
+        if listing.is_some() {
+            g.tracks.retain(|k, _| {
+                let keep = files.iter().any(|(n, _)| n == k);
+                if !keep && !settings.paused {
+                    to_remove.push(k.clone()); // the file is gone
+                }
+                keep
+            });
+        }
+        refresh_worlds(&mut g, &world_list);
         apply_mode(&g);
         for (n, p) in &files {
             let t = g.tracks.entry(n.clone()).or_insert_with(|| Track {
@@ -308,7 +318,7 @@ fn sync_once(sh: &Shared) {
                 t.sig = None;
                 t.ing = None;
                 if !settings.paused && !t.purged {
-                    local.hall.store().remove(n);
+                    to_remove.push(n.clone());
                     t.purged = true;
                 }
             }
@@ -319,11 +329,13 @@ fn sync_once(sh: &Shared) {
             }
         }
     }
+    for n in &to_remove {
+        local.hall.store().remove(n);
+    }
     if settings.paused {
         return;
     }
     let has_server = !settings.server.trim().is_empty() && !settings.token.is_empty();
-    let local = sh.lock().unwrap().local.clone();
     for (name, path) in files {
         let (selected, prev, ing, beat) = {
             let g = sh.lock().unwrap();
@@ -453,11 +465,17 @@ fn status(sh: &Shared) -> Status {
 }
 
 /// Forgets every track and the characters the local Hall got from them (another folder is coming).
-fn clear_tracks(g: &mut Inner) {
-    for n in g.tracks.keys() {
-        g.local.hall.store().remove(n);
-    }
+/// Returns the names to remove from the store, to be removed after the lock is dropped.
+fn clear_tracks(g: &mut Inner) -> Vec<String> {
+    let names = if g.settings.paused { Vec::new() } else { g.tracks.keys().cloned().collect() };
     g.tracks.clear();
+    names
+}
+
+fn remove_chars(local: &LocalHall, names: &[String]) {
+    for n in names {
+        local.hall.store().remove(n);
+    }
 }
 
 fn save(g: &Inner) -> Result<(), String> {
@@ -531,7 +549,7 @@ fn set_view(view: String, sh: State<Shared>) -> Result<Status, String> {
     {
         let mut g = sh.lock().unwrap();
         let has_server = !g.settings.server.trim().is_empty();
-        g.settings.view = if view == "group" && has_server { "group".into() } else { "local".into() };
+        g.settings.view = if view == "group" && has_server { "group".into() } else if view == "group" { String::new() } else { "local".into() };
         apply_mode(&g);
         save(&g)?;
     }
@@ -540,10 +558,12 @@ fn set_view(view: String, sh: State<Shared>) -> Result<Status, String> {
 
 #[tauri::command]
 fn set_world(name: String, sh: State<Shared>) -> Result<Status, String> {
+    let dir = sh.lock().unwrap().dir.clone();
+    let list = read_worlds(dir.as_deref());
     {
         let mut g = sh.lock().unwrap();
         g.settings.world = name;
-        refresh_worlds(&mut g);
+        refresh_worlds(&mut g, &list);
         save(&g)?;
     }
     Ok(status(&sh))
@@ -556,12 +576,14 @@ fn sync_now(sh: State<Shared>) {
 
 #[tauri::command]
 fn set_dir(dir: String, sh: State<Shared>) -> Result<Status, String> {
-    {
+    let (local, gone) = {
         let mut g = sh.lock().unwrap();
         g.settings.dir = dir;
-        clear_tracks(&mut g);
+        let gone = clear_tracks(&mut g);
         save(&g)?;
-    }
+        (g.local.clone(), gone)
+    };
+    remove_chars(&local, &gone);
     Ok(status(&sh))
 }
 
@@ -574,10 +596,14 @@ async fn pick_dir(app: AppHandle, sh: State<'_, Shared>) -> Result<Status, Strin
     }
     if let Some(p) = d.blocking_pick_folder() {
         let p = p.into_path().map_err(|e| e.to_string())?;
-        let mut g = sh.lock().unwrap();
-        g.settings.dir = p.display().to_string();
-        clear_tracks(&mut g);
-        save(&g)?;
+        let (local, gone) = {
+            let mut g = sh.lock().unwrap();
+            g.settings.dir = p.display().to_string();
+            let gone = clear_tracks(&mut g);
+            save(&g)?;
+            (g.local.clone(), gone)
+        };
+        remove_chars(&local, &gone);
     }
     Ok(status(&sh))
 }
