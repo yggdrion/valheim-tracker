@@ -1,6 +1,7 @@
 //! The Hall inside the app: a loopback server for the window's iframe. In `Local` mode it serves the
 //! characters ingested from this machine; in `Group` mode it forwards GETs to the group's server.
-//! It has no token, so every POST to the Hall itself is refused (403).
+//! It has no token, so every POST to the Hall itself is refused (403), and it answers only requests addressed
+//! to its own loopback origin (a Host other than 127.0.0.1:port / localhost:port is refused: DNS rebinding).
 
 use std::io;
 use std::net::TcpListener;
@@ -29,10 +30,15 @@ fn stale_secs() -> f64 {
     minutes * 60.0
 }
 
-pub fn start(state_dir: PathBuf) -> io::Result<LocalHall> {
+/// Binds `127.0.0.1:preferred` (the last run's port, so the iframe keeps its origin and the dashboard its
+/// localStorage), or any free port when that fails or `preferred` is 0.
+pub fn start(state_dir: PathBuf, preferred: u16) -> io::Result<LocalHall> {
     let store = Arc::new(Store::open(state_dir)?);
     let hall = Arc::new(Hall::new(store, None, None, stale_secs()));
-    let listener = TcpListener::bind("127.0.0.1:0")?;
+    let listener = match preferred {
+        0 => TcpListener::bind("127.0.0.1:0")?,
+        p => TcpListener::bind(("127.0.0.1", p)).or_else(|_| TcpListener::bind("127.0.0.1:0"))?,
+    };
     let port = listener.local_addr()?.port();
     let lh = LocalHall { hall, port, mode: Arc::new(RwLock::new(Mode::Local)) };
     let h = lh.clone();
@@ -65,7 +71,16 @@ impl LocalHall {
         format!("http://127.0.0.1:{}/", self.port)
     }
 
+    fn own_host(&self, host: Option<&str>) -> bool {
+        let Some(h) = host else { return false };
+        let h = h.to_ascii_lowercase();
+        h == format!("127.0.0.1:{}", self.port) || h == format!("localhost:{}", self.port)
+    }
+
     pub fn handle(&self, req: &Request) -> Response {
+        if !self.own_host(req.host) {
+            return Response::json(403, &serde_json::json!({ "error": "forbidden" }));
+        }
         let mode = self.mode.read().map(|m| m.clone()).unwrap_or(Mode::Local);
         match mode {
             Mode::Local => self.hall.handle(req),
@@ -101,7 +116,7 @@ fn proxy(server: &str, req: &Request) -> Response {
 
 #[cfg(test)]
 #[path = "../../core/tests/support/mod.rs"]
-mod support;
+pub(crate) mod support;
 
 #[cfg(test)]
 mod tests {
@@ -119,13 +134,37 @@ mod tests {
 
     #[test]
     fn local_hall_refuses_uploads() {
-        let lh = start(tmp()).unwrap();
+        let lh = start(tmp(), 0).unwrap();
         assert!(lh.url().starts_with("http://127.0.0.1:"));
         let r = ureq::post(&format!("{}upload?name=A", lh.url())).set("X-Token", "anything").send_bytes(b"x");
         match r {
             Err(ureq::Error::Status(403, _)) => {}
             other => panic!("expected 403, got {:?}", other.map(|r| r.status())),
         }
+    }
+
+    #[test]
+    fn refuses_foreign_host() {
+        let lh = start(tmp(), 0).unwrap();
+        for host in ["evil.example", "evil.example:80", "127.0.0.1", "127.0.0.1:1"] {
+            match ureq::get(&format!("{}api/characters", lh.url())).set("Host", host).call() {
+                Err(ureq::Error::Status(403, _)) => {}
+                other => panic!("{host}: expected 403, got {:?}", other.map(|r| r.status())),
+            }
+        }
+        for host in [format!("127.0.0.1:{}", lh.port), format!("localhost:{}", lh.port)] {
+            assert_eq!(ureq::get(&format!("{}api/characters", lh.url())).set("Host", &host).call().unwrap().status(), 200);
+        }
+    }
+
+    #[test]
+    fn binds_the_preferred_port_or_any() {
+        let a = start(tmp(), 0).unwrap();
+        // taken: falls back to a free port
+        let b = start(tmp(), a.port).unwrap();
+        assert_ne!(b.port, a.port);
+        let free = TcpListener::bind("127.0.0.1:0").unwrap().local_addr().unwrap().port();
+        assert_eq!(start(tmp(), free).unwrap().port, free);
     }
 
     #[test]
@@ -144,7 +183,7 @@ mod tests {
                 }),
             )
         });
-        let lh = start(tmp()).unwrap();
+        let lh = start(tmp(), 0).unwrap();
         *lh.mode.write().unwrap() = Mode::Group { server: format!("http://127.0.0.1:{port}/") };
         let r = ureq::get(&format!("{}api/world?a=1", lh.url())).call().unwrap();
         assert_eq!(r.content_type(), "application/json");
@@ -157,7 +196,7 @@ mod tests {
         for target in ["@evil.example/x", "//evil.example/x"] {
             use std::io::{Read, Write};
             let mut c = std::net::TcpStream::connect(("127.0.0.1", lh.port)).unwrap();
-            write!(c, "GET {target} HTTP/1.1\r\nHost: x\r\nConnection: close\r\n\r\n").unwrap();
+            write!(c, "GET {target} HTTP/1.1\r\nHost: 127.0.0.1:{}\r\nConnection: close\r\n\r\n", lh.port).unwrap();
             let mut out = String::new();
             let _ = c.read_to_string(&mut out);
             assert!(out.starts_with("HTTP/1.1 404"), "{target}: {out}");
@@ -170,7 +209,7 @@ mod tests {
 
     #[test]
     fn proxy_unreachable_gives_502_page() {
-        let lh = start(tmp()).unwrap();
+        let lh = start(tmp(), 0).unwrap();
         *lh.mode.write().unwrap() = Mode::Group { server: "http://127.0.0.1:1".into() };
         match ureq::get(&lh.url()).call() {
             Err(ureq::Error::Status(502, r)) => {
@@ -183,7 +222,7 @@ mod tests {
 
     #[test]
     fn ingest_shows_in_local_hall() {
-        let lh = start(tmp()).unwrap();
+        let lh = start(tmp(), 0).unwrap();
         // a minimal hand-built save (FchBuilder from core's test support), not a golden
         lh.hall.store().ingest("A", &support::FchBuilder::new(47).build(), 1.0).unwrap();
         let v: serde_json::Value =
