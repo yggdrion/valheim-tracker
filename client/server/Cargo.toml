@@ -1,0 +1,8 @@
+[package]
+name = "tracker-server"
+version = "0.1.0"
+description = "Headless valheim-tracker server"
+edition = "2021"
+
+[dependencies]
+tracker-core = { path = "../core" }
