@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/yggdrion/valheim-tracker/compare/v1.6.0...v1.7.0) (2026-11-28)
+
+### ✨ Features
+
+* **dashboard:** show when the Hall was last updated, top right ([197546f](https://github.com/yggdrion/valheim-tracker/commit/197546f452825699667db6694410bf513712ca95))
+
 ## [1.6.0](https://github.com/yggdrion/valheim-tracker/compare/v1.5.0...v1.6.0) (2026-11-27)
 
 ### ✨ Features
