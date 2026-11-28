@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/yggdrion/valheim-tracker/compare/v1.9.0...v1.9.1) (2026-11-28)
+
+### 🐛 Bug Fixes
+
+* **dashboard:** bolder, brighter tab bar font ([f12b461](https://github.com/yggdrion/valheim-tracker/commit/f12b4613ae9b136675cbb22d0e4ae94a3ff7824d))
+
 ## [1.9.0](https://github.com/yggdrion/valheim-tracker/compare/v1.8.0...v1.9.0) (2026-11-28)
 
 ### ✨ Features
