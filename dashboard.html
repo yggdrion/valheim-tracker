@@ -113,6 +113,7 @@ html{scroll-padding-top:56px}
 .tabs a{flex:none;color:var(--mut);text-decoration:none;padding:9px 14px 8px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
 .tabs a:hover{color:var(--gold2)}.tabs a.on{color:var(--gold2);border-color:var(--gold)}
 body.player .tabs a[data-t=world]{display:none}
+.tabs .upd{flex:none;margin-left:auto;align-self:center;padding:0 4px 0 14px;color:var(--mut);font:12px var(--body);letter-spacing:0;text-transform:none;white-space:nowrap}
 body:not(.t-saga) #sagap,body:not(.t-world) #worldp,body.player #worldp,body:not(.t-road) #roadp,body:not(.t-ach) #achp{display:none!important}
 @media(max-width:560px){.tabs{font-size:12px;letter-spacing:.1em}.tabs a{padding:8px 10px 7px}}
 .mbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:6px}.mbar h2{margin:0}
@@ -183,7 +184,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .empty{color:var(--mut);font-style:italic;padding:20px;text-align:center}
 footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 </style></head><body><main>
-<nav class="tabs" id="tabs"><a data-t="saga">Saga</a><a data-t="world">The World</a><a data-t="road">The Road</a><a data-t="ach">Achievements</a><a data-t="map" href="#map">Map</a></nav>
+<nav class="tabs" id="tabs"><a data-t="saga">Saga</a><a data-t="world">The World</a><a data-t="road">The Road</a><a data-t="ach">Achievements</a><a data-t="map" href="#map">Map</a><span class="upd" id="upd"></span></nav>
 
 <div class="warn" id="warn" hidden></div>
 <section class="panel" id="felp"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
@@ -267,6 +268,8 @@ async function load(){
   try{
     if(!ACH.length)ACH=await j('/api/achievements');
     const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;wonly=!!r.world_only;
+    {const ts=chars.map(c=>c.updated).filter(Number.isFinite),t=ts.length?Math.max(...ts):0;
+     $('upd').textContent=t?'updated '+ago(t):'';$('upd').title=t?new Date(t*1000).toLocaleString():''}
     const w=await j('/api/world');WNAME=(w&&!w.error&&w.name||'').toLowerCase();renderWorld(w);
     const known=new Set(chars.map(c=>c.name));
     if(first){const here=chars.filter(inWorld);(here.length?here:chars).forEach(c=>sel.add(c.name));first=false}
