@@ -31,7 +31,8 @@ button{font:inherit;color:var(--parch);cursor:pointer}
 .wname{font-family:var(--head);font-weight:700;font-size:26px;color:var(--gold2)}.wmeta{color:var(--mut);font-size:13px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chip{font-size:12px;padding:2px 9px;border:1px solid var(--line);border-radius:99px;background:rgba(0,0,0,.25)}
-.bosses{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+.bosses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media(max-width:560px){.bosses{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .boss{text-align:center;padding:10px 4px 8px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.28);filter:grayscale(1);opacity:.5}
 .boss.dead{filter:none;opacity:1;border-color:var(--gold);box-shadow:0 0 14px rgba(212,168,79,.22)}
 .boss b{display:block;font-size:22px;color:var(--gold)}.boss span{font-family:var(--head);font-weight:500;font-size:12px;letter-spacing:.06em}

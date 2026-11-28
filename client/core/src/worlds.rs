@@ -10,7 +10,7 @@ use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
 const DAY_SEC: f64 = 1800.0; // default Valheim day length, not read from the save
-const BOSSES: [(&str, &str); 7] = [
+const BOSSES: [(&str, &str); 8] = [
     ("defeated_eikthyr", "Eikthyr"),
     ("defeated_gdking", "The Elder"),
     ("defeated_bonemass", "Bonemass"),
@@ -18,6 +18,7 @@ const BOSSES: [(&str, &str); 7] = [
     ("defeated_goblinking", "Yagluth"),
     ("defeated_queen", "The Queen"),
     ("defeated_fader", "Fader"),
+    ("defeated_frozenking", "Kall Fimbulbringer"),
 ];
 
 static MODIFIER: LazyLock<Regex> =
