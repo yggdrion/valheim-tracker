@@ -20,6 +20,10 @@ body{display:flex;flex-direction:column}
 .tb button:hover{background:rgba(255,255,255,.09)}
 .tb button.x:hover{background:#c42b1c;color:#fff}
 .tb .tab,.tb .seg button{width:auto;height:100%;padding:0 12px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);border-bottom:2px solid transparent}
+.tb .updb{display:none;width:auto;height:24px;margin-right:8px;padding:0 12px;border:1px solid var(--gold);border-radius:12px;align-items:center;gap:7px;font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--gold)}
+.tb .updb.on{display:flex}.tb .updb:hover{background:var(--gold2)}.tb .updb:disabled{opacity:.7}
+.tb .updb i{width:6px;height:6px;border-radius:50%;background:var(--ink);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
 .tb .tab.on{color:var(--gold2);border-bottom-color:var(--gold)}
 .tb .seg{display:none;height:100%;margin-right:6px}.tb .seg.on{display:flex}
 .tb .seg button{padding:0 9px;font-size:10px}.tb .seg button.on{color:var(--gold2);border-bottom-color:var(--gold)}
@@ -90,6 +94,7 @@ body.setup #hallp{order:1}body.setup #dirp{order:2}body.setup #warriors{order:3}
 <body>
 <div class="tb" data-tauri-drag-region>
   <div class="ttl" data-tauri-drag-region>Valheim Tracker</div>
+  <button class="updb" id="updtb" title="Install the new version and restart"><i></i><span>Update</span></button>
   <button class="tab" id="tabhall">Hall</button>
   <button class="tab" id="tabset">Settings</button>
   <div class="seg" id="seg"><button id="vlocal">Local</button><button id="vgroup">Group</button></div>
@@ -211,17 +216,19 @@ $('autostart').onchange=async e=>{try{e.target.checked=await call('set_autostart
 for(const id of ['server','token'])$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('save').click()});
 async function checkUpdate(manual){const b=$('updchk');if(manual){b.disabled=true;b.textContent='checking…'}
   try{const u=await call('check_update');
-    if(u.available){$('updmsg').textContent='Version '+u.available+' is available.';$('upd').classList.add('on')}
+    if(u.available){$('updmsg').textContent='Version '+u.available+' is available.';$('upd').classList.add('on');
+      $('updtb').classList.add('on');$('updtb').lastChild.textContent='Update to '+u.available}
     else if(manual)b.textContent='up to date'}
   catch(e){if(manual)b.textContent='check failed';console.warn('update check',e)}
   if(manual)setTimeout(()=>{b.disabled=false;b.textContent='Check for updates'},3000)}
 $('updchk').onclick=()=>checkUpdate(true);
-$('updgo').onclick=async()=>{const b=$('updgo');b.disabled=true;b.textContent='updating…';
-  try{await call('install_update')}catch(e){b.disabled=false;b.textContent='Update & restart';$('updmsg').textContent='Update failed: '+e}};
+async function installUpdate(){const b=$('updgo'),t=$('updtb'),l=t.lastChild,was=l.textContent;b.disabled=t.disabled=true;b.textContent=l.textContent='updating…';
+  try{await call('install_update')}catch(e){b.disabled=t.disabled=false;b.textContent='Update & restart';l.textContent=was;$('updmsg').textContent='Update failed: '+e;t.title='Update failed: '+e}}
+$('updgo').onclick=$('updtb').onclick=installUpdate;
 const W=T.window.getCurrentWindow();
 $('wmin').onclick=()=>W.minimize();$('wmax').onclick=()=>W.toggleMaximize();$('wclose').onclick=()=>W.close();
 T.app.getVersion().then(v=>$('ver').textContent='v'+v);
-checkUpdate(false);setInterval(()=>checkUpdate(false),6*3600*1000);
+checkUpdate(false);setInterval(()=>checkUpdate(false),3600*1000);
 T.event.listen('status',e=>{if(!pending)show(e.payload)});
 call('get_status').then(show);call('get_autostart').then(v=>$('autostart').checked=v);
 </script>
