@@ -208,3 +208,14 @@ fn world_only_lists_the_shown_worlds_characters() {
     h.set_world_only(false);
     assert_eq!(names(&h).0.len(), 2);
 }
+
+#[test]
+fn loading_flag_until_cleared() {
+    let h = hall("loading", None);
+    let get = |h: &Hall| json(&call(h, "GET", "/api/characters", "", None, b""));
+    assert!(get(&h).get("loading").is_none());
+    h.set_loading(true);
+    assert_eq!(get(&h)["loading"], true);
+    h.set_loading(false);
+    assert!(get(&h).get("loading").is_none());
+}

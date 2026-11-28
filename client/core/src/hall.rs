@@ -53,6 +53,8 @@ pub struct Hall {
     stale_secs: f64,
     /// the app's Local view: list only the characters who have been in the shown world
     world_only: AtomicBool,
+    /// the app's Local view before its first read of the characters folder
+    loading: AtomicBool,
     world: Cached<Value>,
     locs: Cached<Vec<(String, i64, i64)>>,
 }
@@ -104,6 +106,7 @@ impl Hall {
             token: token.filter(|t| !t.is_empty()),
             stale_secs,
             world_only: AtomicBool::new(false),
+            loading: AtomicBool::new(false),
             world: Mutex::new(None),
             locs: Mutex::new(None),
         }
@@ -115,6 +118,10 @@ impl Hall {
         *lock(&self.locs) = None;
     }
 
+    pub fn set_loading(&self, on: bool) {
+        self.loading.store(on, Ordering::Relaxed);
+    }
+
     pub fn set_world_only(&self, on: bool) {
         self.world_only.store(on, Ordering::Relaxed);
     }
@@ -123,6 +130,9 @@ impl Hall {
     /// no world can be read, so a missing world folder never empties the Hall).
     fn characters(&self) -> Value {
         let mut v = self.store.characters(now(), self.stale_secs);
+        if self.loading.load(Ordering::Relaxed) {
+            v["loading"] = json!(true);
+        }
         if !self.world_only.load(Ordering::Relaxed) {
             return v;
         }

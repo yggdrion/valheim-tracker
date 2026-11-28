@@ -389,8 +389,12 @@ fn sync_once(sh: &Shared) {
             }
             continue;
         }
-        thread::sleep(SETTLE);
-        if sig(&path) != s {
+        // a file written in the last moments may still be mid-save; an older one is read at once (fast start)
+        let fresh = s.map_or(true, |(t, _)| (now() * 1000).saturating_sub(t) < 5000);
+        if fresh {
+            thread::sleep(SETTLE);
+        }
+        if fresh && sig(&path) != s {
             continue; // still being written
         }
         let body = match fs::read(&path) {
@@ -766,6 +770,8 @@ pub fn run() {
             }
             thread::spawn(move || loop {
                 sync_once(&sh);
+                let local = lock(&sh).local.clone();
+                local.hall.set_loading(false);
                 let _ = handle.emit("status", status(&sh));
                 thread::sleep(TICK);
             });

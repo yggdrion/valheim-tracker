@@ -182,11 +182,14 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .tile.y b{color:var(--c);opacity:1}
 .note{color:var(--mut);font-size:12.5px;font-style:italic;margin-top:8px}
 .empty{color:var(--mut);font-style:italic;padding:20px;text-align:center}
+.spin{display:inline-block;width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:spin .9s linear infinite;vertical-align:middle;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
 </style></head><body><main>
 <nav class="tabs" id="tabs"><a data-t="saga">Saga</a><a data-t="world">The World</a><a data-t="road">The Road</a><a data-t="ach">Achievements</a><a data-t="map" href="#map">Map</a><span class="upd" id="upd"></span></nav>
 
 <div class="warn" id="warn" hidden></div>
-<section class="panel" id="felp"><h2 id="wh">The Fellowship</h2><div class="who" id="who"></div><div id="prog" style="margin-top:10px"></div></section>
+<section class="panel" id="felp"><h2 id="wh">The Fellowship</h2><div class="who" id="who"><div class="empty"><span class="spin"></span>Reading the sagas…</div></div><div id="prog" style="margin-top:10px"></div></section>
 <section class="panel saga" id="sagap" hidden><h2 id="sagah">Saga of the Fellowship</h2><div class="sub2" id="sagas"></div><div class="themes" id="saga"></div></section>
 <section class="panel" id="worldp" hidden><div class="world" id="world"></div></section>
 
@@ -236,7 +239,7 @@ const CATS=[
  ['Legacy',['GrindDays','KingsQueens','ChildOfOdin']]];
 const catOf=api=>(CATS.find(c=>c[1].includes(api))||['Other'])[0];
 let route=null,page='hall';
-let wonly=false,WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
+let hl=false,wonly=false,WNAME='',ACH=[],chars=[],sel=new Set(),first=true,full={},stale=10,lost='';
 let view=ls('view')||'cards',flt=new Set(JSON.parse(ls('flt')||'[]')),q='',open=null;
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('vh_'+k);localStorage.setItem('vh_'+k,v)}catch(e){}}
 const $=id=>document.getElementById(id);
@@ -265,7 +268,7 @@ async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(u+' '+r.stat
 async function load(){
   try{
     if(!ACH.length)ACH=await j('/api/achievements');
-    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;wonly=!!r.world_only;
+    const r=await j('/api/characters');chars=r.characters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));stale=r.stale_minutes;wonly=!!r.world_only;hl=!!r.loading;
     {const ts=chars.map(c=>c.updated).filter(Number.isFinite),t=ts.length?Math.max(...ts):0;
      $('upd').textContent=t?'updated '+ago(t):'';$('upd').title=t?new Date(t*1000).toLocaleString():''}
     const w=await j('/api/world');WNAME=(w&&!w.error&&w.name||'').toLowerCase();renderWorld(w);
@@ -280,6 +283,7 @@ async function load(){
   }catch(e){lost=e.message}
   const wb=$('warn');wb.hidden=!lost;wb.textContent=lost?`Lost contact with the hall (${lost}). Showing the last known state; retrying every 15 s.`:'';
   render();
+  if(hl&&!lost)setTimeout(load,1000);
 }
 const seenBefore=new Set();
 function parseRoute(){const m=location.hash.match(/^#player\/(.+)$/);route=m?decodeURIComponent(m[1]):null;page=location.hash==='#map'?'map':route?'player':'hall'}
@@ -333,7 +337,8 @@ function render(){
   $('wh').textContent='The Fellowship';
   const who=$('who');who.replaceChildren();
   $('roadp').hidden=$('achp').hidden=!chars.length;
-  if(!chars.length&&!lost){const e=el('div','empty');e.append(el('b','','The hall is still empty.'),el('br'),
+  if(!chars.length&&!lost&&hl){const e=el('div','empty');e.append(el('span','spin'),'Reading the sagas…');who.append(e)}
+  else if(!chars.length&&!lost){const e=el('div','empty');e.append(el('b','','The hall is still empty.'),el('br'),
     wonly?'No character in this folder has been to this world yet. Play it once, or pick another world in Settings.':'No warrior has reported yet. Start the Valheim Tracker app on a player PC with this server\'s address and token; characters appear here after their first upload.');who.append(e)}
   for(const c of chars){
     const b=tint(el('button',sel.has(c.name)?'on':''),c.name);b.append(el('i'),el('span','',c.name));
