@@ -1,3 +1,13 @@
+## [1.9.0](https://github.com/yggdrion/valheim-tracker/compare/v1.8.0...v1.9.0) (2026-11-28)
+
+### ✨ Features
+
+* **app:** update button in the title bar, update check every hour ([6f2d3e7](https://github.com/yggdrion/valheim-tracker/commit/6f2d3e7a64ec1e3e12de3de92f9facd51143cda2))
+
+### 🐛 Bug Fixes
+
+* The World lists Kall Fimbulbringer, the Deep North boss ([d75482c](https://github.com/yggdrion/valheim-tracker/commit/d75482c263e6b3e24079054c90eab9158b17996b))
+
 ## [1.8.0](https://github.com/yggdrion/valheim-tracker/compare/v1.7.0...v1.8.0) (2026-11-28)
 
 ### ✨ Features
