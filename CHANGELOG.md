@@ -1,3 +1,13 @@
+## [1.8.0](https://github.com/yggdrion/valheim-tracker/compare/v1.7.0...v1.8.0) (2026-11-28)
+
+### ✨ Features
+
+* faster app start with a loading spinner until the characters are read ([6694587](https://github.com/yggdrion/valheim-tracker/commit/6694587a192f76995c4ad6118a29446a3f64f0ac))
+
+### 🐛 Bug Fixes
+
+* wider app window and Hall so the Saga headings fit one line, no empty space or scrollbar at the bottom ([99fd226](https://github.com/yggdrion/valheim-tracker/commit/99fd2260dce9f0106dbb49e7e37bf5fe423a5606))
+
 ## [1.7.0](https://github.com/yggdrion/valheim-tracker/compare/v1.6.0...v1.7.0) (2026-11-28)
 
 ### ✨ Features
