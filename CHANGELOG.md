@@ -1,3 +1,9 @@
+## [1.9.2](https://github.com/yggdrion/valheim-tracker/compare/v1.9.1...v1.9.2) (2026-11-28)
+
+### 🐛 Bug Fixes
+
+* **dashboard:** larger, brighter Saga card headings and list labels ([7e44ae9](https://github.com/yggdrion/valheim-tracker/commit/7e44ae99d61b3cc790b84111c4c643c405ca28ec))
+
 ## [1.9.1](https://github.com/yggdrion/valheim-tracker/compare/v1.9.0...v1.9.1) (2026-11-28)
 
 ### 🐛 Bug Fixes
