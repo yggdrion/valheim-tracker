@@ -19,7 +19,7 @@ body{margin:0;color:var(--parch);font:15px/1.5 var(--body);min-height:100vh;
   background:radial-gradient(1200px 500px at 50% -120px,#2d3b45 0%,transparent 70%),
    radial-gradient(800px 400px at 90% 100%,#2b1a10 0%,transparent 70%),
    repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 2px,transparent 2px 6px),var(--ink)}
-main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+main{max-width:1240px;margin:0 auto;padding:20px 16px 4px}
 .rune{color:var(--gold);letter-spacing:.35em;font-size:13px;opacity:.8}
 .panel{background:linear-gradient(180deg,var(--wood2),var(--wood));border:1px solid var(--line);border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 18px rgba(0,0,0,.45);padding:14px 16px;margin-bottom:16px}
 .panel h2{margin:0 0 10px;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
@@ -182,7 +182,6 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .tile.y b{color:var(--c);opacity:1}
 .note{color:var(--mut);font-size:12.5px;font-style:italic;margin-top:8px}
 .empty{color:var(--mut);font-style:italic;padding:20px;text-align:center}
-footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
 </style></head><body><main>
 <nav class="tabs" id="tabs"><a data-t="saga">Saga</a><a data-t="world">The World</a><a data-t="road">The Road</a><a data-t="ach">Achievements</a><a data-t="map" href="#map">Map</a><span class="upd" id="upd"></span></nav>
 
@@ -205,7 +204,6 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
   <div class="fl" id="flt" style="margin-bottom:14px"></div>
   <div id="view"></div>
 </section>
-<footer id="foot"></footer>
 <section class="panel mapp" id="mapp" hidden>
   <div class="mbar"><h2 id="mapt">Map</h2>
     <label class="chk"><input type="checkbox" id="mreveal"> reveal undiscovered land &amp; places</label>

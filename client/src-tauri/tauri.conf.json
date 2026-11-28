@@ -7,7 +7,7 @@
   "app": {
     "withGlobalTauri": true,
     "windows": [
-      { "label": "main", "decorations": false, "title": "Valheim Tracker", "width": 1000, "height": 760, "minWidth": 420, "minHeight": 520 }
+      { "label": "main", "decorations": false, "title": "Valheim Tracker", "width": 1260, "height": 840, "minWidth": 420, "minHeight": 520 }
     ],
     "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; frame-src http://127.0.0.1:*" }
   },
